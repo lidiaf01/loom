@@ -1,0 +1,6 @@
+# Permitir acceso directo a este directorio
+# No aplicar reglas de reescritura aquí
+<IfModule mod_rewrite.c>
+    RewriteEngine Off
+</IfModule>
+

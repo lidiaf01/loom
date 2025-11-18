@@ -1,0 +1,491 @@
+/**
+ * Estilos principales - Proyecto Loom
+ * Sprint 1 - Diseño Mobile First
+ * 
+ * @author Lidia Artero Fernández
+ */
+
+/* ============================================
+   FUENTES PERSONALIZADAS
+   ============================================ */
+
+/* Bukhari Script - Para títulos */
+@font-face {
+    font-family: 'Bukhari Script';
+    src: url('/loom/recursos/fuentes/Bukhari Script.ttf') format('truetype');
+    font-weight: 400;
+    font-style: normal;
+    font-display: swap;
+}
+
+/* Heading Now - Para textos (64-68 corresponden a grosores) */
+@font-face {
+    font-family: 'Heading Now';
+    src: url('/loom/recursos/fuentes/HeadingNowTrial-64Regular.ttf') format('truetype');
+    font-weight: 400; /* Regular - 64 */
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Heading Now';
+    src: url('/loom/recursos/fuentes/HeadingNowTrial-64RegularItalic.ttf') format('truetype');
+    font-weight: 400; /* Regular - 64 */
+    font-style: italic;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Heading Now';
+    src: url('/loom/recursos/fuentes/HeadingNowTrial-65Medium.ttf') format('truetype');
+    font-weight: 500; /* Medium - 65 */
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Heading Now';
+    src: url('/loom/recursos/fuentes/HeadingNowTrial-65MediumItalic.ttf') format('truetype');
+    font-weight: 500; /* Medium - 65 */
+    font-style: italic;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Heading Now';
+    src: url('/loom/recursos/fuentes/HeadingNowTrial-66Bold.ttf') format('truetype');
+    font-weight: 600; /* Bold - 66 */
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Heading Now';
+    src: url('/loom/recursos/fuentes/HeadingNowTrial-66BoldItalic.ttf') format('truetype');
+    font-weight: 600; /* Bold - 66 */
+    font-style: italic;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Heading Now';
+    src: url('/loom/recursos/fuentes/HeadingNowTrial-67Extrabold.ttf') format('truetype');
+    font-weight: 700; /* Extrabold - 67 */
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Heading Now';
+    src: url('/loom/recursos/fuentes/HeadingNowTrial-67ExtraboldItalic.ttf') format('truetype');
+    font-weight: 700; /* Extrabold - 67 */
+    font-style: italic;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Heading Now';
+    src: url('/loom/recursos/fuentes/HeadingNowTrial-68Heavy.ttf') format('truetype');
+    font-weight: 800; /* Heavy - 68 */
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Heading Now';
+    src: url('/loom/recursos/fuentes/HeadingNowTrial-68HeavyItalic.ttf') format('truetype');
+    font-weight: 800; /* Heavy - 68 */
+    font-style: italic;
+    font-display: swap;
+}
+
+/* ============================================
+   RESET Y VARIABLES
+   ============================================ */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    /* Colores principales - Guía de Branding Loom */
+    --color-primary: #FBEF74;        /* Amarillo principal */
+    --color-primary-dark: #F1D94A;   /* Amarillo oscuro (hover) */
+    --color-secondary: #F1AFF2;      /* Rosa de contraste */
+    --color-accent: #F1AFF2;         /* Rosa acento */
+    
+    /* Colores de texto */
+    --color-text: #474444;           /* Texto principal (sustituye negro) */
+    --color-text-light: #6B6B6B;     /* Texto secundario */
+    --color-text-muted: #8B8B8B;     /* Texto muted */
+    
+    /* Colores de fondo */
+    --color-bg: #F8F4DE;             /* Fondo base (sustituye blanco) */
+    --color-bg-light: #FDFBF0;       /* Fondo claro */
+    --color-bg-dark: #474444;        /* Fondo oscuro */
+    
+    /* Colores de estado */
+    --color-success: #10b981;
+    --color-error: #ef4444;
+    --color-warning: #f59e0b;
+    --color-info: #3b82f6;
+    
+    /* Espaciado */
+    --spacing-xs: 0.5rem;
+    --spacing-sm: 1rem;
+    --spacing-md: 1.5rem;
+    --spacing-lg: 2rem;
+    --spacing-xl: 3rem;
+    
+    /* Tipografía - Guía de Branding Loom */
+    --font-titulos: 'Bukhari Script', cursive;           /* Para todos los títulos */
+    --font-texto: 'Heading Now', sans-serif;              /* Para el resto de textos */
+    --font-family: var(--font-texto);                    /* Fuente por defecto */
+    --font-size-base: 16px;
+    --font-size-sm: 0.875rem;
+    --font-size-lg: 1.125rem;
+    --font-size-xl: 1.25rem;
+    --font-size-2xl: 1.5rem;
+    --font-size-3xl: 2rem;
+    
+    /* Bordes */
+    --border-radius: 0.5rem;
+    --border-radius-lg: 1rem;
+    --border-width: 1px;
+    
+    /* Sombras */
+    --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+    --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+    
+    /* Transiciones */
+    --transition: all 0.3s ease;
+}
+
+/* ============================================
+   BASE
+   ============================================ */
+html {
+    font-size: var(--font-size-base);
+    -webkit-text-size-adjust: 100%;
+}
+
+body {
+    font-family: var(--font-texto);  /* Heading Now para textos */
+    color: var(--color-text);
+    background-color: #F8F4DE !important;  /* Fondo base - color sustituto del blanco */
+    line-height: 1.6;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    margin: 0;
+    padding: 0;
+}
+
+/* ============================================
+   TIPOGRAFÍA
+   ============================================ */
+h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-titulos);  /* Bukhari Script para títulos */
+    font-weight: 400;
+    line-height: 1.2;
+    color: var(--color-text);
+}
+
+h1 { font-size: var(--font-size-3xl); }
+h2 { font-size: var(--font-size-2xl); }
+h3 { font-size: var(--font-size-xl); }
+h4 { font-size: var(--font-size-lg); }
+
+p {
+    margin-bottom: var(--spacing-sm);
+}
+
+a {
+    color: var(--color-primary);
+    text-decoration: none;
+    transition: var(--transition);
+}
+
+a:hover {
+    color: var(--color-primary-dark);
+}
+
+/* ============================================
+   LAYOUT
+   ============================================ */
+.container {
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 var(--spacing-sm);
+}
+
+/* ============================================
+   HEADER
+   ============================================ */
+.header-principal {
+    background-color: var(--color-bg);  /* Fondo base #F8F4DE */
+    border-bottom: var(--border-width) solid rgba(71, 68, 68, 0.1);
+    padding: var(--spacing-sm) 0;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    box-shadow: var(--shadow-sm);
+}
+
+.header-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo h1 {
+    font-family: var(--font-titulos);  /* Bukhari Script */
+    font-size: var(--font-size-2xl);
+    color: var(--color-primary);  /* Amarillo #FBEF74 */
+    margin: 0;
+}
+
+.logo img {
+    height: 40px;
+    width: auto;
+    object-fit: contain;
+}
+
+.nav-usuario {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-sm);
+}
+
+.usuario-nombre {
+    color: var(--color-text);
+    font-weight: 500;
+}
+
+.btn-logout {
+    padding: var(--spacing-xs) var(--spacing-sm);
+    background-color: var(--color-error);
+    color: white;
+    border-radius: var(--border-radius);
+    font-size: var(--font-size-sm);
+    transition: var(--transition);
+}
+
+.btn-logout:hover {
+    background-color: #dc2626;
+    color: white;
+}
+
+/* ============================================
+   FOOTER
+   ============================================ */
+.footer-principal {
+    background-color: var(--color-bg);
+    border-top: var(--border-width) solid #e5e7eb;
+    padding: var(--spacing-md) 0;
+    margin-top: auto;
+    text-align: center;
+    color: var(--color-text-light);
+    font-size: var(--font-size-sm);
+}
+
+.footer-principal p {
+    margin-bottom: var(--spacing-xs);
+}
+
+/* ============================================
+   HOME / PANTALLA PRINCIPAL
+   ============================================ */
+.home-container {
+    flex: 1;
+    padding: var(--spacing-md) 0;
+}
+
+.banner-bienvenida {
+    background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-primary-dark) 100%);
+    /* Usar solo amarillo, evitar juntar con rosa según guía */
+    color: var(--color-text);
+    padding: var(--spacing-lg);
+    border-radius: var(--border-radius-lg);
+    margin-bottom: var(--spacing-lg);
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+}
+
+.banner-content h2 {
+    font-family: var(--font-titulos);  /* Bukhari Script */
+    color: var(--color-text);
+    margin-bottom: var(--spacing-xs);
+    position: relative;
+    z-index: 1;
+}
+
+.banner-content p {
+    color: var(--color-text);
+    margin: 0;
+    position: relative;
+    z-index: 1;
+}
+
+/* Menú de navegación */
+.menu-navegacion {
+    background-color: var(--color-bg);
+    border-radius: var(--border-radius-lg);
+    padding: var(--spacing-md);
+    margin-bottom: var(--spacing-lg);
+    box-shadow: var(--shadow-md);
+}
+
+.menu-titulo {
+    margin-bottom: var(--spacing-md);
+    color: var(--color-text);
+}
+
+.menu-lista {
+    list-style: none;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--spacing-sm);
+}
+
+.menu-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: var(--spacing-md);
+    background-color: var(--color-bg-light);
+    border-radius: var(--border-radius);
+    transition: var(--transition);
+    text-align: center;
+}
+
+.menu-item:hover {
+    background-color: var(--color-primary);  /* Amarillo #FBEF74 */
+    color: var(--color-text);
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-md);
+}
+
+.menu-icon {
+    font-size: var(--font-size-2xl);
+    margin-bottom: var(--spacing-xs);
+}
+
+.menu-texto {
+    font-size: var(--font-size-sm);
+    font-weight: 500;
+}
+
+/* Perfil resumen */
+.perfil-resumen {
+    margin-bottom: var(--spacing-lg);
+}
+
+.perfil-card {
+    background-color: var(--color-bg);
+    border-radius: var(--border-radius-lg);
+    padding: var(--spacing-md);
+    box-shadow: var(--shadow-md);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+
+.perfil-avatar {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    overflow: hidden;
+    margin-bottom: var(--spacing-md);
+    border: 3px solid var(--color-primary);
+}
+
+.perfil-avatar img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.perfil-info h3 {
+    margin-bottom: var(--spacing-xs);
+}
+
+.perfil-email {
+    color: var(--color-text-light);
+    font-size: var(--font-size-sm);
+    margin-bottom: var(--spacing-sm);
+}
+
+.perfil-biografia {
+    color: var(--color-text);
+    margin-bottom: var(--spacing-sm);
+}
+
+.perfil-rol {
+    color: var(--color-primary);  /* Amarillo #FBEF74 */
+    font-weight: 500;
+    font-size: var(--font-size-sm);
+}
+
+/* Info sprint */
+.info-sprint {
+    margin-bottom: var(--spacing-lg);
+}
+
+.info-card {
+    background-color: var(--color-bg);
+    border-radius: var(--border-radius-lg);
+    padding: var(--spacing-md);
+    box-shadow: var(--shadow-md);
+}
+
+.info-card h4 {
+    font-family: var(--font-titulos);  /* Bukhari Script */
+    margin-bottom: var(--spacing-sm);
+    color: var(--color-primary);  /* Amarillo #FBEF74 */
+}
+
+.info-card ul {
+    list-style: none;
+    padding-left: 0;
+}
+
+.info-card li {
+    padding: var(--spacing-xs) 0;
+    color: var(--color-text);
+}
+
+/* ============================================
+   RESPONSIVE - TABLET Y DESKTOP
+   ============================================ */
+@media (min-width: 768px) {
+    .container {
+        padding: 0 var(--spacing-md);
+    }
+    
+    .menu-lista {
+        grid-template-columns: repeat(3, 1fr);
+    }
+    
+    .perfil-card {
+        flex-direction: row;
+        text-align: left;
+    }
+    
+    .perfil-avatar {
+        margin-right: var(--spacing-md);
+        margin-bottom: 0;
+    }
+}
+
+@media (min-width: 1024px) {
+    .menu-lista {
+        grid-template-columns: repeat(6, 1fr);
+    }
+}
+

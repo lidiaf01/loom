@@ -1,0 +1,124 @@
+/**
+ * Estilos para iconos decorativos y de botones
+ * Proyecto Loom - Sprint 1
+ */
+
+/* ============================================
+   ICONOS DECORATIVOS
+   ============================================ */
+
+.icono-decorativo {
+    position: absolute;
+    pointer-events: none;
+    opacity: 0.3;
+    z-index: 0;
+}
+
+/* Estrellas decorativas */
+.icono-estrella {
+    width: 24px;
+    height: 24px;
+    background-image: url('/loom/recursos/iconos/decorativos/estrella.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+.icono-estrella-grande {
+    width: 48px;
+    height: 48px;
+}
+
+/* Nubes decorativas */
+.icono-nube {
+    width: 64px;
+    height: 64px;
+    background-image: url('/loom/recursos/iconos/decorativos/nube.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+/* Distribución de iconos decorativos en la página */
+.auth-container::before,
+.auth-container::after {
+    content: '';
+    position: absolute;
+    width: 48px;
+    height: 48px;
+    background-size: contain;
+    background-repeat: no-repeat;
+    opacity: 0.2;
+    z-index: 0;
+}
+
+.home-container {
+    position: relative;
+}
+
+/* ============================================
+   ICONOS DE BOTONES
+   ============================================ */
+
+.btn-con-icono {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--spacing-xs);
+}
+
+.btn-icono {
+    width: 20px;
+    height: 20px;
+    display: inline-block;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    flex-shrink: 0;
+}
+
+/* Iconos específicos de botones */
+.btn-icono-registro {
+    background-image: url('/loom/recursos/iconos/botones/registro.png');
+}
+
+.btn-icono-login {
+    background-image: url('/loom/recursos/iconos/botones/login.png');
+}
+
+.btn-icono-crear {
+    background-image: url('/loom/recursos/iconos/botones/crear.png');
+}
+
+.btn-icono-buscar {
+    background-image: url('/loom/recursos/iconos/botones/buscar.png');
+}
+
+.btn-icono-perfil {
+    background-image: url('/loom/recursos/iconos/botones/perfil.png');
+}
+
+.btn-icono-diario {
+    background-image: url('/loom/recursos/iconos/botones/diario.png');
+}
+
+.btn-icono-biblioteca {
+    background-image: url('/loom/recursos/iconos/botones/biblioteca.png');
+}
+
+.btn-icono-ajustes {
+    background-image: url('/loom/recursos/iconos/botones/ajustes.png');
+}
+
+.btn-icono-cerrar-sesion {
+    background-image: url('/loom/recursos/iconos/botones/cerrar-sesion.png');
+}
+
+/* Tamaño de iconos en menú de navegación */
+.menu-item .menu-icon {
+    width: 32px;
+    height: 32px;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+

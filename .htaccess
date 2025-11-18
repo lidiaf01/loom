@@ -1,0 +1,45 @@
+# Configuración Apache para Proyecto Loom
+# Evita mostrar listado de directorios
+
+# Desactivar listado de directorios
+Options -Indexes
+
+# Página de inicio por defecto
+DirectoryIndex index.php index.html
+
+# Habilitar reescritura de URL (si se necesita en el futuro)
+RewriteEngine On
+
+# NO aplicar reglas a archivos PHP en controladores (APIs) - PRIORIDAD ALTA
+RewriteCond %{REQUEST_URI} ^/loom/controladores/ [NC]
+RewriteRule ^ - [L]
+
+# NO aplicar reglas a archivos de prueba
+RewriteCond %{REQUEST_URI} ^/loom/test.*\.php$ [NC]
+RewriteRule ^ - [L]
+
+# NO redirigir archivos que existen (incluyendo PHP)
+RewriteCond %{REQUEST_FILENAME} -f [OR]
+RewriteCond %{REQUEST_FILENAME} -d
+RewriteRule ^ - [L]
+
+# Redirigir a index.php solo si el archivo no existe
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^(.*)$ index.php [QSA,L]
+
+# Proteger archivos sensibles
+<FilesMatch "^(config\.php|\.htaccess|\.git)">
+    Order allow,deny
+    Deny from all
+</FilesMatch>
+
+# Configuración de tipos MIME
+AddType application/javascript .js
+AddType text/css .css
+AddType image/png .png
+AddType image/jpeg .jpg .jpeg
+AddType font/truetype .ttf
+AddType font/woff .woff
+AddType font/woff2 .woff2
+
