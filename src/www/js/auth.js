@@ -145,20 +145,19 @@ document.addEventListener('DOMContentLoaded', function() {
             // IMPORTANTE: Asegurar que el campo de contraseña se llame 'clave'
             // Si existe un campo con nombre 'contraseña', cambiarlo a 'clave'
             const campoClave = formLogin.querySelector('[name="clave"]');
-            const campoContraseña = formLogin.querySelector('[name="contraseña"]');
+            const campoContraseña = formLogin.querySelector('[name="clave"]');
             
             if (campoContraseña) {
-                // Si existe un campo con nombre 'contraseña', renombrarlo
+                // Asegurar que el campo tenga el nombre 'clave'
                 campoContraseña.setAttribute('name', 'clave');
-                formData.delete('contraseña');
-                formData.append('clave', campoContraseña.value);
-            }
-            
-            // Verificar que el FormData tenga 'clave' y no 'contraseña'
-            if (formData.has('contraseña')) {
-                const valor = formData.get('contraseña');
-                formData.delete('contraseña');
-                formData.append('clave', valor);
+                // Actualizar formData si es necesario
+                if (formData.has('clave')) {
+                    // ya tiene 'clave'
+                } else if (formData.has('contraseña')) {
+                    const valor = formData.get('contraseña');
+                    formData.delete('contraseña');
+                    formData.append('clave', valor);
+                }
             }
             
             // Obtener la URL del action del formulario
@@ -225,8 +224,8 @@ document.addEventListener('DOMContentLoaded', function() {
                         mensajeResultado.className = 'mensaje-resultado mensaje-error';
                         mensajeResultado.style.display = 'block';
                         
-                        // Si el mensaje menciona 'contraseña' o SQL, hacerlo más visible
-                        if (mensajeError.includes('contraseña') || mensajeError.includes('ALTER TABLE')) {
+                        // Si el mensaje menciona 'clave' o SQL, hacerlo más visible
+                        if (mensajeError.includes('clave') || mensajeError.includes('ALTER TABLE')) {
                             mensajeResultado.style.background = '#fff3cd';
                             mensajeResultado.style.border = '2px solid #ffc107';
                             mensajeResultado.style.padding = '15px';

@@ -1,17 +1,11 @@
 <?php
 /**
- * Clase Database - Singleton para conexión a MySQL
- * Sprint 1 - Proyecto Loom
- * 
- * @author Lidia Artero Fernández
- * @version 1.0
- */
-
+// Sprint 1 - Lidia
 class Database {
     private static $instance = null;
     private $pdo;
     
-    /**
+    private function __construct() { 
      * Constructor privado para implementar patrón Singleton
      */
     private function __construct() {
@@ -42,7 +36,7 @@ class Database {
      * 
      * @return Database
      */
-    public static function getInstance() {
+    public static function getInstance() { 
         if (self::$instance === null) {
             self::$instance = new self();
         }
@@ -54,14 +48,14 @@ class Database {
      * 
      * @return PDO
      */
-    public function getConnection() {
+    public function getConnection() { 
         return $this->pdo;
     }
     
     /**
      * Prevenir clonación
      */
-    private function __clone() {}
+    private function __clone() { } 
     
     /**
      * Prevenir deserialización

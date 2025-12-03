@@ -2,13 +2,7 @@
 /**
  * Configuración principal del proyecto Loom
  * Sprint 1 - Proyecto Loom
- * 
- * @author Lidia Artero Fernández
- * @version 1.0
- */
-
-// Prevenir acceso directo
-if (!defined('LOOM_APP')) {
+// Sprint 1 - Lidia
     define('LOOM_APP', true);
 }
 

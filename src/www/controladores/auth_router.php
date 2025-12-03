@@ -1,10 +1,5 @@
 <?php
-/**
- * Router para Autenticación
- * Sprint 1 - Proyecto Loom
- */
-
-require_once __DIR__ . '/../config.php';
+// Sprint 1 - Lidia
 require_once __DIR__ . '/AuthController.php';
 
 // Configurar respuesta JSON

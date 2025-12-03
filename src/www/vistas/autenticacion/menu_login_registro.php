@@ -3,6 +3,8 @@
  * Menú de Login/Registro
  * Sprint 1 - Proyecto Loom
  */
+<?php
+// Sprint 1 - Lidia
 
 require_once __DIR__ . '/../../config.php';
 

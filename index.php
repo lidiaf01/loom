@@ -1,10 +1,6 @@
 <?php
-/**
- * Punto de entrada principal - Proyecto Loom
- * Sprint 1 - Proyecto Loom
- * 
- * Este archivo debe estar en la raíz de htdocs/loom/
- */
+// Sprint 1 - Lidia
+// Punto de entrada principal
 
 // Iniciar sesión antes de incluir config
 if (session_status() === PHP_SESSION_NONE) {

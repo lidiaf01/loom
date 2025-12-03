@@ -1,8 +1,5 @@
 <?php
-/**
- * Vista de Login
- * Sprint 1 - Proyecto Loom
- */
+// Sprint 1 - Lidia
 
 require_once __DIR__ . '/../../config.php';
 
@@ -41,16 +38,16 @@ include __DIR__ . '/../plantilla/header.php';
             </div>
             
             <div class="form-group">
-                <label for="contraseña">Contraseña *</label>
+                <label for="clave">Clave *</label>
                 <input 
                     type="password" 
-                    id="contraseña" 
-                    name="contraseña" 
+                    id="clave" 
+                    name="clave" 
                     required
-                    placeholder="Tu contraseña"
+                    placeholder="Tu clave"
                     autocomplete="current-password"
                 >
-                <span class="error-message" id="error_contraseña"></span>
+                <span class="error-message" id="error_clave"></span>
             </div>
             
             <div class="form-group checkbox-group">
@@ -75,8 +72,8 @@ include __DIR__ . '/../plantilla/header.php';
     </div>
 </main>
 
-<script src="/loom/scripts/validaciones.js"></script>
-<script src="/loom/scripts/auth.js"></script>
+<script src="/loom/js/validaciones.js"></script>
+<script src="/loom/js/auth.js"></script>
 
 <?php include __DIR__ . '/../plantilla/footer.php'; ?>
 

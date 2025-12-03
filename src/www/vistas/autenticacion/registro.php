@@ -1,8 +1,5 @@
 <?php
-/**
- * Vista de Registro
- * Sprint 1 - Proyecto Loom
- */
+// Sprint 1 - Lidia
 
 require_once __DIR__ . '/../../config.php';
 
@@ -66,11 +63,11 @@ include __DIR__ . '/../plantilla/header.php';
             </div>
             
             <div class="form-group">
-                <label for="contraseña">Contraseña *</label>
+                <label for="clave">Clave *</label>
                 <input 
                     type="password" 
-                    id="contraseña" 
-                    name="contraseña" 
+                    id="clave" 
+                    name="clave" 
                     required 
                     minlength="<?php echo PASSWORD_MIN_LENGTH; ?>"
                     placeholder="Mínimo 8 caracteres"
@@ -78,19 +75,19 @@ include __DIR__ . '/../plantilla/header.php';
                 <div class="password-requirements">
                     <small>Debe contener: mayúscula, minúscula y número</small>
                 </div>
-                <span class="error-message" id="error_contraseña"></span>
+                <span class="error-message" id="error_clave"></span>
             </div>
             
             <div class="form-group">
-                <label for="confirmar_contraseña">Confirmar contraseña *</label>
+                <label for="confirmar_clave">Confirmar clave *</label>
                 <input 
                     type="password" 
-                    id="confirmar_contraseña" 
-                    name="confirmar_contraseña" 
+                    id="confirmar_clave" 
+                    name="confirmar_clave" 
                     required
-                    placeholder="Repite tu contraseña"
+                    placeholder="Repite tu clave"
                 >
-                <span class="error-message" id="error_confirmar_contraseña"></span>
+                <span class="error-message" id="error_confirmar_clave"></span>
             </div>
             
             <div class="form-group">
@@ -119,8 +116,8 @@ include __DIR__ . '/../plantilla/header.php';
     </div>
 </main>
 
-<script src="/loom/scripts/validaciones.js"></script>
-<script src="/loom/scripts/auth.js"></script>
+<script src="/loom/js/validaciones.js"></script>
+<script src="/loom/js/auth.js"></script>
 
 <?php include __DIR__ . '/../plantilla/footer.php'; ?>
 

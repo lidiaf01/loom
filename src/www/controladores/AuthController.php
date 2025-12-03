@@ -1,11 +1,5 @@
 <?php
-/**
- * Controlador de Autenticación
- * Sprint 1 - Proyecto Loom
- * 
- * @author Lidia Artero Fernández
- * @version 1.0
- */
+// Sprint 1 - Lidia
 
 require_once __DIR__ . '/../modelos/Usuario.php';
 
@@ -16,9 +10,7 @@ class AuthController {
         $this->usuario = new Usuario();
     }
     
-    /**
-     * Procesa el registro de un nuevo usuario
-     */
+    // Sprint 1 - Lidia
     public function registrar() {
         // Verificar que sea petición POST
         if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
@@ -31,7 +23,7 @@ class AuthController {
         $datos = [
             'nombre_usuario' => limpiar($_POST['nombre_usuario'] ?? ''),
             'email' => limpiar($_POST['email'] ?? ''),
-            'contraseña' => $_POST['contraseña'] ?? '',
+            'clave' => $_POST['clave'] ?? '',
             'fecha_nacimiento' => limpiar($_POST['fecha_nacimiento'] ?? ''),
             'biografia' => limpiar($_POST['biografia'] ?? '')
         ];
@@ -66,9 +58,7 @@ class AuthController {
         }
     }
     
-    /**
-     * Procesa el login de un usuario
-     */
+    // Sprint 1 - Lidia
     public function login() {
         // Verificar que sea petición POST
         if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
@@ -78,17 +68,17 @@ class AuthController {
         }
         
         $email = limpiar($_POST['email'] ?? '');
-        $contraseña = $_POST['contraseña'] ?? '';
+        $clave = $_POST['clave'] ?? '';
         
         // Validaciones básicas
-        if (empty($email) || empty($contraseña)) {
+        if (empty($email) || empty($clave)) {
             http_response_code(400);
-            echo json_encode(['exito' => false, 'mensaje' => 'Email y contraseña son requeridos']);
+            echo json_encode(['exito' => false, 'mensaje' => 'Email y clave son requeridos']);
             return;
         }
         
         // Autenticar
-        $resultado = $this->usuario->autenticar($email, $contraseña);
+        $resultado = $this->usuario->autenticar($email, $clave);
         
         if ($resultado['exito']) {
             // Guardar datos en sesión
@@ -114,9 +104,7 @@ class AuthController {
         }
     }
     
-    /**
-     * Cierra la sesión del usuario
-     */
+    // Sprint 1 - Lidia
     public function logout() {
         // Destruir sesión
         $_SESSION = [];
@@ -139,12 +127,7 @@ class AuthController {
         ]);
     }
     
-    /**
-     * Valida los datos de registro
-     * 
-     * @param array $datos
-     * @return array Errores encontrados
-     */
+    // Sprint 1 - Lidia
     private function validarRegistro($datos) {
         $errores = [];
         
@@ -164,17 +147,17 @@ class AuthController {
             $errores[] = 'El email no es válido';
         }
         
-        // Validar contraseña
-        if (empty($datos['contraseña'])) {
-            $errores[] = 'La contraseña es requerida';
-        } elseif (strlen($datos['contraseña']) < PASSWORD_MIN_LENGTH) {
-            $errores[] = 'La contraseña debe tener al menos ' . PASSWORD_MIN_LENGTH . ' caracteres';
-        } elseif (!preg_match('/[A-Z]/', $datos['contraseña'])) {
-            $errores[] = 'La contraseña debe contener al menos una mayúscula';
-        } elseif (!preg_match('/[a-z]/', $datos['contraseña'])) {
-            $errores[] = 'La contraseña debe contener al menos una minúscula';
-        } elseif (!preg_match('/[0-9]/', $datos['contraseña'])) {
-            $errores[] = 'La contraseña debe contener al menos un número';
+        // Validar clave
+        if (empty($datos['clave'])) {
+            $errores[] = 'La clave es requerida';
+        } elseif (strlen($datos['clave']) < PASSWORD_MIN_LENGTH) {
+            $errores[] = 'La clave debe tener al menos ' . PASSWORD_MIN_LENGTH . ' caracteres';
+        } elseif (!preg_match('/[A-Z]/', $datos['clave'])) {
+            $errores[] = 'La clave debe contener al menos una mayúscula';
+        } elseif (!preg_match('/[a-z]/', $datos['clave'])) {
+            $errores[] = 'La clave debe contener al menos una minúscula';
+        } elseif (!preg_match('/[0-9]/', $datos['clave'])) {
+            $errores[] = 'La clave debe contener al menos un número';
         }
         
         // Validar fecha de nacimiento

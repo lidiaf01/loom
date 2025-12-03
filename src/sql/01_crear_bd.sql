@@ -25,7 +25,7 @@ CREATE TABLE IF NOT EXISTS usuarios (
     id_usuario INT AUTO_INCREMENT PRIMARY KEY,
     nombre_usuario VARCHAR(50) NOT NULL UNIQUE,
     email VARCHAR(100) NOT NULL UNIQUE,
-    contraseña VARCHAR(255) NOT NULL,
+    clave VARCHAR(255) NOT NULL COMMENT 'Hash de la clave del usuario',
     fecha_nacimiento DATE NOT NULL,
     biografia TEXT DEFAULT NULL,
     foto_perfil VARCHAR(255) DEFAULT 'default_avatar.png',

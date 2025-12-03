@@ -1,11 +1,5 @@
 <?php
-/**
- * Modelo Usuario - CRUD de usuarios
- * Sprint 1 - Proyecto Loom
- * 
- * @author Lidia Artero Fernández
- * @version 1.0
- */
+// Sprint 1 - Lidia
 
 require_once __DIR__ . '/Database.php';
 
@@ -16,12 +10,7 @@ class Usuario {
         $this->db = Database::getInstance()->getConnection();
     }
     
-    /**
-     * Registra un nuevo usuario
-     * 
-     * @param array $datos Datos del usuario (nombre_usuario, email, contraseña, fecha_nacimiento)
-     * @return array ['exito' => bool, 'mensaje' => string, 'id_usuario' => int|null]
-     */
+    // Sprint 1 - Lidia
     public function registrar($datos) {
         try {
             // Validar que el email no exista
@@ -55,18 +44,18 @@ class Usuario {
                 ];
             }
             
-            // Hash de la contraseña
-            $hashContraseña = password_hash($datos['contraseña'], PASSWORD_DEFAULT);
+            // Hash de la clave
+            $hashClave = password_hash($datos['clave'], PASSWORD_DEFAULT);
             
             // Insertar usuario
-            $sql = "INSERT INTO usuarios (nombre_usuario, email, contraseña, fecha_nacimiento, biografia, rol)
-                    VALUES (:nombre_usuario, :email, :contraseña, :fecha_nacimiento, :biografia, :rol)";
+                $sql = "INSERT INTO usuarios (nombre_usuario, email, clave, fecha_nacimiento, biografia, rol)
+                    VALUES (:nombre_usuario, :email, :clave, :fecha_nacimiento, :biografia, :rol)";
             
             $stmt = $this->db->prepare($sql);
             $stmt->execute([
                 ':nombre_usuario' => $datos['nombre_usuario'],
                 ':email' => $datos['email'],
-                ':contraseña' => $hashContraseña,
+                ':clave' => $hashClave,
                 ':fecha_nacimiento' => $datos['fecha_nacimiento'],
                 ':biografia' => $datos['biografia'] ?? null,
                 ':rol' => 'usuario'
@@ -89,16 +78,10 @@ class Usuario {
         }
     }
     
-    /**
-     * Autentica un usuario (login)
-     * 
-     * @param string $email Email del usuario
-     * @param string $contraseña Contraseña sin hash
-     * @return array ['exito' => bool, 'mensaje' => string, 'usuario' => array|null]
-     */
-    public function autenticar($email, $contraseña) {
+    // Sprint 1 - Lidia
+    public function autenticar($email, $clave) {
         try {
-            $sql = "SELECT id_usuario, nombre_usuario, email, contraseña, rol, activo, foto_perfil, biografia
+                $sql = "SELECT id_usuario, nombre_usuario, email, clave, rol, activo, foto_perfil, biografia
                     FROM usuarios 
                     WHERE email = :email AND activo = 1
                     LIMIT 1";
@@ -110,16 +93,16 @@ class Usuario {
             if (!$usuario) {
                 return [
                     'exito' => false,
-                    'mensaje' => 'Email o contraseña incorrectos',
+                    'mensaje' => 'Email o clave incorrectos',
                     'usuario' => null
                 ];
             }
             
-            // Verificar contraseña
-            if (!password_verify($contraseña, $usuario['contraseña'])) {
+            // Verificar clave
+            if (!password_verify($clave, $usuario['clave'])) {
                 return [
                     'exito' => false,
-                    'mensaje' => 'Email o contraseña incorrectos',
+                    'mensaje' => 'Email o clave incorrectos',
                     'usuario' => null
                 ];
             }
@@ -127,8 +110,8 @@ class Usuario {
             // Actualizar último acceso
             $this->actualizarUltimoAcceso($usuario['id_usuario']);
             
-            // Eliminar contraseña del array antes de devolver
-            unset($usuario['contraseña']);
+            // Eliminar clave del array antes de devolver
+            unset($usuario['clave']);
             
             return [
                 'exito' => true,
@@ -145,12 +128,7 @@ class Usuario {
         }
     }
     
-    /**
-     * Obtiene un usuario por ID
-     * 
-     * @param int $idUsuario
-     * @return array|null
-     */
+    // Sprint 1 - Lidia
     public function obtenerPorId($idUsuario) {
         try {
             $sql = "SELECT id_usuario, nombre_usuario, email, fecha_nacimiento, biografia, 
@@ -168,12 +146,7 @@ class Usuario {
         }
     }
     
-    /**
-     * Verifica si un email existe
-     * 
-     * @param string $email
-     * @return bool
-     */
+    // Sprint 1 - Lidia
     public function existeEmail($email) {
         try {
             $sql = "SELECT COUNT(*) FROM usuarios WHERE email = :email";
@@ -185,12 +158,7 @@ class Usuario {
         }
     }
     
-    /**
-     * Verifica si un nombre de usuario existe
-     * 
-     * @param string $nombreUsuario
-     * @return bool
-     */
+    // Sprint 1 - Lidia
     public function existeNombreUsuario($nombreUsuario) {
         try {
             $sql = "SELECT COUNT(*) FROM usuarios WHERE nombre_usuario = :nombre_usuario";
@@ -202,11 +170,7 @@ class Usuario {
         }
     }
     
-    /**
-     * Actualiza el último acceso del usuario
-     * 
-     * @param int $idUsuario
-     */
+    // Sprint 1 - Lidia
     private function actualizarUltimoAcceso($idUsuario) {
         try {
             $sql = "UPDATE usuarios SET ultimo_acceso = NOW() WHERE id_usuario = :id_usuario";
