@@ -1,5 +1,5 @@
 <?php
-// Sprint 1 - Lidia
+// Controlador de Autenticación
 
 require_once __DIR__ . '/../modelos/Usuario.php';
 
@@ -10,43 +10,36 @@ class AuthController {
         $this->usuario = new Usuario();
     }
     
-    // Sprint 1 - Lidia
     public function registrar() {
-        // Verificar que sea petición POST
         if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
             http_response_code(405);
             echo json_encode(['exito' => false, 'mensaje' => 'Método no permitido']);
             return;
         }
         
-        // Obtener y limpiar datos
         $datos = [
             'nombre_usuario' => limpiar($_POST['nombre_usuario'] ?? ''),
             'email' => limpiar($_POST['email'] ?? ''),
             'clave' => $_POST['clave'] ?? '',
-            'fecha_nacimiento' => limpiar($_POST['fecha_nacimiento'] ?? ''),
+            'fecha_nacimiento' => $_POST['fecha_nacimiento'] ?? '',
             'biografia' => limpiar($_POST['biografia'] ?? '')
         ];
         
-        // Validaciones básicas
+        // Validaciones
         $errores = $this->validarRegistro($datos);
-        
         if (!empty($errores)) {
             http_response_code(400);
             echo json_encode(['exito' => false, 'mensaje' => implode(', ', $errores)]);
             return;
         }
         
-        // Registrar usuario
         $resultado = $this->usuario->registrar($datos);
         
         if ($resultado['exito']) {
-            // Iniciar sesión automáticamente tras registro
             $_SESSION['usuario_id'] = $resultado['id_usuario'];
             $_SESSION['nombre_usuario'] = $datos['nombre_usuario'];
             $_SESSION['email'] = $datos['email'];
             
-            http_response_code(201);
             echo json_encode([
                 'exito' => true,
                 'mensaje' => $resultado['mensaje'],
@@ -58,9 +51,7 @@ class AuthController {
         }
     }
     
-    // Sprint 1 - Lidia
     public function login() {
-        // Verificar que sea petición POST
         if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
             http_response_code(405);
             echo json_encode(['exito' => false, 'mensaje' => 'Método no permitido']);
@@ -70,29 +61,19 @@ class AuthController {
         $email = limpiar($_POST['email'] ?? '');
         $clave = $_POST['clave'] ?? '';
         
-        // Validaciones básicas
         if (empty($email) || empty($clave)) {
             http_response_code(400);
-            echo json_encode(['exito' => false, 'mensaje' => 'Email y clave son requeridos']);
+            echo json_encode(['exito' => false, 'mensaje' => 'Email y clave requeridos']);
             return;
         }
         
-        // Autenticar
         $resultado = $this->usuario->autenticar($email, $clave);
         
         if ($resultado['exito']) {
-            // Guardar datos en sesión
             $_SESSION['usuario_id'] = $resultado['usuario']['id_usuario'];
             $_SESSION['nombre_usuario'] = $resultado['usuario']['nombre_usuario'];
             $_SESSION['email'] = $resultado['usuario']['email'];
-            $_SESSION['rol'] = $resultado['usuario']['rol'];
             
-            // Opción "Recordar sesión" (cookie)
-            if (isset($_POST['recordar']) && $_POST['recordar'] === '1') {
-                setcookie('loom_session', session_id(), time() + SESSION_LIFETIME, '/');
-            }
-            
-            http_response_code(200);
             echo json_encode([
                 'exito' => true,
                 'mensaje' => $resultado['mensaje'],
@@ -104,73 +85,35 @@ class AuthController {
         }
     }
     
-    // Sprint 1 - Lidia
     public function logout() {
-        // Destruir sesión
         $_SESSION = [];
-        
-        if (isset($_COOKIE[session_name()])) {
-            setcookie(session_name(), '', time() - 3600, '/');
-        }
-        
-        if (isset($_COOKIE['loom_session'])) {
-            setcookie('loom_session', '', time() - 3600, '/');
-        }
-        
         session_destroy();
         
-        http_response_code(200);
         echo json_encode([
             'exito' => true,
-            'mensaje' => 'Sesión cerrada correctamente',
-            'redirect' => url('index.php')
+            'mensaje' => 'Sesión cerrada',
+            'redirect' => url('vistas/autenticacion/login.php')
         ]);
     }
     
-    // Sprint 1 - Lidia
     private function validarRegistro($datos) {
         $errores = [];
         
-        // Validar nombre de usuario
-        if (empty($datos['nombre_usuario'])) {
-            $errores[] = 'El nombre de usuario es requerido';
-        } elseif (strlen($datos['nombre_usuario']) < 3) {
-            $errores[] = 'El nombre de usuario debe tener al menos 3 caracteres';
-        } elseif (strlen($datos['nombre_usuario']) > 50) {
-            $errores[] = 'El nombre de usuario no puede exceder 50 caracteres';
+        if (empty($datos['nombre_usuario']) || strlen($datos['nombre_usuario']) < 3) {
+            $errores[] = 'Usuario: mín 3 caracteres';
         }
-        
-        // Validar email
-        if (empty($datos['email'])) {
-            $errores[] = 'El email es requerido';
-        } elseif (!filter_var($datos['email'], FILTER_VALIDATE_EMAIL)) {
-            $errores[] = 'El email no es válido';
+        if (empty($datos['email']) || !filter_var($datos['email'], FILTER_VALIDATE_EMAIL)) {
+            $errores[] = 'Email inválido';
         }
-        
-        // Validar clave
-        if (empty($datos['clave'])) {
-            $errores[] = 'La clave es requerida';
-        } elseif (strlen($datos['clave']) < PASSWORD_MIN_LENGTH) {
-            $errores[] = 'La clave debe tener al menos ' . PASSWORD_MIN_LENGTH . ' caracteres';
-        } elseif (!preg_match('/[A-Z]/', $datos['clave'])) {
-            $errores[] = 'La clave debe contener al menos una mayúscula';
-        } elseif (!preg_match('/[a-z]/', $datos['clave'])) {
-            $errores[] = 'La clave debe contener al menos una minúscula';
-        } elseif (!preg_match('/[0-9]/', $datos['clave'])) {
-            $errores[] = 'La clave debe contener al menos un número';
+        if (empty($datos['clave']) || strlen($datos['clave']) < PASSWORD_MIN_LENGTH) {
+            $errores[] = 'Clave: mín ' . PASSWORD_MIN_LENGTH . ' caracteres';
         }
-        
-        // Validar fecha de nacimiento
+        if (!preg_match('/[A-Z]/', $datos['clave']) || !preg_match('/[a-z]/', $datos['clave']) || 
+            !preg_match('/[0-9]/', $datos['clave'])) {
+            $errores[] = 'Clave: mayúscula, minúscula y número requeridos';
+        }
         if (empty($datos['fecha_nacimiento'])) {
-            $errores[] = 'La fecha de nacimiento es requerida';
-        } else {
-            $fechaNacimiento = new DateTime($datos['fecha_nacimiento']);
-            $hoy = new DateTime();
-            $edad = $hoy->diff($fechaNacimiento)->y;
-            
-            if ($edad < EDAD_MINIMA) {
-                $errores[] = 'Debes tener al menos ' . EDAD_MINIMA . ' años para registrarte';
-            }
+            $errores[] = 'Fecha de nacimiento requerida';
         }
         
         return $errores;

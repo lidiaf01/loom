@@ -1,67 +1,30 @@
 <?php
-/**
-// Sprint 1 - Lidia
+// Conexión a base de datos (Singleton simplificado)
+
 class Database {
     private static $instance = null;
     private $pdo;
     
-    private function __construct() { 
-     * Constructor privado para implementar patrón Singleton
-     */
     private function __construct() {
         try {
-            $dsn = sprintf(
-                "mysql:host=%s;dbname=%s;charset=%s",
-                DB_HOST,
-                DB_NAME,
-                DB_CHARSET
-            );
-            
-            $options = [
-                PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
-                PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
-                PDO::ATTR_EMULATE_PREPARES => false,
-            ];
-            
-            $this->pdo = new PDO($dsn, DB_USER, DB_PASS, $options);
-            
+            $dsn = "mysql:host=" . DB_HOST . ";dbname=" . DB_NAME . ";charset=" . DB_CHARSET;
+            $this->pdo = new PDO($dsn, DB_USER, DB_PASS);
+            $this->pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+            $this->pdo->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_ASSOC);
         } catch (PDOException $e) {
-            // En producción, registrar en log en lugar de mostrar
-            die("Error de conexión a la base de datos: " . $e->getMessage());
+            die("Error BD: " . $e->getMessage());
         }
     }
     
-    /**
-     * Obtiene la instancia única de la conexión (Singleton)
-     * 
-     * @return Database
-     */
-    public static function getInstance() { 
+    public static function getInstance() {
         if (self::$instance === null) {
             self::$instance = new self();
         }
         return self::$instance;
     }
     
-    /**
-     * Obtiene el objeto PDO
-     * 
-     * @return PDO
-     */
-    public function getConnection() { 
+    public function getConnection() {
         return $this->pdo;
-    }
-    
-    /**
-     * Prevenir clonación
-     */
-    private function __clone() { } 
-    
-    /**
-     * Prevenir deserialización
-     */
-    public function __wakeup() {
-        throw new Exception("Cannot unserialize singleton");
     }
 }
 

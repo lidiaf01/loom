@@ -1,18 +1,12 @@
 <?php
-// Sprint 1 - Lidia
 // Punto de entrada principal
-
-// Iniciar sesión antes de incluir config
-if (session_status() === PHP_SESSION_NONE) {
-    session_start();
-}
 
 require_once __DIR__ . '/config.php';
 
-// Redirigir según estado de autenticación
+// Redirigir según autenticación
 if (estaAutenticado()) {
     header('Location: ' . url('vistas/inicio/pantalla_principal.php'));
 } else {
-    header('Location: ' . url('vistas/autenticacion/menu_login_registro.php'));
+    header('Location: ' . url('vistas/autenticacion/login.php'));
 }
 exit;

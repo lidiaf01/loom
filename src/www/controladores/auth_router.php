@@ -1,33 +1,25 @@
 <?php
-// Sprint 1 - Lidia
-require_once __DIR__ . '/AuthController.php';
+// Router de autenticación
 
-// Configurar respuesta JSON
 header('Content-Type: application/json; charset=utf-8');
 
-// Obtener acción
-$action = $_GET['action'] ?? $_POST['action'] ?? '';
+require_once __DIR__ . '/AuthController.php';
 
-// Crear instancia del controlador
+$action = $_GET['action'] ?? $_POST['action'] ?? '';
 $controller = new AuthController();
 
-// Enrutar según acción
 switch ($action) {
     case 'registrar':
         $controller->registrar();
         break;
-        
     case 'login':
         $controller->login();
         break;
-        
     case 'logout':
         $controller->logout();
         break;
-        
     default:
         http_response_code(400);
-        echo json_encode(['exito' => false, 'mensaje' => 'Acción no válida']);
-        break;
+        echo json_encode(['exito' => false, 'mensaje' => 'Acción inválida']);
 }
 
