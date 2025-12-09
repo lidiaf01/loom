@@ -56,7 +56,7 @@ class Usuario {
     public function autenticar($email, $clave) {
         try {
             $sql = "SELECT id_usuario, nombre_usuario, email, clave, rol, foto_perfil, biografia
-                    FROM usuarios WHERE email = :email AND activo = 1 LIMIT 1";
+                    FROM usuarios WHERE email = :email LIMIT 1";
             
             $stmt = $this->db->prepare($sql);
             $stmt->execute([':email' => $email]);

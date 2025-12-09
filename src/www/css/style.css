@@ -12,7 +12,7 @@
 /* Bukhari Script - Para títulos */
 @font-face {
     font-family: 'Bukhari Script';
-    src: url('/loom/recursos/fuentes/Bukhari Script.ttf') format('truetype');
+    src: url('../recursos/fuentes/Bukhari Script.ttf') format('truetype');
     font-weight: 400;
     font-style: normal;
     font-display: swap;
@@ -21,7 +21,7 @@
 /* Heading Now - Para textos (64-68 corresponden a grosores) */
 @font-face {
     font-family: 'Heading Now';
-    src: url('/loom/recursos/fuentes/HeadingNowTrial-64Regular.ttf') format('truetype');
+    src: url('../recursos/fuentes/HeadingNowTrial-64Regular.ttf') format('truetype');
     font-weight: 400; /* Regular - 64 */
     font-style: normal;
     font-display: swap;
@@ -29,7 +29,7 @@
 
 @font-face {
     font-family: 'Heading Now';
-    src: url('/loom/recursos/fuentes/HeadingNowTrial-64RegularItalic.ttf') format('truetype');
+    src: url('../recursos/fuentes/HeadingNowTrial-64RegularItalic.ttf') format('truetype');
     font-weight: 400; /* Regular - 64 */
     font-style: italic;
     font-display: swap;
@@ -37,7 +37,7 @@
 
 @font-face {
     font-family: 'Heading Now';
-    src: url('/loom/recursos/fuentes/HeadingNowTrial-65Medium.ttf') format('truetype');
+    src: url('../recursos/fuentes/HeadingNowTrial-65Medium.ttf') format('truetype');
     font-weight: 500; /* Medium - 65 */
     font-style: normal;
     font-display: swap;
@@ -45,7 +45,7 @@
 
 @font-face {
     font-family: 'Heading Now';
-    src: url('/loom/recursos/fuentes/HeadingNowTrial-65MediumItalic.ttf') format('truetype');
+    src: url('../recursos/fuentes/HeadingNowTrial-65MediumItalic.ttf') format('truetype');
     font-weight: 500; /* Medium - 65 */
     font-style: italic;
     font-display: swap;
@@ -53,7 +53,7 @@
 
 @font-face {
     font-family: 'Heading Now';
-    src: url('/loom/recursos/fuentes/HeadingNowTrial-66Bold.ttf') format('truetype');
+    src: url('../recursos/fuentes/HeadingNowTrial-66Bold.ttf') format('truetype');
     font-weight: 600; /* Bold - 66 */
     font-style: normal;
     font-display: swap;
@@ -61,7 +61,7 @@
 
 @font-face {
     font-family: 'Heading Now';
-    src: url('/loom/recursos/fuentes/HeadingNowTrial-66BoldItalic.ttf') format('truetype');
+    src: url('../recursos/fuentes/HeadingNowTrial-66BoldItalic.ttf') format('truetype');
     font-weight: 600; /* Bold - 66 */
     font-style: italic;
     font-display: swap;
@@ -69,7 +69,7 @@
 
 @font-face {
     font-family: 'Heading Now';
-    src: url('/loom/recursos/fuentes/HeadingNowTrial-67Extrabold.ttf') format('truetype');
+    src: url('../recursos/fuentes/HeadingNowTrial-67Extrabold.ttf') format('truetype');
     font-weight: 700; /* Extrabold - 67 */
     font-style: normal;
     font-display: swap;
@@ -77,7 +77,7 @@
 
 @font-face {
     font-family: 'Heading Now';
-    src: url('/loom/recursos/fuentes/HeadingNowTrial-67ExtraboldItalic.ttf') format('truetype');
+    src: url('../recursos/fuentes/HeadingNowTrial-67ExtraboldItalic.ttf') format('truetype');
     font-weight: 700; /* Extrabold - 67 */
     font-style: italic;
     font-display: swap;
@@ -85,7 +85,7 @@
 
 @font-face {
     font-family: 'Heading Now';
-    src: url('/loom/recursos/fuentes/HeadingNowTrial-68Heavy.ttf') format('truetype');
+    src: url('../recursos/fuentes/HeadingNowTrial-68Heavy.ttf') format('truetype');
     font-weight: 800; /* Heavy - 68 */
     font-style: normal;
     font-display: swap;
@@ -93,7 +93,7 @@
 
 @font-face {
     font-family: 'Heading Now';
-    src: url('/loom/recursos/fuentes/HeadingNowTrial-68HeavyItalic.ttf') format('truetype');
+    src: url('../recursos/fuentes/HeadingNowTrial-68HeavyItalic.ttf') format('truetype');
     font-weight: 800; /* Heavy - 68 */
     font-style: italic;
     font-display: swap;

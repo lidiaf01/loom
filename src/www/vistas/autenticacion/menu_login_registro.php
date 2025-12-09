@@ -3,14 +3,14 @@
  * Menú de Login/Registro
  * Sprint 1 - Proyecto Loom
  */
-<?php
+
 // Sprint 1 - Lidia
 
-require_once __DIR__ . '/../../config.php';
+require_once __DIR__ . '/../../../../config.php';
 
 // Si ya está autenticado, redirigir a inicio
 if (estaAutenticado()) {
-    header('Location: ' . url('vistas/inicio/pantalla_principal.php'));
+    header('Location: ' . ASSETS_URL . '/?page=inicio');
     exit;
 }
 
@@ -26,7 +26,7 @@ include __DIR__ . '/../plantilla/header.php';
             $logoPath = RECURSOS_PATH . '/logo/loom-logo.png';
             if (file_exists($logoPath)): 
             ?>
-                <img src="/loom/recursos/logo/loom-logo.png" alt="Loom" class="logo-grande">
+                <img src="../../../recursos/logo/loom-logo.png" alt="Loom" class="logo-grande">
             <?php else: ?>
                 <h1 class="logo-grande">Loom</h1>
             <?php endif; ?>
@@ -34,10 +34,10 @@ include __DIR__ . '/../plantilla/header.php';
         </div>
         
         <div class="auth-options">
-            <a href="<?php echo url('vistas/autenticacion/login.php'); ?>" class="btn-auth btn-primary">
+            <a href="<?php echo ASSETS_URL; ?>/?page=login" class="btn-auth btn-primary">
                 Iniciar Sesión
             </a>
-            <a href="<?php echo url('vistas/autenticacion/registro.php'); ?>" class="btn-auth btn-secondary">
+            <a href="<?php echo ASSETS_URL; ?>/?page=registro" class="btn-auth btn-secondary">
                 Registrarse
             </a>
         </div>

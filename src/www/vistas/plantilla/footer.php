@@ -5,10 +5,10 @@
         </div>
     </footer>
     
-    <script src="/loom/scripts/main.js"></script>
+    <script src="/loom/src/www/js/main.js"></script>
     <?php if (isset($js_extra)): ?>
         <?php foreach ($js_extra as $script): ?>
-            <script src="<?php echo url($script); ?>"></script>
+            <script src="<?php echo ASSETS_URL; ?>/<?php echo ltrim($script, '/'); ?>"></script>
         <?php endforeach; ?>
     <?php endif; ?>
 </body>

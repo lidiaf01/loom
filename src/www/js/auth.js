@@ -83,13 +83,13 @@ document.addEventListener('DOMContentLoaded', function() {
         btnLogout.addEventListener('click', function(e) {
             e.preventDefault();
             if (confirm('¿Cerrar sesión?')) {
-                fetch('/loom/controladores/auth_router.php?action=logout', {
+                fetch('/loom/src/www/controladores/auth_router.php?action=logout', {
                     method: 'POST'
                 })
                 .then(r => r.json())
                 .then(data => {
                     if (data.exito) {
-                        window.location.href = '/loom';
+                        window.location.href = '/loom/?page=login';
                     }
                 });
             }

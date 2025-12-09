@@ -6,14 +6,23 @@ if (estaAutenticado()) {
     exit;
 }
 
-$titulo = 'Iniciar Sesión';
+$titulo = 'Error de Inicio de Sesión';
 $mostrarHeader = false;
 include __DIR__ . '/../plantilla/header.php';
 ?>
 
 <main class="auth-container">
     <div class="auth-form-wrapper">
-        <h2>Iniciar sesión</h2>
+        <h2>Inicio de sesión fallido</h2>
+        
+        <div class="error-box">
+            <p style="color: #ef4444; font-size: 1.1rem; margin: 1.5rem 0;">
+                ❌ No ha sido posible iniciar sesión
+            </p>
+            <p style="color: #6B6B6B; margin: 1rem 0;">
+                Email o contraseña incorrectos. Por favor, verifica tus datos e intenta de nuevo.
+            </p>
+        </div>
         
         <form id="formLogin" method="POST" action="<?php echo ASSETS_URL; ?>/src/www/controladores/auth_router.php?action=login">
             <div class="form-group">
@@ -37,4 +46,5 @@ include __DIR__ . '/../plantilla/header.php';
     </div>
 </main>
 
+<script src="/loom/src/www/js/auth.js"></script>
 <?php include __DIR__ . '/../plantilla/footer.php'; ?>

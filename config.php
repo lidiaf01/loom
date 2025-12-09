@@ -27,6 +27,9 @@ define('CONTROLADORES_PATH', WWW_PATH . '/controladores');
 define('VISTAS_PATH', WWW_PATH . '/vistas');
 define('RECURSOS_PATH', WWW_PATH . '/recursos');
 define('ASSETS_URL', '/loom');
+define('FUENTES_URL', ASSETS_URL . '/src/www/recursos/fuentes');
+define('ICONOS_URL', ASSETS_URL . '/src/www/recursos/iconos');
+define('LOGO_URL', ASSETS_URL . '/src/www/recursos/logo');
 
 // ========== SEGURIDAD ==========
 define('PASSWORD_MIN_LENGTH', 8);
@@ -57,7 +60,7 @@ function obtenerUsuarioId() {
 
 function requerirAutenticacion() {
     if (!estaAutenticado()) {
-        header('Location: ' . ASSETS_URL . '/vistas/autenticacion/login.php');
+        header('Location: ' . ASSETS_URL . '/?page=login');
         exit;
     }
 }
@@ -67,6 +70,15 @@ function limpiar($texto) {
 }
 
 function url($ruta) {
+    // Convertir rutas de vistas a parámetros GET
+    if (strpos($ruta, 'vistas/autenticacion/login.php') !== false) {
+        return ASSETS_URL . '/?page=login';
+    } elseif (strpos($ruta, 'vistas/autenticacion/registro.php') !== false) {
+        return ASSETS_URL . '/?page=registro';
+    } elseif (strpos($ruta, 'vistas/inicio/pantalla_principal.php') !== false) {
+        return ASSETS_URL . '/?page=inicio';
+    }
+    // Para otros archivos (js, css, etc)
     return ASSETS_URL . '/' . ltrim($ruta, '/');
 }
 

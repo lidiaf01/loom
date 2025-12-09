@@ -1,5 +1,5 @@
 <?php
-require_once __DIR__ . '/../../config.php';
+require_once __DIR__ . '/../../../../config.php';
 
 if (estaAutenticado()) {
     header('Location: ' . url('vistas/inicio/pantalla_principal.php'));
@@ -88,7 +88,7 @@ include __DIR__ . '/../plantilla/header.php';
             $logoPath = RECURSOS_PATH . '/logo/loom-logo.png';
             if (file_exists($logoPath)): 
             ?>
-                <img src="/loom/recursos/logo/loom-logo.png" alt="Loom" style="height: 120px; max-width: 350px; width: auto; display: block; margin: 0 auto;">
+                <img src="../../../recursos/logo/loom-logo.png" alt="Loom" style="height: 120px; max-width: 350px; width: auto; display: block; margin: 0 auto;">
             <?php else: ?>
                 <h1 style="font-size: 2.5rem; margin: 0;">Loom</h1>
             <?php endif; ?>

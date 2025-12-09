@@ -1,8 +1,8 @@
 <?php
-require_once __DIR__ . '/../../config.php';
+require_once __DIR__ . '/../../../../config.php';
 
 if (estaAutenticado()) {
-    header('Location: ' . url('vistas/inicio/pantalla_principal.php'));
+    header('Location: ' . ASSETS_URL . '/?page=inicio');
     exit;
 }
 
@@ -15,8 +15,7 @@ include __DIR__ . '/../plantilla/header.php';
     <div class="auth-form-wrapper">
         <h2>Crear cuenta</h2>
         
-        <form id="formRegistro" method="POST" action="<?php echo url('controladores/auth_router.php'); ?>">
-            <input type="hidden" name="action" value="registrar">
+        <form id="formRegistro" method="POST" action="<?php echo ASSETS_URL; ?>/src/www/controladores/auth_router.php?action=registrar">
             
             <div class="form-group">
                 <label for="nombre_usuario">Nombre de usuario</label>
