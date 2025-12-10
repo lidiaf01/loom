@@ -5,9 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title><?php echo isset($titulo) ? $titulo . ' - ' : ''; ?>Loom</title>
     <link rel="icon" type="image/png" href="/loom/src/www/recursos/logo/loom-icon.png">
-    <link rel="stylesheet" href="/loom/src/www/css/style.css">
-    <link rel="stylesheet" href="/loom/src/www/css/auth.css">
-    <link rel="stylesheet" href="/loom/src/www/css/iconos.css">
+    <link rel="stylesheet" href="/loom/src/www/estilos/style.css">
+    <link rel="stylesheet" href="/loom/src/www/estilos/auth.css">
+    <link rel="stylesheet" href="/loom/src/www/estilos/iconos.css">
 </head>
 <body>
     <?php if (isset($mostrarHeader) && $mostrarHeader): ?>
