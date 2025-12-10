@@ -21,7 +21,7 @@ define('DB_PASS', '');
 define('DB_CHARSET', 'utf8mb4');
 
 // ========== RUTAS Y URLs ==========
-define('WWW_PATH', __DIR__);
+define('WWW_PATH', __DIR__ . '/src/www');
 define('MODELOS_PATH', WWW_PATH . '/modelos');
 define('CONTROLADORES_PATH', WWW_PATH . '/controladores');
 define('VISTAS_PATH', WWW_PATH . '/vistas');
