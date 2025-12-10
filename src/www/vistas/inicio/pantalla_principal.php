@@ -1,4 +1,5 @@
 <?php
+<<<<<<< HEAD
 /**
  * Página principal de Loom
  * 
@@ -12,6 +13,19 @@
 if (!isset($_SESSION['usuario_id'])) {
     $_SESSION['error'] = 'Acceso no autorizado. Por favor inicie sesión.';
     echo '<meta http-equiv="refresh" content="0;url=index.php?controlador=usuario&metodo=iniciarSesion">';
+=======
+require_once __DIR__ . '/../../../../config.php';
+require_once __DIR__ . '/../../../../modelos/Usuario.php';
+
+requerirAutenticacion();
+
+$usuarioModel = new Usuario();
+$usuario = $usuarioModel->obtenerPorId(obtenerUsuarioId());
+
+if (!$usuario) {
+    session_destroy();
+    header('Location: ' . url('vistas/autenticacion/login.php'));
+>>>>>>> 53c5bf011309e270d2c5e4fa9544df665db30bd6
     exit;
 }
 
@@ -58,9 +72,15 @@ if (!$usuario) {
         
         <div class="perfil-info">
             <h3><?php echo htmlspecialchars($usuario['nombre_usuario']); ?></h3>
+<<<<<<< HEAD
             <p><?php echo htmlspecialchars($usuario['correo']); ?></p>
             <?php if (!empty($usuario['fecha_nacimiento'])): ?>
                 <p>Fecha de nacimiento: <?php echo htmlspecialchars($usuario['fecha_nacimiento']); ?></p>
+=======
+            <p><?php echo htmlspecialchars($usuario['email']); ?></p>
+            <?php if ($usuario['biografia']): ?>
+                <p><?php echo htmlspecialchars($usuario['biografia']); ?></p>
+>>>>>>> 53c5bf011309e270d2c5e4fa9544df665db30bd6
             <?php endif; ?>
         </div>
         

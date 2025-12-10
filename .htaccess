@@ -5,6 +5,11 @@
     RewriteCond %{REQUEST_FILENAME} !-f
     RewriteCond %{REQUEST_FILENAME} !-d
     
+<<<<<<< HEAD
     # Todo lo demás va a index.php (que redirige a src/index.php)
     RewriteRule ^(.*)$ index.php [QSA,L]
+=======
+    # Todo lo demás va a index.php
+    RewriteRule ^(.*)$ index.php?page=$1 [QSA,L]
+>>>>>>> 53c5bf011309e270d2c5e4fa9544df665db30bd6
 </IfModule>
