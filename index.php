@@ -1,10 +1,4 @@
 <?php
-<<<<<<< HEAD
-/**
- * Punto de entrada principal - Redirige a src/www/index.php
- */
-require_once __DIR__ . '/src/www/index.php';
-=======
 // Punto de entrada principal - Router MVC
 
 require_once __DIR__ . '/config.php';
@@ -45,4 +39,3 @@ switch ($page) {
         echo '<h1>Página no encontrada</h1>';
         exit;
 }
->>>>>>> 53c5bf011309e270d2c5e4fa9544df665db30bd6

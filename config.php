@@ -71,10 +71,14 @@ function limpiar($texto) {
 
 function url($ruta) {
     // Convertir rutas de vistas a parámetros GET
-    if (strpos($ruta, 'vistas/autenticacion/login.php') !== false) {
+    if (strpos($ruta, 'vistas/autenticacion/menu_login_registro.php') !== false) {
+        return ASSETS_URL . '/?page=menu';
+    } elseif (strpos($ruta, 'vistas/autenticacion/login.php') !== false) {
         return ASSETS_URL . '/?page=login';
     } elseif (strpos($ruta, 'vistas/autenticacion/registro.php') !== false) {
         return ASSETS_URL . '/?page=registro';
+    } elseif (strpos($ruta, 'vistas/autenticacion/error_login.php') !== false) {
+        return ASSETS_URL . '/?page=error_login';
     } elseif (strpos($ruta, 'vistas/inicio/pantalla_principal.php') !== false) {
         return ASSETS_URL . '/?page=inicio';
     }
