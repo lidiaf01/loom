@@ -9,10 +9,9 @@
 .auth-container {
     min-height: 100vh;
     display: flex;
-    align-items: flex-start;
+    align-items: center;
     justify-content: center;
     padding: var(--spacing-sm);
-    padding-top: 2rem;
     background-color: #FFFFFF !important;  /* Fondo blanco */
     position: relative;
     overflow: hidden;
@@ -39,9 +38,9 @@
 
 /* Logo en página principal de autenticación */
 .logo-grande img {
-    height: 120px !important;  /* Tamaño ideal para página principal */
+    height: 100px !important;  /* Reducido de 120px */
     width: auto !important;
-    max-width: 350px !important;
+    max-width: 280px !important;  /* Reducido de 350px */
     object-fit: contain !important;
     display: block !important;
     margin: 0 auto var(--spacing-md) auto !important;

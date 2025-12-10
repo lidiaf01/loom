@@ -1,120 +1,71 @@
 <?php
 /**
- * Pantalla Principal
- * Sprint 1 - Proyecto Loom
+ * Página principal de Loom
+ * 
+ * Muestra la pantalla principal después del login.
+ * 
+ * @package Loom
+ * @subpackage Vistas
  */
 
-require_once __DIR__ . '/../../config.php';
-require_once __DIR__ . '/../../modelos/Usuario.php';
-
-// Requerir autenticación
-requerirAutenticacion();
-
-// Obtener datos del usuario
-$usuarioModel = new Usuario();
-$usuario = $usuarioModel->obtenerPorId(obtenerUsuarioId());
-
-if (!$usuario) {
-    session_destroy();
-    header('Location: ' . url('vistas/autenticacion/login.php'));
+// Verificar autenticación
+if (!isset($_SESSION['usuario_id'])) {
+    $_SESSION['error'] = 'Acceso no autorizado. Por favor inicie sesión.';
+    echo '<meta http-equiv="refresh" content="0;url=index.php?controlador=usuario&metodo=iniciarSesion">';
     exit;
 }
 
-$titulo = 'Inicio';
-$mostrarHeader = true;
-include __DIR__ . '/../plantilla/header.php';
-?>
+// Obtener datos del usuario
+require_once __DIR__ . '/../../modelos/usuario.php';
+$usuarioModel = new Usuario();
+$usuario = $usuarioModel->buscarPorId($_SESSION['usuario_id']);
 
+if (!$usuario) {
+    session_destroy();
+    $_SESSION['error'] = 'Usuario no encontrado.';
+    echo '<meta http-equiv="refresh" content="0;url=index.php?controlador=usuario&metodo=iniciarSesion">';
+    exit;
+}
+?>
+<!doctype html>
+<html lang="es">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Inicio - Loom</title>
+</head>
+<body>
+<header>
+    <?php
+    // Mostrar mensajes de sesión
+    if (!empty($_SESSION['error'])) {
+        echo '<p style="color: red;">' . htmlspecialchars($_SESSION['error']) . '</p>';
+        unset($_SESSION['error']);
+    }
+    if (!empty($_SESSION['success'])) {
+        echo '<p style="color: green;">' . htmlspecialchars($_SESSION['success']) . '</p>';
+        unset($_SESSION['success']);
+    }
+    ?>
+    <nav>
+        <a href="index.php?controlador=usuario&metodo=cerrarSesion">Cerrar sesión</a>
+    </nav>
+</header>
 <main class="home-container">
     <div class="container">
-        <!-- Banner de bienvenida -->
-        <section class="banner-bienvenida">
-            <div class="banner-content">
-                <h2>¡Hola, <?php echo htmlspecialchars($usuario['nombre_usuario']); ?>! 👋</h2>
-                <p>Bienvenido a tu espacio en Loom</p>
-            </div>
-        </section>
+        <h2>¡Hola, <?php echo htmlspecialchars($usuario['nombre_usuario']); ?>!</h2>
+        <p>Bienvenido a Loom</p>
         
-        <!-- Menú de navegación principal -->
-        <nav class="menu-navegacion">
-            <h3 class="menu-titulo">Navegación</h3>
-            <ul class="menu-lista">
-                <li>
-                    <a href="#" class="menu-item">
-                        <span class="menu-icon">✏️</span>
-                        <span class="menu-texto">Crear</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="#" class="menu-item">
-                        <span class="menu-icon">🔍</span>
-                        <span class="menu-texto">Búsqueda</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="#" class="menu-item">
-                        <span class="menu-icon">👤</span>
-                        <span class="menu-texto">Perfil</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="#" class="menu-item">
-                        <span class="menu-icon">📔</span>
-                        <span class="menu-texto">Diario</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="#" class="menu-item">
-                        <span class="menu-icon">📚</span>
-                        <span class="menu-texto">Biblioteca</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="#" class="menu-item">
-                        <span class="menu-icon">⚙️</span>
-                        <span class="menu-texto">Ajustes</span>
-                    </a>
-                </li>
-            </ul>
-        </nav>
+        <div class="perfil-info">
+            <h3><?php echo htmlspecialchars($usuario['nombre_usuario']); ?></h3>
+            <p><?php echo htmlspecialchars($usuario['correo']); ?></p>
+            <?php if (!empty($usuario['fecha_nacimiento'])): ?>
+                <p>Fecha de nacimiento: <?php echo htmlspecialchars($usuario['fecha_nacimiento']); ?></p>
+            <?php endif; ?>
+        </div>
         
-        <!-- Información del perfil -->
-        <section class="perfil-resumen">
-            <div class="perfil-card">
-                <div class="perfil-avatar">
-                    <?php 
-                    $avatarPath = file_exists(RECURSOS_PATH . '/imagenes/' . $usuario['foto_perfil']) 
-                        ? url('recursos/imagenes/' . $usuario['foto_perfil']) 
-                        : 'https://via.placeholder.com/100?text=' . urlencode(substr($usuario['nombre_usuario'], 0, 1));
-                    ?>
-                    <img src="<?php echo $avatarPath; ?>" 
-                         alt="Avatar de <?php echo htmlspecialchars($usuario['nombre_usuario']); ?>">
-                </div>
-                <div class="perfil-info">
-                    <h3><?php echo htmlspecialchars($usuario['nombre_usuario']); ?></h3>
-                    <p class="perfil-email"><?php echo htmlspecialchars($usuario['email']); ?></p>
-                    <?php if ($usuario['biografia']): ?>
-                        <p class="perfil-biografia"><?php echo htmlspecialchars($usuario['biografia']); ?></p>
-                    <?php endif; ?>
-                    <p class="perfil-rol">Rol: <?php echo ucfirst($usuario['rol']); ?></p>
-                </div>
-            </div>
-        </section>
-        
-        <!-- Mensaje informativo -->
-        <section class="info-sprint">
-            <div class="info-card">
-                <h4>🚀 Sprint 1 - Funcionalidades disponibles</h4>
-                <ul>
-                    <li>✅ Registro de usuarios</li>
-                    <li>✅ Inicio de sesión</li>
-                    <li>✅ Pantalla principal</li>
-                    <li>⏳ Más funcionalidades en próximos sprints</li>
-                </ul>
-            </div>
-        </section>
+        <p>Más funcionalidades próximamente...</p>
     </div>
 </main>
-
-<?php include __DIR__ . '/../plantilla/footer.php'; ?>
-
+</body>
+</html>

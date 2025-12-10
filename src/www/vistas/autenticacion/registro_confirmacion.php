@@ -4,7 +4,7 @@
  * Sprint 1 - Proyecto Loom
  */
 
-require_once __DIR__ . '/../../config.php';
+require_once __DIR__ . '/../../../../config.php';
 
 // Si no está autenticado, redirigir a login
 if (!estaAutenticado()) {
@@ -34,7 +34,7 @@ if (isset($_SESSION['nombre_usuario'])) {
             $logoPath = RECURSOS_PATH . '/logo/loom-logo.png';
             if (file_exists($logoPath)): 
             ?>
-                <img src="/loom/recursos/logo/loom-logo.png" alt="Loom">
+                <img src="../../../recursos/logo/loom-logo.png" alt="Loom">
             <?php else: ?>
                 <h1>Loom</h1>
             <?php endif; ?>

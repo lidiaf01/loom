@@ -6,8 +6,8 @@ ini_set('display_errors', 1);
 // IMPORTANTE: No enviar headers todavía, primero recopilar toda la información
 ob_start();
 
-require_once __DIR__ . '/../../config.php';
-require_once __DIR__ . '/../../modelos/Usuario.php';
+require_once __DIR__ . '/../../../../config.php';
+require_once __DIR__ . '/../../../../modelos/Usuario.php';
 
 $registroExitoso = false;
 $mensajeError = '';
@@ -241,7 +241,7 @@ include __DIR__ . '/../plantilla/header.php';
             $logoPath = RECURSOS_PATH . '/logo/loom-logo.png';
             if (file_exists($logoPath)): 
             ?>
-                <img src="/loom/recursos/logo/loom-logo.png" alt="Loom" style="height: 120px; max-width: 350px; width: auto; display: block; margin: 0 auto;">
+                <img src="../../../recursos/logo/loom-logo.png" alt="Loom" style="height: 120px; max-width: 350px; width: auto; display: block; margin: 0 auto;">
             <?php else: ?>
                 <h1 style="font-size: 2.5rem; margin: 0;">Loom</h1>
             <?php endif; ?>

@@ -1,38 +1,35 @@
 <?php
-/**
- * Router para Autenticación
- * Sprint 1 - Proyecto Loom
- */
+// Router de autenticación
 
-require_once __DIR__ . '/../config.php';
-require_once __DIR__ . '/AuthController.php';
+ob_start();
 
-// Configurar respuesta JSON
-header('Content-Type: application/json; charset=utf-8');
+try {
+    require_once __DIR__ . '/../../../config.php';
+    require_once __DIR__ . '/AuthController.php';
 
-// Obtener acción
-$action = $_GET['action'] ?? $_POST['action'] ?? '';
+    header('Content-Type: application/json; charset=utf-8');
 
-// Crear instancia del controlador
-$controller = new AuthController();
+    $action = $_GET['action'] ?? $_POST['action'] ?? '';
+    $controller = new AuthController();
 
-// Enrutar según acción
-switch ($action) {
-    case 'registrar':
-        $controller->registrar();
-        break;
-        
-    case 'login':
-        $controller->login();
-        break;
-        
-    case 'logout':
-        $controller->logout();
-        break;
-        
-    default:
-        http_response_code(400);
-        echo json_encode(['exito' => false, 'mensaje' => 'Acción no válida']);
-        break;
+    switch ($action) {
+        case 'registrar':
+            $controller->registrar();
+            break;
+        case 'login':
+            $controller->login();
+            break;
+        case 'logout':
+            $controller->logout();
+            break;
+        default:
+            http_response_code(400);
+            echo json_encode(['exito' => false, 'mensaje' => 'Acción inválida']);
+    }
+} catch (Exception $e) {
+    http_response_code(500);
+    echo json_encode(['exito' => false, 'mensaje' => 'Error del servidor: ' . $e->getMessage()]);
 }
 
+ob_end_flush();
+?>
