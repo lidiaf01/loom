@@ -89,7 +89,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 .then(r => r.json())
                 .then(data => {
                     if (data.exito) {
-                        window.location.href = '/loom/?page=login';
+                        window.location.href = data.redirect || '/loom/?page=menu';
                     }
                 });
             }

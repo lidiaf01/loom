@@ -87,7 +87,7 @@ class AuthController {
         echo json_encode([
             'exito' => true,
             'mensaje' => 'Sesión cerrada',
-            'redirect' => url('vistas/autenticacion/login.php')
+            'redirect' => '/loom/?page=menu'
         ]);
     }
     
