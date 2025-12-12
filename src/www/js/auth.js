@@ -17,63 +17,70 @@ document.addEventListener('DOMContentLoaded', function() {
                 method: 'POST',
                 body: formData
             })
-            .then(r => r.json())
+            .then(async r => {
+                const data = await r.json();
+                if (!r.ok) {
+                    return { error: true, status: r.status, ...data };
+                }
+                return data;
+            })
             .then(data => {
+                if (data.error) {
+                    showToast(data.mensaje || 'Error del servidor', 'error', 'Error');
+                    btn.disabled = false;
+                    btn.textContent = 'Iniciar sesión';
+                    return;
+                }
+                
                 if (data.exito) {
-                    window.location.href = data.redirect;
+                    showToast('Sesión iniciada correctamente', 'success', 'Éxito');
+                    setTimeout(() => {
+                        window.location.href = data.redirect;
+                    }, 500);
                 } else {
-                    alert(data.mensaje || 'Error');
+                    showToast(data.mensaje || 'Error al iniciar sesión', 'error', 'Error');
                     btn.disabled = false;
                     btn.textContent = 'Iniciar sesión';
                 }
             })
             .catch(e => {
-                alert('Error de conexión');
+                showToast('Error de conexión. Por favor, verifica tu conexión a internet.', 'error', 'Error de conexión');
                 btn.disabled = false;
                 btn.textContent = 'Iniciar sesión';
             });
         });
     }
     
-    // Formulario de registro
+    // Formulario de registro (solo para validación, no intercepta el envío)
+    // El registro ahora funciona en 3 pasos, así que dejamos que el formulario se envíe normalmente
     const formRegistro = document.getElementById('formRegistro');
     if (formRegistro) {
+        // Solo validar antes de enviar, pero permitir el envío normal del formulario
         formRegistro.addEventListener('submit', function(e) {
-            e.preventDefault();
+            // Validaciones básicas del lado del cliente
+            const nombreUsuario = document.getElementById('nombre_usuario');
+            const email = document.getElementById('email');
+            const fechaNacimiento = document.getElementById('fecha_nacimiento');
             
-            const clave = document.getElementById('clave').value;
-            const confirmar = document.getElementById('confirmar_clave').value;
-            
-            if (clave !== confirmar) {
-                alert('Las claves no coinciden');
-                return;
+            if (nombreUsuario && nombreUsuario.value.length < 3) {
+                e.preventDefault();
+                showToast('El nombre de usuario debe tener al menos 3 caracteres', 'error', 'Error de validación');
+                return false;
             }
             
-            const btn = document.getElementById('btnRegistrar');
-            btn.disabled = true;
-            btn.textContent = 'Procesando...';
+            if (email && !email.value.includes('@')) {
+                e.preventDefault();
+                showToast('Por favor, ingresa un email válido', 'error', 'Error de validación');
+                return false;
+            }
             
-            const formData = new FormData(formRegistro);
+            if (fechaNacimiento && !fechaNacimiento.value) {
+                e.preventDefault();
+                showToast('Por favor, selecciona tu fecha de nacimiento', 'error', 'Error de validación');
+                return false;
+            }
             
-            fetch(formRegistro.action, {
-                method: 'POST',
-                body: formData
-            })
-            .then(r => r.json())
-            .then(data => {
-                if (data.exito) {
-                    window.location.href = data.redirect;
-                } else {
-                    alert(data.mensaje || 'Error');
-                    btn.disabled = false;
-                    btn.textContent = 'Registrarse';
-                }
-            })
-            .catch(e => {
-                alert('Error de conexión');
-                btn.disabled = false;
-                btn.textContent = 'Registrarse';
-            });
+            // Si todo está bien, permitir el envío normal del formulario
         });
     }
     
@@ -82,17 +89,37 @@ document.addEventListener('DOMContentLoaded', function() {
     if (btnLogout) {
         btnLogout.addEventListener('click', function(e) {
             e.preventDefault();
-            if (confirm('¿Cerrar sesión?')) {
-                fetch('/loom/src/www/controladores/auth_router.php?action=logout', {
-                    method: 'POST'
-                })
-                .then(r => r.json())
-                .then(data => {
-                    if (data.exito) {
-                        window.location.href = data.redirect || '/loom/?page=menu';
-                    }
-                });
-            }
+            showConfirmModal({
+                title: 'Cerrar sesión',
+                message: '¿Estás seguro de que deseas cerrar sesión?',
+                confirmText: 'Cerrar sesión',
+                cancelText: 'Cancelar',
+                confirmClass: 'danger',
+                onConfirm: function() {
+                    const assetsUrl = window.ASSETS_URL || '/loom';
+                    fetch(assetsUrl + '/src/www/controladores/auth_router.php?action=logout', {
+                        method: 'POST'
+                    })
+                    .then(r => r.json())
+                    .then(data => {
+                        if (data.exito) {
+                            showToast('Sesión cerrada correctamente', 'success', 'Sesión cerrada');
+                            setTimeout(() => {
+                                const assetsUrl = window.ASSETS_URL || '/loom';
+                                window.location.href = data.redirect || assetsUrl + '/?page=inicio';
+                            }, 500);
+                        } else {
+                            showToast('Error al cerrar sesión', 'error', 'Error');
+                        }
+                    })
+                    .catch(e => {
+                        showToast('Error de conexión', 'error', 'Error');
+                    });
+                },
+                onCancel: function() {
+                    // No hacer nada
+                }
+            });
         });
     }
 });

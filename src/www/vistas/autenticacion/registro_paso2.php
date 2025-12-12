@@ -2,7 +2,7 @@
 require_once __DIR__ . '/../../../../config.php';
 
 if (estaAutenticado()) {
-    header('Location: ' . url('vistas/inicio/pantalla_principal.php'));
+    header('Location: ' . ASSETS_URL . '/?page=dashboard');
     exit;
 }
 
@@ -31,7 +31,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['nombre_usuario']) && 
     }
     
     if (!empty($errores)) {
-        $urlBase = url('vistas/autenticacion/registro.php');
+        $urlBase = ASSETS_URL . '/?page=registro';
         $separador = (strpos($urlBase, '?') !== false) ? '&' : '?';
         header('Location: ' . $urlBase . $separador . implode('&', $errores));
         exit;
@@ -45,7 +45,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['nombre_usuario']) && 
 }
 
 if (!isset($_SESSION['registro_paso1'])) {
-    header('Location: ' . url('vistas/autenticacion/registro.php'));
+    header('Location: ' . ASSETS_URL . '/?page=registro');
     exit;
 }
 
@@ -65,14 +65,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['clave'])) {
     }
     
     if (!empty($errores)) {
-        $urlBase = url('vistas/autenticacion/registro_paso2.php');
+        $urlBase = ASSETS_URL . '/?page=registro_paso2';
         $separador = (strpos($urlBase, '?') !== false) ? '&' : '?';
         header('Location: ' . $urlBase . $separador . implode('&', $errores));
         exit;
     }
     
     $_SESSION['registro_paso2'] = ['clave' => $clave];
-    header('Location: ' . url('vistas/autenticacion/registro_paso3.php'));
+    header('Location: ' . ASSETS_URL . '/?page=registro_paso3');
     exit;
 }
 
@@ -82,24 +82,42 @@ include __DIR__ . '/../plantilla/header.php';
 ?>
 
 <main class="auth-container">
-    <div style="display: flex; flex-direction: column; align-items: center; width: 100%; max-width: 450px;">
-        <div style="text-align: center; margin-bottom: 1.5rem; width: 100%;">
+    <!-- Círculos decorativos de fondo -->
+    <div class="decorative-circles">
+        <div class="decorative-circle circle-large-1"></div>
+        <div class="decorative-circle circle-medium-1"></div>
+        <div class="decorative-circle circle-large-2"></div>
+        <div class="decorative-circle circle-medium-2"></div>
+        <div class="decorative-circle circle-small-1"></div>
+        <div class="decorative-circle circle-small-2"></div>
+        <div class="decorative-circle circle-small-3"></div>
+        <div class="decorative-circle circle-small-4"></div>
+    </div>
+    
+    <div class="auth-step-container">
+        <div class="auth-step-header">
             <?php 
+            $logoIconPath = RECURSOS_PATH . '/logo/loom-icon.png';
             $logoPath = RECURSOS_PATH . '/logo/loom-logo.png';
-            if (file_exists($logoPath)): 
+            if (file_exists($logoIconPath)): 
             ?>
-                <img src="../../../recursos/logo/loom-logo.png" alt="Loom" style="height: 120px; max-width: 350px; width: auto; display: block; margin: 0 auto;">
+                <div class="logo-icon-container">
+                    <img src="<?php echo LOGO_URL; ?>/loom-icon.png" alt="Loom">
+                </div>
+            <?php elseif (file_exists($logoPath)): ?>
+                <img src="<?php echo LOGO_URL; ?>/loom-logo.png" alt="Loom" class="logo-grande">
             <?php else: ?>
-                <h1 style="font-size: 2.5rem; margin: 0;">Loom</h1>
+                <h1 class="logo-text">Loom</h1>
             <?php endif; ?>
         </div>
         
-        <div class="auth-form-wrapper" style="margin-left: 1rem; margin-right: 1rem;">
+        <div class="auth-form-wrapper">
         <div class="auth-header">
             <h2>Crear cuenta</h2>
+            <p>Seguridad</p>
         </div>
         
-        <form id="formRegistro" class="auth-form" method="POST" action="<?php echo url('vistas/autenticacion/registro_paso2.php'); ?>">
+        <form id="formRegistro" class="auth-form" method="POST" action="<?php echo ASSETS_URL; ?>/?page=registro_paso2">
             <div class="form-group">
                 <label for="clave">Clave *</label>
                 <input type="password" id="clave" name="clave" required minlength="<?php echo PASSWORD_MIN_LENGTH; ?>" placeholder="Mínimo 8 caracteres">
@@ -117,16 +135,13 @@ include __DIR__ . '/../plantilla/header.php';
                 <?php endif; ?>
             </div>
             
-            <div class="form-actions-horizontal" style="display: flex !important; flex-direction: row !important; gap: 1rem !important; width: 100% !important;">
-                <button type="button" onclick="window.location.href='<?php echo url('vistas/autenticacion/registro.php'); ?>'" class="btn-submit" style="flex: 1 !important; width: 0 !important; min-width: 0 !important;">Volver</button>
-                <button type="submit" class="btn-submit" style="flex: 1 !important; width: 0 !important; min-width: 0 !important;">Continuar</button>
+            <div class="form-actions-horizontal">
+                <a href="<?php echo ASSETS_URL; ?>/?page=registro" class="btn-submit">Volver</a>
+                <button type="submit" class="btn-submit">Continuar</button>
             </div>
         </form>
         </div>
     </div>
 </main>
-
-<script src="/loom/js/validaciones.js"></script>
-<script src="/loom/js/auth.js"></script>
 
 <?php include __DIR__ . '/../plantilla/footer.php'; ?>

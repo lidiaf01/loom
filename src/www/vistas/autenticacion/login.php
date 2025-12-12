@@ -12,6 +12,18 @@ include __DIR__ . '/../plantilla/header.php';
 ?>
 
 <main class="auth-container">
+    <!-- Círculos decorativos de fondo -->
+    <div class="decorative-circles">
+        <div class="decorative-circle circle-large-1"></div>
+        <div class="decorative-circle circle-medium-1"></div>
+        <div class="decorative-circle circle-large-2"></div>
+        <div class="decorative-circle circle-medium-2"></div>
+        <div class="decorative-circle circle-small-1"></div>
+        <div class="decorative-circle circle-small-2"></div>
+        <div class="decorative-circle circle-small-3"></div>
+        <div class="decorative-circle circle-small-4"></div>
+    </div>
+    
     <div class="auth-form-wrapper">
         <h2>Iniciar sesión</h2>
         
@@ -28,10 +40,12 @@ include __DIR__ . '/../plantilla/header.php';
                 <span class="error-message" id="error_clave"></span>
             </div>
             
-            <button type="submit" id="btnLogin">Iniciar sesión</button>
-            
-            <p>¿No tienes cuenta? <a href="<?php echo url('vistas/autenticacion/registro.php'); ?>">Regístrate</a></p>
+            <button type="submit" id="btnLogin" class="btn-submit">Iniciar sesión</button>
         </form>
+        
+        <div class="form-footer">
+            <p>¿No tienes cuenta? <a href="<?php echo ASSETS_URL; ?>/?page=registro">Regístrate</a></p>
+        </div>
         
         <div id="mensajeResultado"></div>
     </div>

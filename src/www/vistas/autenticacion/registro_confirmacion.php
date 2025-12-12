@@ -8,7 +8,7 @@ require_once __DIR__ . '/../../../../config.php';
 
 // Si no está autenticado, redirigir a login
 if (!estaAutenticado()) {
-    header('Location: ' . url('vistas/autenticacion/login.php'));
+    header('Location: ' . ASSETS_URL . '/?page=login');
     exit;
 }
 
@@ -28,20 +28,37 @@ if (isset($_SESSION['nombre_usuario'])) {
 ?>
 
 <main class="auth-container">
+    <!-- Círculos decorativos de fondo -->
+    <div class="decorative-circles">
+        <div class="decorative-circle circle-large-1"></div>
+        <div class="decorative-circle circle-medium-1"></div>
+        <div class="decorative-circle circle-large-2"></div>
+        <div class="decorative-circle circle-medium-2"></div>
+        <div class="decorative-circle circle-small-1"></div>
+        <div class="decorative-circle circle-small-2"></div>
+        <div class="decorative-circle circle-small-3"></div>
+        <div class="decorative-circle circle-small-4"></div>
+    </div>
+    
     <div class="auth-form-wrapper auth-form-wrapper-centered">
         <div class="auth-logo-small">
             <?php 
+            $logoIconPath = RECURSOS_PATH . '/logo/loom-icon.png';
             $logoPath = RECURSOS_PATH . '/logo/loom-logo.png';
-            if (file_exists($logoPath)): 
+            if (file_exists($logoIconPath)): 
             ?>
-                <img src="../../../recursos/logo/loom-logo.png" alt="Loom">
+                <div class="logo-icon-container">
+                    <img src="<?php echo LOGO_URL; ?>/loom-icon.png" alt="Loom">
+                </div>
+            <?php elseif (file_exists($logoPath)): ?>
+                <img src="<?php echo LOGO_URL; ?>/loom-logo.png" alt="Loom" class="logo-grande">
             <?php else: ?>
-                <h1>Loom</h1>
+                <h1 class="logo-text">Loom</h1>
             <?php endif; ?>
         </div>
         
         <div class="auth-header">
-            <h2 class="welcome-title">¡Bienvenido, <?php echo htmlspecialchars($nombreUsuario); ?>! 🎉</h2>
+            <h2 class="welcome-title">¡Bienvenido, <?php echo htmlspecialchars($nombreUsuario); ?>!</h2>
             <p class="welcome-subtitle">Tu cuenta ha sido creada exitosamente</p>
         </div>
         
@@ -52,10 +69,8 @@ if (isset($_SESSION['nombre_usuario'])) {
             </p>
         </div>
         
-        <div class="form-actions">
-            <a href="<?php echo url('vistas/inicio/pantalla_principal.php'); ?>" class="btn-submit btn-link">
-                Comenzar
-            </a>
+        <div class="form-actions form-actions-centered">
+            <a href="<?php echo ASSETS_URL; ?>/?page=dashboard" class="btn-submit btn-link">Comenzar</a>
         </div>
     </div>
 </main>
@@ -63,7 +78,8 @@ if (isset($_SESSION['nombre_usuario'])) {
 <script>
 // Redirigir automáticamente después de 5 segundos
 setTimeout(function() {
-    window.location.href = '<?php echo url('vistas/inicio/pantalla_principal.php'); ?>';
+    window.location.href = '<?php echo ASSETS_URL; ?>/?page=dashboard';
 }, 5000);
 </script>
+<?php include __DIR__ . '/../plantilla/footer.php'; ?>
 

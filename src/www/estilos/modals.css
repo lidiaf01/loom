@@ -1,0 +1,329 @@
+/**
+ * Estilos para modales y alertas personalizados
+ * Adaptados al estilo de la página
+ */
+
+/* Variables de colores - usar las del dashboard si están disponibles */
+:root {
+    --modal-bg: var(--dashboard-bg, #FFF8F0);
+    --modal-text: var(--dashboard-text, #5C4B51);
+    --modal-text-light: var(--dashboard-text-light, rgba(92, 75, 81, 0.70));
+    --modal-text-muted: var(--dashboard-text-muted, rgba(92, 75, 81, 0.60));
+    --modal-overlay: rgba(0, 0, 0, 0.5);
+    
+    /* Colores de cards */
+    --modal-card-green: var(--dashboard-card-green, #C7F5E8);
+    --modal-card-purple: var(--dashboard-card-purple, #E8D5FF);
+    --modal-card-yellow: var(--dashboard-card-yellow, #FFF4B8);
+    --modal-card-pink: var(--dashboard-card-pink, #FFB3D9);
+    --modal-card-coral: var(--dashboard-card-coral, #FFD4C8);
+    
+    /* Gradientes */
+    --modal-gradient-1: var(--dashboard-gradient-1, linear-gradient(135deg, #FFB3D9 0%, #E8D5FF 100%));
+    
+    /* Fuentes */
+    --font-texto: 'Heading Now', var(--font-texto, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif);
+    --transition: all 0.3s ease;
+}
+
+/* Overlay del modal */
+.modal-backdrop {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: var(--modal-overlay);
+    z-index: 1040;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 16px;
+    box-sizing: border-box;
+    animation: fadeIn 0.2s ease;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+/* Modal container */
+.modal-custom {
+    background: var(--modal-bg);
+    border-radius: 24px;
+    box-shadow: 0px 25px 50px rgba(0, 0, 0, 0.25);
+    max-width: 400px;
+    width: 100%;
+    max-height: 90vh;
+    overflow-y: auto;
+    position: relative;
+    animation: slideUp 0.3s ease;
+    z-index: 1050;
+}
+
+@keyframes slideUp {
+    from {
+        transform: translateY(20px);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+/* Modal header */
+.modal-custom-header {
+    padding: 24px 24px 16px;
+    border-bottom: none;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.modal-custom-title {
+    color: var(--modal-text);
+    font-size: 20px;
+    font-family: 'Heading Now', var(--font-texto), -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    font-weight: 400;
+    margin: 0;
+    line-height: 28px;
+}
+
+.modal-custom-close {
+    background: none;
+    border: none;
+    font-size: 24px;
+    color: var(--modal-text-muted);
+    cursor: pointer;
+    padding: 0;
+    width: 32px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    transition: var(--transition);
+    flex-shrink: 0;
+}
+
+.modal-custom-close:hover {
+    background: rgba(92, 75, 81, 0.10);
+    color: var(--modal-text);
+}
+
+/* Modal body */
+.modal-custom-body {
+    padding: 16px 24px;
+    color: var(--modal-text);
+    font-family: 'Heading Now', var(--font-texto), -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    font-size: 16px;
+    line-height: 24px;
+}
+
+.modal-custom-body p {
+    margin: 0 0 12px 0;
+}
+
+.modal-custom-body p:last-child {
+    margin-bottom: 0;
+}
+
+/* Modal footer */
+.modal-custom-footer {
+    padding: 16px 24px 24px;
+    border-top: none;
+    display: flex;
+    gap: 12px;
+    justify-content: flex-end;
+}
+
+/* Botones del modal */
+.modal-btn {
+    padding: 12px 24px;
+    min-height: 44px;
+    border-radius: 16px;
+    font-family: 'Heading Now', var(--font-texto), -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    font-size: 16px;
+    font-weight: 500;
+    border: none;
+    cursor: pointer;
+    transition: var(--transition);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    box-sizing: border-box;
+    touch-action: manipulation;
+}
+
+.modal-btn-primary {
+    background: var(--modal-gradient-1);
+    color: var(--modal-bg);
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.10);
+}
+
+.modal-btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0px 6px 8px rgba(0, 0, 0, 0.15);
+}
+
+.modal-btn-secondary {
+    background: rgba(255, 255, 255, 0.50);
+    border: 2px solid rgba(92, 75, 81, 0.30);
+    color: var(--modal-text);
+}
+
+.modal-btn-secondary:hover {
+    background: rgba(255, 255, 255, 0.70);
+    border-color: rgba(92, 75, 81, 0.50);
+}
+
+.modal-btn-danger {
+    background: var(--modal-card-coral);
+    color: var(--modal-text);
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.10);
+}
+
+.modal-btn-danger:hover {
+    transform: translateY(-2px);
+    box-shadow: 0px 6px 8px rgba(0, 0, 0, 0.15);
+}
+
+/* Alertas/Toast */
+.toast-container {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    z-index: 1060;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    max-width: 400px;
+    width: calc(100% - 40px);
+}
+
+@media (max-width: 480px) {
+    .toast-container {
+        right: 16px;
+        left: 16px;
+        max-width: none;
+        width: auto;
+    }
+}
+
+.toast-custom {
+    background: var(--modal-bg);
+    border-radius: 16px;
+    box-shadow: 0px 10px 15px rgba(0, 0, 0, 0.10);
+    padding: 16px 20px;
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    animation: slideInRight 0.3s ease;
+    position: relative;
+}
+
+@keyframes slideInRight {
+    from {
+        transform: translateX(100%);
+        opacity: 0;
+    }
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+.toast-custom.success {
+    border-left: 4px solid var(--modal-card-green);
+}
+
+.toast-custom.error {
+    border-left: 4px solid var(--modal-card-coral);
+}
+
+.toast-custom.warning {
+    border-left: 4px solid var(--modal-card-yellow);
+}
+
+.toast-custom.info {
+    border-left: 4px solid var(--modal-card-purple);
+}
+
+.toast-custom-icon {
+    width: 24px;
+    height: 24px;
+    flex-shrink: 0;
+    margin-top: 2px;
+}
+
+.toast-custom-content {
+    flex: 1;
+}
+
+.toast-custom-title {
+    color: var(--modal-text);
+    font-family: 'Heading Now', var(--font-texto), -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    font-size: 16px;
+    font-weight: 500;
+    margin: 0 0 4px 0;
+}
+
+.toast-custom-message {
+    color: var(--modal-text-light);
+    font-family: 'Heading Now', var(--font-texto), -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    font-size: 14px;
+    line-height: 20px;
+    margin: 0;
+}
+
+.toast-custom-close {
+    background: none;
+    border: none;
+    color: var(--modal-text-muted);
+    cursor: pointer;
+    padding: 0;
+    width: 20px;
+    height: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    font-size: 18px;
+    line-height: 1;
+}
+
+.toast-custom-close:hover {
+    color: var(--modal-text);
+}
+
+/* Responsive */
+@media (max-width: 480px) {
+    .modal-custom {
+        max-width: 100%;
+        border-radius: 24px 24px 0 0;
+        max-height: 80vh;
+    }
+    
+    .modal-custom-header,
+    .modal-custom-body,
+    .modal-custom-footer {
+        padding-left: 20px;
+        padding-right: 20px;
+    }
+    
+    .modal-custom-footer {
+        flex-direction: column;
+    }
+    
+    .modal-btn {
+        width: 100%;
+    }
+}
+

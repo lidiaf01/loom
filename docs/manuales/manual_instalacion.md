@@ -2,8 +2,8 @@
 ## Pasos para iniciar el proyecto desde cero
 
 **Autor:** Lidia Artero Fernández  
-**Proyecto:** Loom - Sprint 1  
-**Fecha:** Noviembre 2025
+**Proyecto:** Loom - Sprint 2  
+**Fecha:** Diciembre 2025
 
 ---
 
@@ -116,12 +116,13 @@ C:\xampp\htdocs\
    - Seleccionar TODOS los archivos y carpetas dentro de `src/www/`:
      - `index.php`
      - `config.php`
-     - `assets/`
-     - `css/`
+     - `estilos/` (CSS)
      - `js/`
      - `modelos/`
      - `controladores/`
      - `vistas/`
+     - `recursos/` (fuentes, iconos, imágenes, logo)
+     - `uploads/` (Sprint 2 - para fotos de perfil)
    - Copiar (Ctrl+C / Cmd+C)
 
 3. **Pegar en htdocs**
@@ -136,12 +137,14 @@ htdocs/
 └── loom/
     ├── index.php          ← Debe estar aquí directamente
     ├── config.php
-    ├── assets/
-    ├── css/
+    ├── estilos/           ← CSS (Sprint 1 y 2)
     ├── js/
     ├── modelos/
     ├── controladores/
-    └── vistas/
+    ├── vistas/
+    ├── recursos/           ← Fuentes, iconos, imágenes, logo
+    └── uploads/            ← Sprint 2 - Fotos de perfil
+        └── perfiles/
 ```
 
 **Estructura INCORRECTA (evitar):**
@@ -165,7 +168,33 @@ htdocs/
 ```bash
 # Dar permisos de lectura/escritura
 sudo chmod -R 755 /opt/lampp/htdocs/loom
+
+# Dar permisos de escritura al directorio de uploads (Sprint 2)
+sudo chmod -R 775 /opt/lampp/htdocs/loom/src/www/uploads
 ```
+
+### Paso 4: Crear Directorio de Uploads (Sprint 2)
+
+**IMPORTANTE:** El directorio de uploads es necesario para la funcionalidad de subida de fotos de perfil.
+
+**Windows:**
+1. Navegar a: `htdocs/loom/src/www/`
+2. Crear carpeta: `uploads`
+3. Dentro de `uploads`, crear carpeta: `perfiles`
+4. Estructura final: `htdocs/loom/src/www/uploads/perfiles/`
+
+**Linux:**
+```bash
+# Crear directorios
+mkdir -p /opt/lampp/htdocs/loom/src/www/uploads/perfiles
+
+# Dar permisos de escritura
+sudo chmod -R 775 /opt/lampp/htdocs/loom/src/www/uploads
+```
+
+**Verificar:**
+- El directorio debe existir en: `src/www/uploads/perfiles/`
+- Debe tener permisos de escritura para que PHP pueda guardar archivos
 
 ---
 
@@ -192,7 +221,9 @@ sudo chmod -R 755 /opt/lampp/htdocs/loom
 
 ### Paso 3: Importar Scripts SQL
 
-#### Importar Estructura (bbdd.sql)
+**IMPORTANTE:** Los scripts SQL deben importarse en el siguiente orden:
+
+#### 1. Importar Estructura Base (01_crear_bd.sql)
 
 1. **Seleccionar base de datos**
    - Clic en `loom_db` en el menú lateral
@@ -202,7 +233,7 @@ sudo chmod -R 755 /opt/lampp/htdocs/loom
 
 3. **Seleccionar archivo**
    - Clic en "Elegir archivo"
-   - Navegar a: `proyecto-loom/src/sql/bbdd.sql`
+   - Navegar a: `proyecto-loom/src/sql/01_crear_bd.sql`
    - Seleccionar el archivo
 
 4. **Importar**
@@ -210,7 +241,7 @@ sudo chmod -R 755 /opt/lampp/htdocs/loom
    - Esperar a que termine la importación
    - Verificar mensaje de éxito
 
-#### Importar Datos (datos_iniciales.sql)
+#### 2. Importar Datos Iniciales (02_datos_iniciales.sql) - Opcional
 
 1. **Mantener seleccionada la BD `loom_db`**
 
@@ -218,7 +249,23 @@ sudo chmod -R 755 /opt/lampp/htdocs/loom
 
 3. **Seleccionar segundo archivo**
    - Clic en "Elegir archivo"
-   - Navegar a: `proyecto-loom/src/sql/datos_iniciales.sql`
+   - Navegar a: `proyecto-loom/src/sql/02_datos_iniciales.sql`
+   - Seleccionar el archivo
+
+4. **Importar**
+   - Clic en "Continuar" o "Ejecutar"
+   - Esperar a que termine la importación
+   - Verificar mensaje de éxito
+
+#### 3. Importar Tabla Diario (03_diario.sql) - Sprint 2
+
+1. **Mantener seleccionada la BD `loom_db`**
+
+2. **Ir a pestaña "Importar" nuevamente**
+
+3. **Seleccionar tercer archivo**
+   - Clic en "Elegir archivo"
+   - Navegar a: `proyecto-loom/src/sql/03_diario.sql`
    - Seleccionar el archivo
 
 4. **Importar**
@@ -231,13 +278,18 @@ sudo chmod -R 755 /opt/lampp/htdocs/loom
 1. **Verificar tablas creadas**
    - En phpMyAdmin, con loom_db seleccionada
    - Debe aparecer en la lista:
-     * usuarios
-     * sesiones
+     * `usuarios` (Sprint 1)
+     * `diario` (Sprint 2 - nueva)
 
-2. **Verificar datos insertados**
+2. **Verificar datos insertados** (si importaste 02_datos_iniciales.sql)
    - Clic en la tabla "usuarios"
    - Clic en pestaña "Examinar"
-   - Debe mostrar al menos 3 usuarios de prueba
+   - Debe mostrar usuarios de prueba (si se importaron datos iniciales)
+
+3. **Verificar estructura de tabla diario**
+   - Clic en la tabla "diario"
+   - Clic en pestaña "Estructura"
+   - Debe tener las columnas: id_entrada, id_usuario, titulo, contenido, fecha_entrada, estado_animo, fecha_creacion, fecha_actualizacion
 
 ### Paso 5: Configurar Credenciales (si es necesario)
 
@@ -313,16 +365,120 @@ sudo chmod -R 755 /opt/lampp/htdocs/loom
 
 ### Paso 4: Verificar Funcionalidades
 
-**Pantalla Principal:**
-- Banner de bienvenida visible
-- Menú de navegación con 6 opciones
-- Información del perfil del usuario
-- Botón "Cerrar sesión" funcional
+**Pantalla Principal (Dashboard):**
+- Banner de bienvenida visible con saludo personalizado
+- Tarjetas de herramientas: Diario, Stats, Crear, Últimas lecturas
+- Barra de navegación inferior con: Principal, Buscar, Biblioteca, Perfil
+- Botón de perfil circular en la esquina superior derecha
 
 **Navegación:**
 - Logo "Loom" redirige a pantalla principal
 - Cerrar sesión funciona correctamente
 - Redirección si intentas acceder sin estar autenticado
+
+**Nuevas Funcionalidades (Sprint 2):**
+
+**Perfil de Usuario:**
+- Acceder desde el botón de perfil en el dashboard o desde la navegación inferior
+- Ver información del perfil: nombre, email, biografía, foto
+- Editar perfil: modificar nombre, email, biografía, fecha de nacimiento
+- Subir/cambiar foto de perfil (formatos: JPG, PNG, WebP, máximo 5MB)
+
+**Diario Personal:**
+- Acceder desde la tarjeta "Diario" en el dashboard
+- Crear nueva entrada de diario con título, contenido, fecha y estado de ánimo
+- Ver lista de entradas con paginación
+- Editar entradas existentes
+- Eliminar entradas (con confirmación)
+- Buscar entradas por término en título o contenido
+
+---
+
+## 6. Solución de Problemas
+
+### Problema: Aparece listado de directorios en lugar de la aplicación
+
+**Síntoma:** Al acceder a `http://localhost/loom/` aparece un listado de archivos en lugar de la aplicación.
+
+**Causa:** Los archivos no están en la ubicación correcta o falta el archivo `index.php`.
+
+**Solución:**
+1. Verificar que `index.php` esté directamente en `htdocs/loom/`
+2. Verificar que la estructura de carpetas sea correcta (ver Paso 2 de Configuración del Proyecto)
+3. Si los archivos están en `htdocs/loom/src/www/`, moverlos a `htdocs/loom/`
+
+### Problema: Error al subir foto de perfil (Sprint 2)
+
+**Síntoma:** Al intentar subir una foto de perfil aparece un error.
+
+**Causas posibles:**
+1. El directorio `uploads/perfiles/` no existe
+2. El directorio no tiene permisos de escritura
+3. El archivo es demasiado grande (máximo 5MB)
+4. El formato no es válido (solo JPG, PNG, WebP)
+
+**Solución:**
+1. Verificar que existe `src/www/uploads/perfiles/`
+2. En Linux, dar permisos: `sudo chmod -R 775 src/www/uploads`
+3. Verificar tamaño del archivo (máximo 5MB)
+4. Verificar formato del archivo
+5. Revisar configuración de PHP (`upload_max_filesize` y `post_max_size` en `php.ini`)
+
+### Problema: Error "Tabla 'diario' no existe" (Sprint 2)
+
+**Síntoma:** Al acceder al diario aparece un error de base de datos.
+
+**Causa:** No se importó el script `03_diario.sql`.
+
+**Solución:**
+1. Acceder a phpMyAdmin
+2. Seleccionar la base de datos `loom_db`
+3. Ir a pestaña "Importar"
+4. Importar el archivo `src/sql/03_diario.sql`
+5. Verificar que la tabla `diario` aparece en la lista
+
+### Problema: Las fuentes no se cargan correctamente
+
+**Síntoma:** El texto se ve con fuente genérica en lugar de las fuentes personalizadas.
+
+**Causa:** Las rutas de las fuentes no son correctas o los archivos no están en su lugar.
+
+**Solución:**
+1. Verificar que las fuentes estén en `src/www/recursos/fuentes/`
+2. Verificar que los archivos `.ttf` estén presentes
+3. Revisar las rutas en `src/www/estilos/style.css` (deben usar `ASSETS_URL`)
+4. Limpiar caché del navegador (Ctrl+F5)
+
+### Problema: Error de permisos en Linux
+
+**Síntoma:** No se pueden crear o modificar archivos.
+
+**Solución:**
+```bash
+# Dar permisos completos al proyecto
+sudo chmod -R 755 /opt/lampp/htdocs/loom
+
+# Dar permisos de escritura a uploads
+sudo chmod -R 775 /opt/lampp/htdocs/loom/src/www/uploads
+
+# Cambiar propietario si es necesario
+sudo chown -R www-data:www-data /opt/lampp/htdocs/loom
+```
+
+### Problema: Error de conexión a la base de datos
+
+**Síntoma:** Aparece error "Error de conexión a la base de datos".
+
+**Causas posibles:**
+1. MySQL no está iniciado
+2. Credenciales incorrectas en `config.php`
+3. La base de datos no existe
+
+**Solución:**
+1. Verificar que MySQL esté corriendo en XAMPP Control Panel
+2. Verificar credenciales en `config.php`
+3. Verificar que la base de datos `loom_db` existe en phpMyAdmin
+4. Si MySQL tiene clave, actualizar `DB_PASS` en `config.php`
 
 ---
 

@@ -12,14 +12,26 @@ include __DIR__ . '/../plantilla/header.php';
 ?>
 
 <main class="auth-container">
+    <!-- Círculos decorativos de fondo -->
+    <div class="decorative-circles">
+        <div class="decorative-circle circle-large-1"></div>
+        <div class="decorative-circle circle-medium-1"></div>
+        <div class="decorative-circle circle-large-2"></div>
+        <div class="decorative-circle circle-medium-2"></div>
+        <div class="decorative-circle circle-small-1"></div>
+        <div class="decorative-circle circle-small-2"></div>
+        <div class="decorative-circle circle-small-3"></div>
+        <div class="decorative-circle circle-small-4"></div>
+    </div>
+    
     <div class="auth-form-wrapper">
         <h2>Inicio de sesión fallido</h2>
         
         <div class="error-box">
-            <p style="color: #ef4444; font-size: 1.1rem; margin: 1.5rem 0;">
-                ❌ No ha sido posible iniciar sesión
+            <p class="error-text">
+                No ha sido posible iniciar sesión
             </p>
-            <p style="color: #6B6B6B; margin: 1rem 0;">
+            <p class="error-description">
                 Email o contraseña incorrectos. Por favor, verifica tus datos e intenta de nuevo.
             </p>
         </div>
@@ -37,14 +49,15 @@ include __DIR__ . '/../plantilla/header.php';
                 <span class="error-message" id="error_clave"></span>
             </div>
             
-            <button type="submit" id="btnLogin">Iniciar sesión</button>
-            
-            <p>¿No tienes cuenta? <a href="<?php echo url('vistas/autenticacion/registro.php'); ?>">Regístrate</a></p>
+            <button type="submit" id="btnLogin" class="btn-submit">Iniciar sesión</button>
         </form>
+        
+        <div class="form-footer">
+            <p>¿No tienes cuenta? <a href="<?php echo ASSETS_URL; ?>/?page=registro">Regístrate</a></p>
+        </div>
         
         <div id="mensajeResultado"></div>
     </div>
 </main>
 
-<script src="/loom/src/www/js/auth.js"></script>
 <?php include __DIR__ . '/../plantilla/footer.php'; ?>

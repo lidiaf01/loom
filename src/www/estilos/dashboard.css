@@ -1,0 +1,424 @@
+/* Dashboard - Diseño Figma */
+/* Sprint 2 */
+
+/* Importar variables de fuentes desde style.css */
+@import url('style.css');
+
+.dashboard-figma {
+    width: 375px;
+    height: 778px;
+    position: relative;
+    background: #FFF8F0;
+    margin: 0 auto;
+}
+
+/* Header Section */
+.dashboard-header-section {
+    width: 375px;
+    height: 272px;
+    left: 0px;
+    top: 0px;
+    position: absolute;
+    background: rgba(0, 0, 0, 0);
+}
+
+.dashboard-header-content {
+    width: 335px;
+    height: 56px;
+    left: 20px;
+    top: 32px;
+    position: absolute;
+    background: rgba(0, 0, 0, 0);
+}
+
+.dashboard-greeting-section {
+    width: 159.47px;
+    height: 56px;
+    left: 0px;
+    top: 0px;
+    position: absolute;
+    background: rgba(0, 0, 0, 0);
+}
+
+.dashboard-greeting-title {
+    width: 160px;
+    max-width: 160px;
+    height: auto;
+    min-height: 32px;
+    left: 0px;
+    top: 0px;
+    position: absolute;
+    color: #5C4B51;
+    font-size: 24px;
+    font-family: var(--font-texto), 'Heading Now', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    font-weight: 400;
+    line-height: 32px;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 1;
+    -webkit-box-orient: vertical;
+    box-sizing: border-box;
+}
+
+.dashboard-greeting-subtitle {
+    width: 160px;
+    max-width: 160px;
+    height: auto;
+    min-height: 20px;
+    left: 0px;
+    top: 36px;
+    position: absolute;
+    color: rgba(92, 75, 81, 0.70);
+    font-size: 14px;
+    font-family: var(--font-texto), 'Heading Now', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    font-weight: 400;
+    line-height: 20px;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 1;
+    -webkit-box-orient: vertical;
+    box-sizing: border-box;
+}
+
+.dashboard-profile-button {
+    width: 48px;
+    height: 48px;
+    left: 287px;
+    top: 4px;
+    position: absolute;
+    background: linear-gradient(135deg, #FFB3D9 0%, #E8D5FF 100%);
+    border-radius: 9999px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+}
+
+.dashboard-profile-icon {
+    width: 18px;
+    height: 28px;
+    left: 15px;
+    top: 10px;
+    position: absolute;
+    background: rgba(0, 0, 0, 0);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Tools Section */
+.dashboard-tools-section {
+    width: 375px;
+    height: 410px;
+    left: 0px;
+    top: 102px;
+    position: absolute;
+    background: rgba(0, 0, 0, 0);
+}
+
+.dashboard-tools-label {
+    width: 335px;
+    max-width: 335px;
+    height: auto;
+    min-height: 20px;
+    left: 20px;
+    top: 0px;
+    position: absolute;
+    color: rgba(92, 75, 81, 0.60);
+    font-size: 14px;
+    font-family: var(--font-texto), 'Heading Now', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    font-weight: 400;
+    line-height: 20px;
+    letter-spacing: 0.35px;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    box-sizing: border-box;
+}
+
+.dashboard-tool-card {
+    width: 335px;
+    max-width: 335px;
+    height: 140px;
+    left: 20px;
+    position: absolute;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.10);
+    border-radius: 16px;
+    text-decoration: none;
+    display: block;
+    box-sizing: border-box;
+    overflow: hidden;
+}
+
+.dashboard-card-diario {
+    top: 32px;
+    background: linear-gradient(90deg, #C7F5E8 0%, #70EAC8 100%);
+}
+
+.dashboard-card-stats {
+    top: 184px;
+    background: linear-gradient(90deg, #E8D5FF 0%, #B481F1 100%);
+}
+
+.dashboard-card-crear {
+    top: 340px;
+    background: linear-gradient(90deg, #FFB3D9 0%, #F464AC 100%);
+}
+
+.dashboard-card-lecturas {
+    top: 498px;
+    background: linear-gradient(90deg, #C5EDFF 0%, #41C3FF 100%);
+}
+
+.dashboard-card-lecturas .dashboard-tool-title {
+    width: auto;
+    max-width: 303px;
+    right: 16px;
+    left: 16px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.dashboard-card-lecturas .dashboard-tool-description {
+    width: auto;
+    max-width: 303px;
+    right: 16px;
+    left: 16px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.dashboard-tool-icon-box {
+    width: 40px;
+    height: 40px;
+    left: 16px;
+    top: 16px;
+    position: absolute;
+    background: #FFF8F0;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.dashboard-tool-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.dashboard-tool-title {
+    width: 129.50px;
+    max-width: 129.50px;
+    height: auto;
+    min-height: 20px;
+    left: 16px;
+    top: 68px;
+    position: absolute;
+    color: #5C4B51;
+    font-size: 14px;
+    font-family: var(--font-texto), 'Heading Now', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    font-weight: 400;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    box-sizing: border-box;
+    line-height: 20px;
+}
+
+.dashboard-tool-description {
+    width: 129.50px;
+    max-width: 129.50px;
+    left: 16px;
+    top: 92px;
+    position: absolute;
+    color: rgba(92, 75, 81, 0.60);
+    font-size: 12px;
+    font-family: var(--font-texto), 'Heading Now', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    font-weight: 400;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    overflow: hidden;
+    box-sizing: border-box;
+    line-height: 16px;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+.dashboard-tool-description > div {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    max-width: 100%;
+}
+
+.dashboard-card-diario .dashboard-tool-description {
+    height: auto;
+    min-height: 32px;
+    max-height: 32px;
+}
+
+.dashboard-card-diario .dashboard-tool-description > div {
+    height: auto;
+    min-height: 16px;
+    max-height: 16px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+/* Bottom Navigation - Reutilizable en todas las páginas */
+.dashboard-bottom-nav {
+    width: 100%;
+    max-width: 375px;
+    height: 96px;
+    position: fixed;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    background: white;
+    box-shadow: 0px 25px 50px rgba(0, 0, 0, 0.25);
+    border-top-left-radius: 24px;
+    border-top-right-radius: 24px;
+    z-index: 1000;
+}
+
+@media (max-width: 375px) {
+    .dashboard-bottom-nav {
+        width: 100vw;
+        max-width: 100%;
+        left: 0;
+        transform: none;
+    }
+}
+
+.dashboard-nav-content {
+    width: 100%;
+    max-width: 343px;
+    height: 72px;
+    margin: 0 auto;
+    padding: 12px 16px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-sizing: border-box;
+}
+
+.dashboard-nav-item {
+    width: 79.75px;
+    height: 72px;
+    position: relative;
+    background: rgba(0, 0, 0, 0);
+    border-radius: 16px;
+    text-decoration: none;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    flex: 1;
+    max-width: 79.75px;
+}
+
+.dashboard-nav-active {
+    background: #FFF4B8;
+}
+
+.dashboard-nav-icon {
+    width: 20px;
+    height: 20px;
+    margin-top: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+}
+
+.dashboard-nav-icon svg {
+    width: 20px;
+    height: 20px;
+    display: block;
+}
+
+.dashboard-nav-label {
+    text-align: center;
+    color: #5C4B51;
+    font-size: 12px;
+    font-family: var(--font-texto), 'Heading Now', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    font-weight: 400;
+    line-height: 16px;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    margin-top: 4px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    max-width: 100%;
+    box-sizing: border-box;
+}
+
+.dashboard-nav-item:not(.dashboard-nav-active) .dashboard-nav-label {
+    color: rgba(92, 75, 81, 0.60);
+}
+
+.dashboard-nav-item:not(.dashboard-nav-active) .dashboard-nav-icon svg {
+    color: rgba(92, 75, 81, 0.60);
+}
+
+.dashboard-nav-item:not(.dashboard-nav-active) .dashboard-nav-icon svg path {
+    fill: rgba(92, 75, 81, 0.60);
+}
+
+.dashboard-nav-active .dashboard-nav-icon svg {
+    color: #5C4B51;
+}
+
+.dashboard-nav-active .dashboard-nav-icon svg path {
+    fill: #5C4B51;
+}
+
+/* Asegurar que los iconos se vean correctamente */
+.dashboard-nav-item .dashboard-nav-icon svg {
+    width: 20px;
+    height: 20px;
+}
+
+.dashboard-nav-item .dashboard-nav-icon svg path {
+    fill: currentColor;
+}
+
+/* Responsive */
+@media (min-width: 376px) {
+    .dashboard-figma {
+        max-width: 375px;
+    }
+}
+
+/* Ajustes para que funcione mejor */
+body {
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden;
+}
+
+/* Espacio para el nav inferior solo en páginas autenticadas */
+body:has(.dashboard-bottom-nav) {
+    padding-bottom: 96px;
+}
+
+/* Ajuste para páginas con contenido largo */
+main {
+    padding-bottom: 20px;
+    min-height: calc(100vh - 120px);
+}

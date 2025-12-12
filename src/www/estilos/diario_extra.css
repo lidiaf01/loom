@@ -1,0 +1,25 @@
+/* Estilos adicionales para diario */
+
+.diario-tabla {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.diario-tabla th,
+.diario-tabla td {
+    padding: 10px;
+    border: 1px solid #ddd;
+}
+
+.diario-paginacion {
+    margin-top: 20px;
+}
+
+.mensaje-error {
+    padding: 10px;
+    margin: 10px 0;
+    background: #ffcccc;
+    color: #d32f2f;
+    border-radius: 4px;
+}
+

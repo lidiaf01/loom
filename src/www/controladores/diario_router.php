@@ -1,11 +1,11 @@
 <?php
-// Router de autenticación
+// Router de diario
 
 ob_start();
 
 try {
     require_once __DIR__ . '/../../../config.php';
-    require_once __DIR__ . '/AuthController.php';
+    require_once __DIR__ . '/DiarioController.php';
 
     header('Content-Type: application/json; charset=utf-8');
 
@@ -18,17 +18,12 @@ try {
         exit;
     }
     
-    $controller = new AuthController();
+    $controller = new DiarioController();
 
     switch ($action) {
-        case 'registrar':
-            $controller->registrar();
-            break;
-        case 'login':
-            $controller->login();
-            break;
-        case 'logout':
-            $controller->logout();
+        case 'eliminar':
+            $id = $_POST['id'] ?? $_GET['id'] ?? 0;
+            $controller->eliminar($id);
             break;
         default:
             http_response_code(400);
@@ -54,3 +49,4 @@ try {
 
 ob_end_flush();
 ?>
+

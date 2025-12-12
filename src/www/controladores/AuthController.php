@@ -43,7 +43,7 @@ class AuthController {
             echo json_encode([
                 'exito' => true,
                 'mensaje' => $resultado['mensaje'],
-                'redirect' => url('vistas/inicio/pantalla_principal.php')
+                'redirect' => ASSETS_URL . '/?page=dashboard'
             ]);
         } else {
             http_response_code(400);
@@ -53,7 +53,8 @@ class AuthController {
     
     public function login() {
         if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
-            header('Location: ' . ASSETS_URL . '/?page=login');
+            http_response_code(405);
+            echo json_encode(['exito' => false, 'mensaje' => 'Método no permitido']);
             return;
         }
         
@@ -61,7 +62,8 @@ class AuthController {
         $clave = $_POST['clave'] ?? '';
         
         if (empty($email) || empty($clave)) {
-            header('Location: ' . ASSETS_URL . '/?page=error_login');
+            http_response_code(400);
+            echo json_encode(['exito' => false, 'mensaje' => 'Email y clave son requeridos']);
             return;
         }
         
@@ -72,11 +74,14 @@ class AuthController {
             $_SESSION['nombre_usuario'] = $resultado['usuario']['nombre_usuario'];
             $_SESSION['email'] = $resultado['usuario']['email'];
             
-            header('Location: ' . ASSETS_URL . '/?page=inicio');
-            exit;
+            echo json_encode([
+                'exito' => true,
+                'mensaje' => 'Login exitoso',
+                'redirect' => ASSETS_URL . '/?page=dashboard'
+            ]);
         } else {
-            header('Location: ' . ASSETS_URL . '/?page=error_login');
-            exit;
+            http_response_code(400);
+            echo json_encode(['exito' => false, 'mensaje' => $resultado['mensaje']]);
         }
     }
     

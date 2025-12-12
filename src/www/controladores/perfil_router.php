@@ -1,11 +1,11 @@
 <?php
-// Router de autenticación
+// Router de perfil
 
 ob_start();
 
 try {
     require_once __DIR__ . '/../../../config.php';
-    require_once __DIR__ . '/AuthController.php';
+    require_once __DIR__ . '/PerfilController.php';
 
     header('Content-Type: application/json; charset=utf-8');
 
@@ -18,17 +18,14 @@ try {
         exit;
     }
     
-    $controller = new AuthController();
+    $controller = new PerfilController();
 
     switch ($action) {
-        case 'registrar':
-            $controller->registrar();
+        case 'actualizar':
+            $controller->actualizar();
             break;
-        case 'login':
-            $controller->login();
-            break;
-        case 'logout':
-            $controller->logout();
+        case 'subirFoto':
+            $controller->subirFoto();
             break;
         default:
             http_response_code(400);
@@ -54,3 +51,4 @@ try {
 
 ob_end_flush();
 ?>
+

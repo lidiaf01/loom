@@ -4,6 +4,93 @@
  */
 
 /* ============================================
+   CÍRCULOS DECORATIVOS (Reutilizables)
+   ============================================ */
+.decorative-circles {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    pointer-events: none;
+    overflow: hidden;
+    z-index: 0;
+}
+
+.decorative-circle {
+    position: absolute;
+    border-radius: 50%;
+}
+
+.decorative-circle.circle-large-1 {
+    width: 100px;
+    height: 100px;
+    left: 60%;
+    top: 40px;
+    opacity: 0.50;
+    background: var(--color-primary);
+}
+
+.decorative-circle.circle-medium-1 {
+    width: 70px;
+    height: 70px;
+    left: 5%;
+    top: 100px;
+    opacity: 0.35;
+    background: var(--color-secondary);
+}
+
+.decorative-circle.circle-large-2 {
+    width: 120px;
+    height: 120px;
+    left: 50%;
+    bottom: 100px;
+    opacity: 0.25;
+    background: var(--color-primary);
+}
+
+.decorative-circle.circle-medium-2 {
+    width: 60px;
+    height: 60px;
+    left: 10%;
+    bottom: 120px;
+    opacity: 0.40;
+    background: var(--color-secondary);
+}
+
+.decorative-circle.circle-small-1 {
+    width: 10px;
+    height: 10px;
+    left: 15%;
+    top: 80px;
+    background: var(--color-secondary);
+}
+
+.decorative-circle.circle-small-2 {
+    width: 8px;
+    height: 8px;
+    left: 80%;
+    top: 120px;
+    background: var(--color-primary);
+}
+
+.decorative-circle.circle-small-3 {
+    width: 12px;
+    height: 12px;
+    left: 20%;
+    bottom: 140px;
+    background: var(--color-secondary);
+}
+
+.decorative-circle.circle-small-4 {
+    width: 10px;
+    height: 10px;
+    left: 85%;
+    bottom: 160px;
+    background: var(--color-primary);
+}
+
+/* ============================================
    CONTENEDOR DE AUTENTICACIÓN
    ============================================ */
 .auth-container {
@@ -21,6 +108,8 @@
     width: 100%;
     max-width: 400px;
     text-align: center;
+    position: relative;
+    z-index: 1;
 }
 
 .auth-logo {
@@ -36,10 +125,19 @@
     margin-bottom: var(--spacing-sm);
 }
 
+.auth-logo {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: var(--spacing-xl);
+}
+
 .logo-grande img {
-    height: 100px;
+    height: auto;
     width: auto;
-    max-width: 300px;
+    max-width: 280px;
+    max-height: 120px;
     object-fit: contain;
     display: block;
     margin: 0 auto var(--spacing-sm) auto;
@@ -47,9 +145,9 @@
 
 .tagline {
     font-size: var(--font-size-lg);
-    color: #474444;  /* Texto principal */
+    color: #474444;
     margin: 0;
-    font-family: 'Heading Now', sans-serif;
+    font-family: var(--font-texto) !important;
 }
 
 .auth-options {
@@ -62,7 +160,7 @@
 .btn-auth {
     padding: var(--spacing-md);
     border-radius: var(--border-radius);
-    font-family: var(--font-texto);  /* Heading Now para botones */
+    font-family: var(--font-texto) !important;  /* Heading Now para botones */
     font-weight: 600;
     font-size: var(--font-size-lg);
     transition: var(--transition);
@@ -72,37 +170,42 @@
 }
 
 .btn-primary {
-    background-color: #FBEF74 !important;  /* Amarillo principal */
-    color: #474444 !important;  /* Texto principal */
-    border: 2px solid #FBEF74;
-    font-family: 'Heading Now', sans-serif;
+    background: linear-gradient(90deg, var(--color-primary) 0%, var(--color-secondary) 100%) !important;
+    color: #474444 !important;
+    border: none;
+    font-family: var(--font-texto) !important;
+    box-shadow: 0px 10px 15px rgba(0, 0, 0, 0.10);
 }
 
 .btn-primary:hover {
-    background-color: var(--color-primary-dark);  /* Amarillo oscuro */
     transform: translateY(-2px);
-    box-shadow: var(--shadow-lg);
+    box-shadow: 0px 12px 20px rgba(0, 0, 0, 0.15);
     color: var(--color-text);
-    border-color: var(--color-primary-dark);
 }
 
 .btn-secondary {
-    background-color: transparent;
-    color: #F1AFF2 !important;  /* Rosa de contraste */
-    border: 2px solid #F1AFF2;
-    font-family: 'Heading Now', sans-serif;
+    background: rgba(255, 255, 255, 0.80);
+    color: #474444 !important;
+    border: 2px solid var(--color-primary);
+    font-family: var(--font-texto) !important;
+    box-shadow: 0px 10px 15px rgba(0, 0, 0, 0.10);
 }
 
 .btn-secondary:hover {
-    background-color: var(--color-secondary);
+    background: rgba(255, 255, 255, 0.95);
+    transform: translateY(-2px);
     color: var(--color-text);
-    /* Evitar juntar mucho con amarillo según guía */
 }
 
 .auth-info {
-    color: #6B6B6B;  /* Texto secundario */
+    color: #6B6B6B;
     font-size: var(--font-size-sm);
-    font-family: 'Heading Now', sans-serif;
+    font-family: var(--font-texto) !important;
+}
+
+.auth-info p {
+    font-family: var(--font-texto) !important;
+    margin: 0;
 }
 
 /* ============================================
@@ -111,11 +214,36 @@
 .auth-form-wrapper {
     width: 100%;
     max-width: 450px;
-    background-color: var(--color-bg-light);  /* Fondo más claro para contraste */
-    border-radius: var(--border-radius-lg);
+    background: rgba(255, 255, 255, 0.50);
+    border-radius: 20px;
     padding: var(--spacing-lg);
-    box-shadow: var(--shadow-lg);
-    border: 1px solid rgba(71, 68, 68, 0.1);
+    box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.05);
+    border: none;
+    position: relative;
+    z-index: 1;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.auth-form-wrapper-centered {
+    text-align: center;
+}
+
+.auth-form-wrapper h2 {
+    font-family: var(--font-titulos);
+    font-size: 2.5rem;
+    font-weight: 400;
+    color: var(--color-text);
+    margin-bottom: var(--spacing-lg);
+    text-align: center;
+}
+
+.auth-form-wrapper form {
+    text-align: left;
+}
+
+.auth-form-wrapper .form-footer {
+    text-align: center;
 }
 
 .auth-header {
@@ -124,9 +252,12 @@
 }
 
 .auth-header h2 {
-    font-family: var(--font-titulos);  /* Bukhari Script */
+    font-family: var(--font-titulos);
+    font-size: 2.5rem;
+    font-weight: 400;
     margin-bottom: var(--spacing-xs);
     color: var(--color-text);
+    text-align: center;
 }
 
 .auth-header p {
@@ -146,21 +277,29 @@
 .form-group label {
     display: block;
     margin-bottom: var(--spacing-xs);
-    font-weight: 500;
+    font-weight: 600;
     color: var(--color-text);
-    font-size: var(--font-size-sm);
+    font-size: var(--font-size-base);
+    font-family: var(--font-texto);
 }
 
 .form-group input,
 .form-group textarea {
     width: 100%;
-    padding: var(--spacing-sm);
+    padding: var(--spacing-md);
     border: var(--border-width) solid #d1d5db;
-    border-radius: var(--border-radius);
+    border-radius: 16px;
     font-size: var(--font-size-base);
-    font-family: var(--font-family);
+    font-family: var(--font-texto);
     transition: var(--transition);
-    background-color: var(--color-bg);
+    background-color: rgba(255, 255, 255, 0.90);
+    box-sizing: border-box;
+}
+
+.form-group input::placeholder,
+.form-group textarea::placeholder {
+    font-family: var(--font-texto) !important;
+    color: rgba(71, 68, 68, 0.50);
 }
 
 .form-group input:focus,
@@ -179,9 +318,13 @@
     margin-top: var(--spacing-xs);
 }
 
-.password-requirements small {
+.password-requirements small,
+.help-text {
     color: var(--color-text-light);
-    font-size: 0.75rem;
+    font-size: 0.875rem;
+    font-family: var(--font-texto) !important;
+    display: block;
+    margin-top: var(--spacing-xs);
 }
 
 .error-message {
@@ -218,20 +361,22 @@
 .btn-submit {
     width: 100%;
     padding: var(--spacing-md);
-    background-color: var(--color-primary);  /* Amarillo #FBEF74 */
+    background: linear-gradient(90deg, var(--color-primary) 0%, var(--color-secondary) 100%);
     color: var(--color-text);
     border: none;
-    border-radius: var(--border-radius);
+    border-radius: 20px;
     font-size: var(--font-size-lg);
     font-weight: 600;
+    font-family: var(--font-texto);
     cursor: pointer;
     transition: var(--transition);
+    box-shadow: 0px 10px 15px rgba(0, 0, 0, 0.10);
+    margin-top: var(--spacing-md);
 }
 
 .btn-submit:hover {
-    background-color: var(--color-primary-dark);  /* Amarillo oscuro */
     transform: translateY(-2px);
-    box-shadow: var(--shadow-md);
+    box-shadow: 0px 12px 20px rgba(0, 0, 0, 0.15);
     color: var(--color-text);
 }
 
@@ -255,12 +400,107 @@
 .form-footer p {
     margin: 0;
     color: var(--color-text-light);
-    font-size: var(--font-size-sm);
+    font-size: var(--font-size-base);
+    font-family: var(--font-texto);
+    text-align: center;
 }
 
 .form-footer a {
     color: var(--color-primary);
-    font-weight: 500;
+    font-weight: 600;
+    font-family: var(--font-texto);
+    text-decoration: none;
+}
+
+.form-footer a:hover {
+    text-decoration: underline;
+}
+
+/* Logo con gradiente */
+.logo-icon-container {
+    width: 100px;
+    height: 100px;
+    margin: 0 auto var(--spacing-md);
+    background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-secondary) 100%);
+    box-shadow: 0px 10px 15px rgba(0, 0, 0, 0.10);
+    border-radius: 28px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: var(--spacing-sm);
+}
+
+.logo-icon-container img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+
+.logo-text {
+    font-size: 2.5rem;
+    margin: 0;
+    font-family: var(--font-titulos) !important;
+    color: var(--color-primary);
+    text-align: center;
+}
+
+/* Contenedor centrado para pasos de registro */
+.auth-step-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    max-width: 450px;
+    position: relative;
+    z-index: 1;
+    margin: 0 auto;
+}
+
+.auth-step-header {
+    text-align: center;
+    margin-bottom: var(--spacing-lg);
+    width: 100%;
+}
+
+/* Botones horizontales */
+.form-actions-horizontal {
+    display: flex;
+    flex-direction: row;
+    gap: var(--spacing-md);
+    width: 100%;
+    margin-top: var(--spacing-lg);
+}
+
+.form-actions-horizontal .btn-submit {
+    flex: 1;
+    min-width: 0;
+}
+
+/* Mensajes de error */
+.error-box {
+    background: rgba(255, 255, 255, 0.80);
+    border-radius: 16px;
+    padding: var(--spacing-md);
+    margin-bottom: var(--spacing-md);
+    text-align: center;
+}
+
+.error-box p {
+    font-family: var(--font-texto);
+    margin: var(--spacing-sm) 0;
+}
+
+.error-text {
+    color: #ef4444;
+    font-size: 1.1rem;
+    font-weight: 600;
+    font-family: var(--font-texto);
+}
+
+.error-description {
+    color: #6B6B6B;
+    font-size: var(--font-size-base);
+    font-family: var(--font-texto);
 }
 
 /* ============================================
@@ -287,6 +527,51 @@
     background-color: #fee2e2;
     color: #991b1b;
     border: 1px solid #ef4444;
+}
+
+/* ============================================
+   MENSAJES DE BIENVENIDA
+   ============================================ */
+.welcome-title {
+    font-family: var(--font-titulos);
+    font-size: 2.5rem;
+    font-weight: 400;
+    color: var(--color-text);
+    text-align: center;
+    margin: 0 0 var(--spacing-sm) 0;
+    line-height: 1.2;
+}
+
+.welcome-subtitle {
+    font-family: var(--font-texto);
+    font-size: 1.125rem;
+    color: rgba(71, 68, 68, 0.70);
+    text-align: center;
+    margin: 0 0 var(--spacing-lg) 0;
+}
+
+.welcome-message-box {
+    background: rgba(255, 255, 255, 0.50);
+    border-radius: 16px;
+    padding: var(--spacing-md);
+    margin-bottom: var(--spacing-lg);
+    text-align: center;
+}
+
+.welcome-message-text {
+    font-family: var(--font-texto);
+    font-size: var(--font-size-base);
+    color: rgba(71, 68, 68, 0.80);
+    line-height: 1.6;
+    margin: 0;
+    text-align: center;
+}
+
+.btn-link {
+    display: inline-block;
+    text-decoration: none;
+    width: auto;
+    min-width: 200px;
 }
 
 /* ============================================

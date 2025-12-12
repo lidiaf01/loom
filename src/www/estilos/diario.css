@@ -1,0 +1,230 @@
+/**
+ * Estilos para el diario personal
+ */
+
+.diario-entrada-container {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+.diario-entrada-view {
+    background: #FFF8F0;
+    border-radius: 16px;
+    padding: 24px;
+    box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.diario-entrada-header {
+    margin-bottom: 20px;
+    padding-bottom: 16px;
+    border-bottom: 2px solid rgba(92, 75, 81, 0.1);
+}
+
+.diario-entrada-titulo {
+    font-size: 1.75rem;
+    font-family: var(--font-titulos), 'Bukhari Script', serif;
+    color: #5C4B51;
+    margin: 0 0 12px 0;
+    font-weight: 400;
+    line-height: 1.3;
+    word-wrap: break-word;
+}
+
+.diario-entrada-fecha {
+    font-size: 0.875rem;
+    color: rgba(92, 75, 81, 0.6);
+    font-family: var(--font-texto), 'Heading Now', sans-serif;
+}
+
+.diario-entrada-estado {
+    margin-bottom: 20px;
+    padding: 12px 16px;
+    background: rgba(255, 255, 255, 0.5);
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.estado-label {
+    font-size: 0.875rem;
+    color: rgba(92, 75, 81, 0.7);
+    font-family: var(--font-texto), 'Heading Now', sans-serif;
+    font-weight: 500;
+}
+
+.estado-valor {
+    font-size: 1rem;
+    font-family: var(--font-texto), 'Heading Now', sans-serif;
+    font-weight: 500;
+    color: #5C4B51;
+}
+
+.diario-entrada-contenido {
+    font-size: 1rem;
+    line-height: 1.6;
+    color: #5C4B51;
+    font-family: var(--font-texto), 'Heading Now', sans-serif;
+    margin-bottom: 24px;
+    white-space: pre-wrap;
+    word-wrap: break-word;
+    padding: 16px;
+    background: rgba(255, 255, 255, 0.5);
+    border-radius: 12px;
+    min-height: 100px;
+}
+
+.diario-entrada-navegacion {
+    display: flex;
+    flex-direction: row;
+    gap: 12px;
+    padding-top: 16px;
+    border-top: 2px solid rgba(92, 75, 81, 0.1);
+    align-items: stretch;
+}
+
+.btn-nav {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 12px 16px;
+    background: rgba(255, 255, 255, 0.6);
+    border-radius: 12px;
+    text-decoration: none;
+    color: #5C4B51;
+    transition: all 0.3s ease;
+    border: 2px solid rgba(92, 75, 81, 0.2);
+    flex: 1;
+    min-width: 0;
+}
+
+.btn-nav:hover {
+    background: rgba(255, 255, 255, 0.9);
+    border-color: rgba(92, 75, 81, 0.4);
+    transform: translateY(-2px);
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.btn-nav.btn-disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    background: rgba(255, 255, 255, 0.3);
+}
+
+.btn-nav.btn-disabled:hover {
+    transform: none;
+    box-shadow: none;
+}
+
+.btn-anterior {
+    justify-content: flex-start;
+}
+
+.btn-siguiente {
+    justify-content: flex-end;
+    flex-direction: row-reverse;
+}
+
+.nav-icon {
+    font-size: 1.25rem;
+    font-weight: bold;
+    flex-shrink: 0;
+}
+
+.nav-text {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    min-width: 0;
+    text-align: left;
+}
+
+.btn-siguiente .nav-text {
+    text-align: right;
+}
+
+.nav-label {
+    font-size: 0.75rem;
+    color: rgba(92, 75, 81, 0.6);
+    font-family: var(--font-texto), 'Heading Now', sans-serif;
+    font-weight: 500;
+    margin-bottom: 4px;
+}
+
+.nav-titulo {
+    font-size: 0.9375rem;
+    color: #5C4B51;
+    font-family: var(--font-texto), 'Heading Now', sans-serif;
+    font-weight: 400;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.btn-volver {
+    padding: 12px 24px;
+    border-radius: 12px;
+    text-decoration: none;
+    font-family: var(--font-texto), 'Heading Now', sans-serif;
+    font-size: 0.9375rem;
+    font-weight: 500;
+    transition: all 0.3s ease;
+    background: linear-gradient(90deg, #C7F5E8 0%, #70EAC8 100%);
+    color: #5C4B51;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: none;
+    white-space: nowrap;
+    flex-shrink: 0;
+}
+
+.btn-volver:hover {
+    transform: translateY(-2px);
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.15);
+}
+
+/* Responsive */
+@media (max-width: 600px) {
+    .diario-entrada-container {
+        padding: 16px;
+    }
+    
+    .diario-entrada-view {
+        padding: 20px;
+    }
+    
+    .diario-entrada-titulo {
+        font-size: 1.5rem;
+    }
+    
+    .diario-entrada-navegacion {
+        flex-direction: column;
+        gap: 10px;
+    }
+    
+    .btn-nav {
+        padding: 10px 12px;
+        width: 100%;
+    }
+    
+    .nav-titulo {
+        font-size: 0.875rem;
+    }
+    
+    .btn-volver {
+        width: 100%;
+    }
+    
+    .btn-siguiente {
+        flex-direction: row;
+    }
+    
+    .btn-siguiente .nav-text {
+        text-align: left;
+    }
+}
+

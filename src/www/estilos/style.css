@@ -12,91 +12,102 @@
 /* Bukhari Script - Para títulos */
 @font-face {
     font-family: 'Bukhari Script';
-    src: url('/loom/recursos/fuentes/Bukhari Script.ttf') format('truetype');
+    src: url('/loom/src/www/recursos/fuentes/Bukhari Script.ttf') format('truetype');
     font-weight: 400;
     font-style: normal;
     font-display: swap;
+    font-feature-settings: normal;
 }
 
 /* Heading Now - Para textos (64-68 corresponden a grosores) */
 @font-face {
     font-family: 'Heading Now';
-    src: url('/loom/recursos/fuentes/HeadingNowTrial-64Regular.ttf') format('truetype');
+    src: url('/loom/src/www/recursos/fuentes/HeadingNowTrial-64Regular.ttf') format('truetype');
     font-weight: 400; /* Regular - 64 */
     font-style: normal;
     font-display: swap;
+    font-feature-settings: normal;
 }
 
 @font-face {
     font-family: 'Heading Now';
-    src: url('/loom/recursos/fuentes/HeadingNowTrial-64RegularItalic.ttf') format('truetype');
+    src: url('/loom/src/www/recursos/fuentes/HeadingNowTrial-64RegularItalic.ttf') format('truetype');
     font-weight: 400; /* Regular - 64 */
     font-style: italic;
     font-display: swap;
+    font-feature-settings: normal;
 }
 
 @font-face {
     font-family: 'Heading Now';
-    src: url('/loom/recursos/fuentes/HeadingNowTrial-65Medium.ttf') format('truetype');
+    src: url('/loom/src/www/recursos/fuentes/HeadingNowTrial-65Medium.ttf') format('truetype');
     font-weight: 500; /* Medium - 65 */
     font-style: normal;
     font-display: swap;
+    font-feature-settings: normal;
 }
 
 @font-face {
     font-family: 'Heading Now';
-    src: url('/loom/recursos/fuentes/HeadingNowTrial-65MediumItalic.ttf') format('truetype');
+    src: url('/loom/src/www/recursos/fuentes/HeadingNowTrial-65MediumItalic.ttf') format('truetype');
     font-weight: 500; /* Medium - 65 */
     font-style: italic;
     font-display: swap;
+    font-feature-settings: normal;
 }
 
 @font-face {
     font-family: 'Heading Now';
-    src: url('/loom/recursos/fuentes/HeadingNowTrial-66Bold.ttf') format('truetype');
+    src: url('/loom/src/www/recursos/fuentes/HeadingNowTrial-66Bold.ttf') format('truetype');
     font-weight: 600; /* Bold - 66 */
     font-style: normal;
     font-display: swap;
+    font-feature-settings: normal;
 }
 
 @font-face {
     font-family: 'Heading Now';
-    src: url('/loom/recursos/fuentes/HeadingNowTrial-66BoldItalic.ttf') format('truetype');
+    src: url('/loom/src/www/recursos/fuentes/HeadingNowTrial-66BoldItalic.ttf') format('truetype');
     font-weight: 600; /* Bold - 66 */
     font-style: italic;
     font-display: swap;
+    font-feature-settings: normal;
 }
 
 @font-face {
     font-family: 'Heading Now';
-    src: url('/loom/recursos/fuentes/HeadingNowTrial-67Extrabold.ttf') format('truetype');
+    src: url('/loom/src/www/recursos/fuentes/HeadingNowTrial-67Extrabold.ttf') format('truetype');
     font-weight: 700; /* Extrabold - 67 */
     font-style: normal;
     font-display: swap;
+    font-feature-settings: normal;
 }
 
 @font-face {
     font-family: 'Heading Now';
-    src: url('/loom/recursos/fuentes/HeadingNowTrial-67ExtraboldItalic.ttf') format('truetype');
+    src: url('/loom/src/www/recursos/fuentes/HeadingNowTrial-67ExtraboldItalic.ttf') format('truetype');
     font-weight: 700; /* Extrabold - 67 */
     font-style: italic;
     font-display: swap;
+    font-feature-settings: normal;
 }
 
 @font-face {
     font-family: 'Heading Now';
-    src: url('/loom/recursos/fuentes/HeadingNowTrial-68Heavy.ttf') format('truetype');
+    src: url('/loom/src/www/recursos/fuentes/HeadingNowTrial-68Heavy.ttf') format('truetype');
     font-weight: 800; /* Heavy - 68 */
     font-style: normal;
     font-display: swap;
+    font-feature-settings: normal;
 }
 
 @font-face {
     font-family: 'Heading Now';
-    src: url('/loom/recursos/fuentes/HeadingNowTrial-68HeavyItalic.ttf') format('truetype');
+    src: url('/loom/src/www/recursos/fuentes/HeadingNowTrial-68HeavyItalic.ttf') format('truetype');
     font-weight: 800; /* Heavy - 68 */
     font-style: italic;
     font-display: swap;
+    font-feature-settings: normal;
 }
 
 /* ============================================
@@ -140,7 +151,8 @@
     
     /* Tipografía - Guía de Branding Loom */
     --font-titulos: 'Bukhari Script', cursive;           /* Para todos los títulos */
-    --font-texto: 'Heading Now', sans-serif;              /* Para el resto de textos */
+    --font-texto: 'Heading Now', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;  /* Para el resto de textos */
+    --font-numeros: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif; /* Para números */
     --font-family: var(--font-texto);                    /* Fuente por defecto */
     --font-size-base: 16px;
     --font-size-sm: 0.875rem;
@@ -172,25 +184,72 @@ html {
 }
 
 body {
-    font-family: var(--font-texto);  /* Heading Now para textos */
+    font-family: var(--font-texto) !important;  /* Heading Now para textos */
     color: var(--color-text);
-    background-color: #F8F4DE !important;  /* Fondo base - color sustituto del blanco */
+    background-color: #FFF8F0 !important;  /* Fondo crema - mismo color que los cuadrados de la pantalla principal */
     line-height: 1.6;
     min-height: 100vh;
     display: flex;
     flex-direction: column;
     margin: 0;
     padding: 0;
+    font-feature-settings: normal;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+/* Asegurar que todos los elementos de texto usen Heading Now */
+p, span, div, a, button, input[type="text"], input[type="email"], input[type="password"], 
+input[type="search"], textarea, select, label, td, th, li, .texto {
+    font-family: 'Heading Now', var(--font-texto), -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif !important;
+}
+
+/* Excepciones: títulos y números */
+h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-titulos) !important;  /* Bukhari Script para títulos */
+}
+
+input[type="number"],
+input[type="date"],
+input[type="tel"],
+input[type="time"],
+input[type="datetime-local"],
+input[type="month"],
+input[type="week"],
+.font-numeros {
+    font-family: var(--font-numeros) !important;
+}
+
+/* Números usan fuente del sistema en inputs */
+input[type="number"],
+input[type="date"],
+input[type="tel"],
+input[type="time"],
+input[type="datetime-local"],
+input[type="month"],
+input[type="week"] {
+    font-family: var(--font-numeros) !important;
+}
+
+/* Asegurar que los números se muestren con fuente del sistema */
+* {
+    font-variant-numeric: normal;
+}
+
+/* Clase helper para aplicar fuente de números */
+.font-numeros {
+    font-family: var(--font-numeros) !important;
 }
 
 /* ============================================
    TIPOGRAFÍA
    ============================================ */
 h1, h2, h3, h4, h5, h6 {
-    font-family: var(--font-titulos);  /* Bukhari Script para títulos */
+    font-family: var(--font-titulos) !important;  /* Bukhari Script para títulos */
     font-weight: 400;
     line-height: 1.2;
     color: var(--color-text);
+    font-feature-settings: normal;
 }
 
 h1 { font-size: var(--font-size-3xl); }
@@ -248,9 +307,16 @@ a:hover {
     margin: 0;
 }
 
+.logo {
+    display: flex;
+    align-items: center;
+}
+
 .logo img {
-    height: 40px;
+    height: auto;
+    max-height: 50px;
     width: auto;
+    max-width: 200px;
     object-fit: contain;
 }
 
@@ -487,5 +553,53 @@ a:hover {
     .menu-lista {
         grid-template-columns: repeat(6, 1fr);
     }
+}
+
+/* ============================================
+   CONTENEDORES DE TEXTO - PREVENIR DESBORDAMIENTO
+   ============================================ */
+main {
+    box-sizing: border-box;
+    overflow-x: hidden;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+}
+
+main p, main div, main span {
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    max-width: 100%;
+}
+
+/* Tablas */
+table {
+    width: 100%;
+    table-layout: fixed;
+    border-collapse: collapse;
+    box-sizing: border-box;
+}
+
+td, th {
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    padding: 8px;
+    box-sizing: border-box;
+}
+
+td {
+    max-width: 0;
+}
+
+/* Contenedores generales */
+div, section, article {
+    box-sizing: border-box;
+}
+
+/* Textos largos */
+p, span, div {
+    word-wrap: break-word;
+    overflow-wrap: break-word;
 }
 

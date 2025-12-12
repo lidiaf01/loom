@@ -1,12 +1,10 @@
-    <footer class="footer-principal">
-        <div class="container">
-            <p>&copy; <?php echo date('Y'); ?> Loom - Plataforma social educativa</p>
-            <p>Desarrollado por Lidia Artero Fernández - Sprint 1</p>
-        </div>
-    </footer>
-    
-    <script src="/loom/src/www/js/main.js"></script>
-    <script src="/loom/src/www/js/auth.js"></script>
+    <script src="<?php echo ASSETS_URL; ?>/src/www/js/config.js"></script>
+    <script src="<?php echo ASSETS_URL; ?>/src/www/js/main.js"></script>
+    <script src="<?php echo ASSETS_URL; ?>/src/www/js/fuentes-numeros.js"></script>
+    <script src="<?php echo ASSETS_URL; ?>/src/www/js/modals.js"></script>
+    <script src="<?php echo ASSETS_URL; ?>/src/www/js/auth.js"></script>
+    <script src="<?php echo ASSETS_URL; ?>/src/www/js/diario.js"></script>
+    <script src="<?php echo ASSETS_URL; ?>/src/www/js/perfil.js"></script>
     <?php if (isset($js_extra)): ?>
         <?php foreach ($js_extra as $script): ?>
             <script src="<?php echo ASSETS_URL; ?>/<?php echo ltrim($script, '/'); ?>"></script>
