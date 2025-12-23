@@ -1,0 +1,34 @@
+[
+  {
+    "nombre": "admin",
+    "email": "admin@loom.com",
+    "contrasenha": "admin",
+    "fecha_nac": "1990-01-01",
+    "biografia": "Administrador del sistema Loom.",
+    "foto_perfil": "profiles/admin.png"
+  },
+  {
+    "nombre": "Maria Lopez",
+    "email": "maria@example.com",
+    "contrasenha": "password123",
+    "fecha_nac": "1995-05-15",
+    "biografia": "Entusiasta del diseño y la tecnología.",
+    "foto_perfil": "profiles/maria.jpg"
+  },
+  {
+    "nombre": "Carlos Ruiz",
+    "email": "carlos@test.com",
+    "contrasenha": "secret2025",
+    "fecha_nac": "1988-11-20",
+    "biografia": "Desarrollador backend aprendiendo Laravel.",
+    "foto_perfil": null
+  },
+  {
+    "nombre": "Ana Garcia",
+    "email": "ana.garcia@web.es",
+    "contrasenha": "ana_pass_88",
+    "fecha_nac": "2000-02-28",
+    "biografia": "Amante de la fotografía y los viajes.",
+    "foto_perfil": "profiles/ana.png"
+  }
+]
