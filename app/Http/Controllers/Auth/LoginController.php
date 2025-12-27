@@ -59,10 +59,12 @@ class LoginController extends Controller
                 'contrasenha' => Hash::make($request->contrasenha),
             ]);
 
+            // Limpiar datos temporales y autenticar al nuevo usuario
             Session::forget('registro_temp');
-            Session::flash('nuevo_usuario', $usuario->nombre);
+            Auth::login($usuario);
 
-            return redirect()->route('registro.exito');
+            // Redirigir a la página principal de la aplicación
+            return redirect()->intended('/home');
         } catch (\Exception $e) {
             Session::flash('error_registro', 'No se pudo completar el registro.');
             return redirect()->route('registro.fallo');
