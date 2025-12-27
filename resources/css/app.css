@@ -36,3 +36,44 @@ h1, h2, h3, h4, .font-heading {
 .blob-float { animation: drift 18s ease-in-out infinite; will-change: transform; }
 .blob-float-2 { animation: drift2 22s ease-in-out infinite; will-change: transform; }
 .blob-float-3 { animation: drift3 26s ease-in-out infinite; will-change: transform; }
+
+/* Animaciones de entrada desde los bordes */
+@keyframes slideInFromLeft {
+    from { transform: translateX(-100%); }
+    to { transform: translateX(0); }
+}
+
+@keyframes slideInFromRight {
+    from { transform: translateX(100%); }
+    to { transform: translateX(0); }
+}
+
+@keyframes floatLeft {
+    0%, 100% { transform: translateX(0); }
+    50% { transform: translateX(-10px); }
+}
+
+@keyframes floatRight {
+    0%, 100% { transform: translateX(0); }
+    50% { transform: translateX(10px); }
+}
+
+.animate-float-left { animation: floatLeft 3s ease-in-out infinite; }
+.animate-float-right { animation: floatRight 3s ease-in-out infinite; }
+
+/* Transiciones de navegación */
+#content-wrapper {
+    transition: opacity 300ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.nav-indicator {
+    transition: background-color 300ms ease-in-out;
+}
+
+.nav-link svg {
+    transition: color 300ms ease-in-out;
+}
+
+.nav-link span {
+    transition: color 300ms ease-in-out;
+}
