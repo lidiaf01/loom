@@ -1,79 +1,144 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="min-h-screen flex items-center justify-center p-4">
-    <div class="w-full max-w-sm h-[800px] bg-orange-50 rounded-[3rem] shadow-2xl relative overflow-hidden flex flex-col p-8 border border-yellow-100">
+<div class="min-h-screen bg-orange-50 pb-32 relative overflow-hidden w-full flex justify-center">
+    
+    {{-- Blobs Decorativos de Fondo --}}
+    <div class="absolute -top-20 -right-20 w-52 h-52 bg-yellow-100 rounded-full opacity-40 blob-float"></div>
+    <div class="absolute top-1/3 -left-20 w-40 h-40 bg-emerald-100 rounded-full opacity-30 blob-float-2"></div>
+    <div class="absolute -bottom-20 right-1/4 w-60 h-60 bg-pink-100 rounded-full opacity-35 blob-float-3"></div>
+    <div class="absolute left-1/4 top-1/4 w-32 h-32 bg-blue-100 rounded-full opacity-25 blob-float-2"></div>
+
+    <div class="max-w-md mx-auto px-5 pt-12 relative z-10">
         
-        {{-- Blobs Decorativos de Fondo --}}
-        <div class="absolute -top-10 -right-10 w-40 h-40 bg-yellow-100 rounded-full opacity-60 blob-float"></div>
-        <div class="absolute top-40 -left-10 w-32 h-32 bg-emerald-100 rounded-full opacity-50 blob-float-2"></div>
-        <div class="absolute -bottom-10 right-0 w-48 h-48 bg-pink-100 rounded-full opacity-60 blob-float-3"></div>
-        <!-- Extras para más dinamismo -->
-        <div class="absolute left-[20px] top-[120px] w-16 h-16 bg-sky-200 rounded-full opacity-40 blob-float-2"></div>
-        <div class="absolute left-1/2 -translate-x-1/2 top-[220px] w-24 h-24 bg-yellow-100 rounded-full opacity-40 blob-float"></div>
-        <div class="absolute -left-6 bottom-[160px] w-24 h-24 bg-purple-200 rounded-full opacity-40 blob-float-3"></div>
-        <div class="absolute -right-5 bottom-[80px] w-16 h-16 bg-emerald-200 rounded-full opacity-50 blob-float"></div>
-        <div class="absolute right-[40px] top-[160px] w-12 h-12 bg-pink-200 rounded-full opacity-60 blob-float-2"></div>
-
-        {{-- Logo y Encabezado --}}
-        <div class="relative z-10 flex flex-col items-center mt-10 mb-12">
-            <div class="w-20 h-20 bg-gradient-to-br from-yellow-100 to-pink-300 rounded-3xl shadow-lg flex items-center justify-center mb-6 transform hover:rotate-6 transition-transform">
-                {{-- Icono representativo (un pequeño cuadrado/logo) --}}
-                <div class="w-8 h-8 bg-stone-700/20 rounded-lg"></div>
+        {{-- Encabezado --}}
+        <div class="flex items-start justify-between mb-10">
+            <div>
+                <h1 class="text-stone-600 text-2xl font-normal font-['Outfit']">Hola, {{ auth()->user()->nombre }}</h1>
+                <p class="text-stone-600/70 text-sm font-normal font-['Outfit'] mt-1">Tu espacio de crecimiento</p>
             </div>
-            <h1 class="text-stone-700 text-5xl font-bold font-['Poppins'] tracking-tight">Loom</h1>
-            <p class="text-stone-700/60 text-lg font-medium font-['Poppins'] mt-2">¿Qué propósito tienes hoy?</p>
+            <div class="w-12 h-12 bg-gradient-to-br from-pink-300 to-purple-200 rounded-full shadow-md flex-shrink-0"></div>
         </div>
 
-        {{-- Lista de Categorías (Tarjetas) --}}
-        <div class="relative z-10 space-y-4 mb-auto">
+        {{-- Sección Herramientas --}}
+        <div>
+            <h2 class="text-stone-600/60 text-sm font-normal font-['Outfit'] mb-4 tracking-tight">Herramientas</h2>
             
-            {{-- Salud & Bienestar --}}
-            <div class="group flex items-center bg-orange-50/80 p-4 rounded-2xl shadow-sm border border-yellow-100 hover:bg-orange-50/90 transition-all cursor-pointer hover:scale-[1.02]">
-                <div class="w-12 h-12 bg-pink-300 rounded-xl flex items-center justify-center shadow-inner group-hover:rotate-3 transition-transform">
-                    <div class="w-5 h-5 bg-stone-700 opacity-80 rounded-sm"></div>
+            {{-- Card Grande - Crear --}}
+            <a href="#crear" class="block w-full bg-yellow-100 rounded-3xl p-6 mb-4 shadow-[0px_4px_6px_0px_rgba(0,0,0,0.10)] shadow-[0px_2px_4px_0px_rgba(0,0,0,0.10)] border border-amber-300 hover:shadow-yellow-300/40 hover:scale-105 hover:-translate-y-1 transition-all duration-300 cursor-pointer">
+                <div class="flex items-start gap-4">
+                    <div class="w-10 h-10 bg-orange-50 rounded-xl flex items-center justify-center flex-shrink-0">
+                        <svg class="w-5 h-5 text-stone-600" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"/>
+                        </svg>
+                    </div>
+                    <div>
+                        <h3 class="text-stone-600 text-sm font-normal font-['Outfit']">Crear</h3>
+                        <p class="text-stone-600/60 text-xs font-normal font-['Outfit']">Comparte tus hábitos</p>
+                    </div>
                 </div>
-                <div class="ml-4">
-                    <h3 class="text-stone-700 text-base font-semibold font-['Poppins']">Salud & Bienestar</h3>
-                    <p class="text-stone-500 text-xs font-normal font-['Poppins']">Cuida tu cuerpo y mente</p>
-                </div>
+            </a>
+
+            {{-- Grid 2 columnas --}}
+            <div class="grid grid-cols-2 gap-4 mb-4">
+                
+                {{-- Diario --}}
+                <a href="#diario" class="bg-emerald-100 rounded-3xl p-5 shadow-[0px_4px_6px_0px_rgba(0,0,0,0.10)] shadow-[0px_2px_4px_0px_rgba(0,0,0,0.10)] border border-emerald-300 hover:shadow-emerald-400/50 hover:scale-105 hover:-translate-y-1 transition-all duration-300 cursor-pointer">
+                    <div class="w-10 h-10 bg-orange-50 rounded-xl flex items-center justify-center mb-3">
+                        <svg class="w-5 h-5 text-stone-600" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 16H5V5h14v14zm-5.04-6.71l-2.75 3.54-1.3-1.54c-.3-.36-.77-.36-1.07 0-.3.36-.3.92 0 1.28l1.83 2.17c.3.36.77.36 1.07 0 .3-.36 2.21-2.88 2.21-2.88.3-.36.3-.92 0-1.28-.3-.36-.77-.36-1.07 0z"/>
+                        </svg>
+                    </div>
+                    <h3 class="text-stone-600 text-sm font-normal font-['Outfit']">Diario</h3>
+                    <p class="text-stone-600/60 text-xs font-normal font-['Outfit'] mt-1">Escribe tus pensamientos</p>
+                </a>
+
+                {{-- Últimas Lecturas --}}
+                <a href="#lecturas" class="bg-sky-200 rounded-3xl p-5 shadow-[0px_4px_6px_0px_rgba(0,0,0,0.10)] shadow-[0px_2px_4px_0px_rgba(0,0,0,0.10)] border border-blue-300 hover:shadow-sky-400/50 hover:scale-105 hover:-translate-y-1 transition-all duration-300 cursor-pointer">
+                    <div class="w-10 h-10 bg-orange-50 rounded-xl flex items-center justify-center mb-3">
+                        <svg class="w-5 h-5 text-stone-600" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-5 9.5c0 .83-.67 1.5-1.5 1.5S11 13.33 11 12.5s.67-1.5 1.5-1.5 1.5.67 1.5 1.5z"/>
+                        </svg>
+                    </div>
+                    <h3 class="text-stone-600 text-sm font-normal font-['Outfit']">Últimas lecturas</h3>
+                    <p class="text-stone-600/60 text-xs font-normal font-['Outfit'] mt-1">Revisa tus aprendizajes anteriores</p>
+                </a>
+
             </div>
 
-            {{-- Ejercicio --}}
-            <div class="group flex items-center bg-orange-50/80 p-4 rounded-2xl shadow-sm border border-yellow-100 hover:bg-orange-50/90 transition-all cursor-pointer hover:scale-[1.02]">
-                <div class="w-12 h-12 bg-orange-200 rounded-xl flex items-center justify-center shadow-inner group-hover:-rotate-3 transition-transform">
-                    <div class="w-6 h-4 bg-stone-700 opacity-80 rounded-sm"></div>
-                </div>
-                <div class="ml-4">
-                    <h3 class="text-stone-700 text-base font-semibold font-['Poppins']">Ejercicio & Movimiento</h3>
-                    <p class="text-stone-500 text-xs font-normal font-['Poppins']">Activa tu energía positiva</p>
-                </div>
-            </div>
+            {{-- Grid 2 columnas - Fila 2 --}}
+            <div class="grid grid-cols-2 gap-4">
+                
+                {{-- Biblioteca --}}
+                <a href="#biblioteca" class="bg-pink-300 rounded-3xl p-5 shadow-[0px_4px_6px_0px_rgba(0,0,0,0.10)] shadow-[0px_2px_4px_0px_rgba(0,0,0,0.10)] border border-pink-400 hover:shadow-pink-400/50 hover:scale-105 hover:-translate-y-1 transition-all duration-300 cursor-pointer">
+                    <div class="w-10 h-10 bg-orange-50 rounded-xl flex items-center justify-center mb-3">
+                        <svg class="w-5 h-5 text-stone-600" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 16H5V5h14v14zm-2-7h-4v4h-2v-4H7v-2h4V7h2v4h4v2z"/>
+                        </svg>
+                    </div>
+                    <h3 class="text-stone-600 text-sm font-normal font-['Outfit']">Biblioteca</h3>
+                    <p class="text-stone-600/60 text-xs font-normal font-['Outfit'] mt-1">Contenido Guardado</p>
+                </a>
 
-            {{-- Hobbies --}}
-            <div class="group flex items-center bg-orange-50/80 p-4 rounded-2xl shadow-sm border border-yellow-100 hover:bg-orange-50/90 transition-all cursor-pointer hover:scale-[1.02]">
-                <div class="w-12 h-12 bg-emerald-100 rounded-xl flex items-center justify-center shadow-inner group-hover:rotate-3 transition-transform">
-                    <div class="w-5 h-5 bg-stone-700 opacity-80 rounded-sm"></div>
-                </div>
-                <div class="ml-4">
-                    <h3 class="text-stone-700 text-base font-semibold font-['Poppins']">Hobbies & Creatividad</h3>
-                    <p class="text-stone-500 text-xs font-normal font-['Poppins']">Explora tu lado artístico</p>
-                </div>
-            </div>
+                {{-- Explorar --}}
+                <a href="#explorar" class="bg-red-300 rounded-3xl p-5 shadow-[0px_4px_6px_0px_rgba(0,0,0,0.10)] shadow-[0px_2px_4px_0px_rgba(0,0,0,0.10)] border border-red-400 hover:shadow-red-400/50 hover:scale-105 hover:-translate-y-1 transition-all duration-300 cursor-pointer">
+                    <div class="w-10 h-10 bg-orange-50 rounded-xl flex items-center justify-center mb-3">
+                        <svg class="w-5 h-5 text-stone-600" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm3.5-9c.83 0 1.5-.67 1.5-1.5S16.33 8 15.5 8 14 8.67 14 9.5s.67 1.5 1.5 1.5zm-7 0c.83 0 1.5-.67 1.5-1.5S9.33 8 8.5 8 7 8.67 7 9.5 7.67 11 8.5 11zm3.5 6.5c2.33 0 4.31-1.46 5.11-3.5H6.89c.8 2.04 2.78 3.5 5.11 3.5z"/>
+                        </svg>
+                    </div>
+                    <h3 class="text-stone-600 text-sm font-normal font-['Outfit']">Explorar</h3>
+                    <p class="text-stone-600/60 text-xs font-normal font-['Outfit'] mt-1">Por si no sabes por donde empezar</p>
+                </a>
 
+            </div>
         </div>
+    </div>
 
-        {{-- Botones de Acción --}}
-        <div class="relative z-10 space-y-4 mb-6">
-            <a href="{{ route('login') }}" 
-               class="w-full h-14 bg-gradient-to-r from-yellow-100 to-pink-300 rounded-2xl shadow-md flex items-center justify-center text-stone-700 text-base font-semibold font-['Poppins'] hover:opacity-90 transition-opacity active:scale-95">
-                Iniciar Sesión
-            </a>
+    {{-- Bottom Navigation --}}
+    <div class="fixed bottom-0 left-0 right-0 bg-white rounded-t-3xl shadow-[0px_25px_50px_0px_rgba(0,0,0,0.25)] max-w-md mx-auto">
+        <div class="px-4 py-4 flex justify-around">
             
-                <a href="{{ route('registro.1') }}" 
-                    class="w-full h-14 bg-orange-50/80 border-2 border-yellow-100 rounded-2xl shadow-sm flex items-center justify-center text-stone-700 text-base font-semibold font-['Poppins'] hover:bg-orange-50/90 transition-colors active:scale-95">
-                Crear Cuenta
+            {{-- Principal --}}
+            <a href="#" class="flex flex-col items-center gap-2">
+                <div class="w-12 h-12 bg-yellow-100 rounded-2xl flex items-center justify-center">
+                    <svg class="w-5 h-5 text-stone-600" fill="currentColor" viewBox="0 0 24 24">
+                        <path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/>
+                    </svg>
+                </div>
+                <span class="text-stone-600 text-xs font-normal font-['Outfit']">Principal</span>
             </a>
+
+            {{-- Buscar --}}
+            <a href="#" class="flex flex-col items-center gap-2">
+                <div class="w-12 h-12 rounded-2xl flex items-center justify-center">
+                    <svg class="w-5 h-5 text-stone-600/60" fill="currentColor" viewBox="0 0 24 24">
+                        <path d="M15.5 1h-8C6.12 1 5 2.12 5 3.5v17C5 21.88 6.12 23 7.5 23h8c1.38 0 2.5-1.12 2.5-2.5v-17C18 2.12 16.88 1 15.5 1zm-4 21c-.83 0-1.5-.67-1.5-1.5s.67-1.5 1.5-1.5 1.5.67 1.5 1.5-.67 1.5-1.5 1.5zm4.5-4H7V4h9v14z"/>
+                    </svg>
+                </div>
+                <span class="text-stone-600/60 text-xs font-normal font-['Outfit']">Buscar</span>
+            </a>
+
+            {{-- Ajustes --}}
+            <a href="#" class="flex flex-col items-center gap-2">
+                <div class="w-12 h-12 rounded-2xl flex items-center justify-center">
+                    <svg class="w-5 h-5 text-stone-600/60" fill="currentColor" viewBox="0 0 24 24">
+                        <path d="M19.14 12.94c.04-.3.06-.61.06-.94 0-.32-.02-.64-.07-.94l2.03-1.58c.18-.14.23-.41.12-.64l-1.92-3.32c-.12-.22-.39-.3-.61-.22l-2.39.96c-.5-.38-1.03-.7-1.62-.94l-.36-2.54c-.04-.24-.24-.41-.48-.41h-3.84c-.24 0-.43.17-.47.41l-.36 2.54c-.59.24-1.13.57-1.62.94l-2.39-.96c-.23-.09-.49 0-.61.22L2.74 8.87c-.12.22-.07.49.12.64l2.03 1.58c-.05.3-.07.62-.07.94s.02.64.07.94l-2.03 1.58c-.18.14-.23.41-.12.64l1.92 3.32c.12.22.39.3.61.22l2.39-.96c.5.38 1.03.7 1.62.94l.36 2.54c.05.24.24.41.48.41h3.84c.24 0 .44-.17.47-.41l.36-2.54c.59-.24 1.13-.56 1.62-.94l2.39.96c.23.09.49 0 .61-.22l1.92-3.32c.12-.22.07-.49-.12-.64l-2.01-1.58zM12 15.6c-1.98 0-3.6-1.62-3.6-3.6s1.62-3.6 3.6-3.6 3.6 1.62 3.6 3.6-1.62 3.6-3.6 3.6z"/>
+                    </svg>
+                </div>
+                <span class="text-stone-600/60 text-xs font-normal font-['Outfit']">Ajustes</span>
+            </a>
+
+            {{-- Perfil --}}
+            <a href="#" class="flex flex-col items-center gap-2">
+                <div class="w-12 h-12 rounded-2xl flex items-center justify-center">
+                    <svg class="w-5 h-5 text-stone-600/60" fill="currentColor" viewBox="0 0 24 24">
+                        <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/>
+                    </svg>
+                </div>
+                <span class="text-stone-600/60 text-xs font-normal font-['Outfit']">Perfil</span>
+            </a>
+
         </div>
     </div>
 </div>
