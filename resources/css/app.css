@@ -2,35 +2,35 @@
 
 /* Tipografías globales */
 :root {
-	--font-body: 'Poppins', system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, 'Helvetica Neue', Arial, 'Noto Sans', sans-serif;
-	--font-heading: 'Outfit', var(--font-body);
+    --font-body: 'Poppins', system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, 'Helvetica Neue', Arial, 'Noto Sans', sans-serif;
+    --font-heading: 'Outfit', var(--font-body);
 }
 
 html, body {
-	font-family: var(--font-body);
+    font-family: var(--font-body);
 }
 
 h1, h2, h3, h4, .font-heading {
-	font-family: var(--font-heading);
+    font-family: var(--font-heading);
 }
 
 /* Animaciones suaves para círculos decorativos */
 @keyframes drift {
-	0%   { transform: translate3d(0, 0, 0); }
-	50%  { transform: translate3d(10px, -8px, 0); }
-	100% { transform: translate3d(0, 0, 0); }
+    0%   { transform: translate3d(0, 0, 0); }
+    50%  { transform: translate3d(10px, -8px, 0); }
+    100% { transform: translate3d(0, 0, 0); }
 }
 
 @keyframes drift2 {
-	0%   { transform: translate3d(0, 0, 0) rotate(0deg); }
-	50%  { transform: translate3d(-8px, 10px, 0) rotate(3deg); }
-	100% { transform: translate3d(0, 0, 0) rotate(0deg); }
+    0%   { transform: translate3d(0, 0, 0) rotate(0deg); }
+    50%  { transform: translate3d(-8px, 10px, 0) rotate(3deg); }
+    100% { transform: translate3d(0, 0, 0) rotate(0deg); }
 }
 
 @keyframes drift3 {
-	0%   { transform: translate3d(0, 0, 0); }
-	50%  { transform: translate3d(6px, 6px, 0); }
-	100% { transform: translate3d(0, 0, 0); }
+    0%   { transform: translate3d(0, 0, 0); }
+    50%  { transform: translate3d(6px, 6px, 0); }
+    100% { transform: translate3d(0, 0, 0); }
 }
 
 .blob-float { animation: drift 18s ease-in-out infinite; will-change: transform; }

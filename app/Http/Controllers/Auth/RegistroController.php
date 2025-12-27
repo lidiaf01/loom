@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Session;
 
-class LoginController extends Controller
+class RegistroController extends Controller
 {
     public function showLoginForm()
     {

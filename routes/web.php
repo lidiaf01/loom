@@ -1,22 +1,34 @@
 <?php
 
 use App\Http\Controllers\Auth\LoginController;
+use App\Http\Controllers\Auth\RegistroController;
 use Illuminate\Support\Facades\Route;
 
-// Login
-Route::get('/', [LoginController::class, 'showLoginForm'])->name('login');
-Route::post('/login', [LoginController::class, 'login'])->name('login.post');
-// Registro
-Route::get('/registro-1', [LoginController::class, 'showRegistro1'])->name('registro.1');
-Route::post('/registro-1', [LoginController::class, 'storePaso1']);
-Route::get('/registro-2', [LoginController::class, 'showRegistro2'])->name('registro.2');
-Route::post('/registro-finalizar', [LoginController::class, 'finalizarRegistro'])->name('registro.finalizar');
+// Redirigir raíz a /inicio
+Route::get('/', function () {
+    return redirect('/inicio');
+});
 
-// Resultados
-Route::view('/exito', 'auth.registro_exito')->name('registro.exito');
-Route::view('/fallo', 'auth.registro_fallo')->name('registro.fallo');
+// Página de inicio (landing) - solo para invitados
+Route::middleware('guest')->group(function () {
+    Route::view('/inicio', 'welcome')->name('inicio');
+    
+    // Login
+    Route::get('/login', [LoginController::class, 'showLoginForm'])->name('login');
+    Route::post('/login', [LoginController::class, 'login'])->name('login.post');
+    
+    // Registro
+    Route::get('/registro-1', [RegistroController::class, 'showRegistro1'])->name('registro.1');
+    Route::post('/registro-1', [RegistroController::class, 'storePaso1']);
+    Route::get('/registro-2', [RegistroController::class, 'showRegistro2'])->name('registro.2');
+    Route::post('/registro-finalizar', [RegistroController::class, 'finalizarRegistro'])->name('registro.finalizar');
+    
+    // Resultados
+    Route::view('/exito', 'auth.registro_exito')->name('registro.exito');
+    Route::view('/fallo', 'auth.registro_fallo')->name('registro.fallo');
+});
 
-// Home
+// Home - solo para autenticados
 Route::middleware('auth')->get('/home', function () {
     return view('layouts.home');
 })->name('home');
