@@ -9,6 +9,7 @@ class Publicacion extends Model
 {
     use HasFactory;
 
+    protected $table = 'publicaciones';
     protected $primaryKey = 'id_publicacion';
     const CREATED_AT = 'fecha_creacion';
     const UPDATED_AT = 'fecha_actualizacion';

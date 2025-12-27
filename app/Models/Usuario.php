@@ -23,4 +23,8 @@ class Usuario extends Authenticatable
     protected $fillable = [
         'nombre', 'email', 'contrasenha', 'fecha_nac', 'biografia', 'foto_perfil', 'fecha_registro'
     ];
+
+    public function publicaciones() {
+        return $this->hasMany(Publicacion::class, 'usuario_id');
+    }
 }

@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\RegistroController;
+use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
 // Redirigir raíz a /inicio
@@ -29,6 +30,11 @@ Route::middleware('guest')->group(function () {
 });
 
 // Home - solo para autenticados
-Route::middleware('auth')->get('/home', function () {
-    return view('layouts.home');
-})->name('home');
+Route::middleware('auth')->group(function () {
+    Route::get('/home', function () {
+        return view('layouts.home');
+    })->name('home');
+
+    // Ruta de perfil
+    Route::get('/perfil', [ProfileController::class, 'show'])->name('profile');
+});
