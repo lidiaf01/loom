@@ -13,5 +13,38 @@
     <main class="w-full h-full">
         @yield('content')
     </main>
+
+    {{-- Script para activar nav según página --}}
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const currentRoute = window.location.pathname;
+            const navLinks = document.querySelectorAll('.nav-link');
+            
+            navLinks.forEach(link => {
+                const href = link.getAttribute('href');
+                const dataRoute = link.getAttribute('data-route');
+                
+                // Determinar si este link es el activo
+                let isActive = false;
+                
+                if (dataRoute === 'home' && (currentRoute === '/home' || currentRoute.includes('/home'))) {
+                    isActive = true;
+                } else if (dataRoute === 'profile' && currentRoute.includes('/profile')) {
+                    isActive = true;
+                } else if (dataRoute === 'search') {
+                    isActive = currentRoute.includes('/search');
+                } else if (dataRoute === 'settings') {
+                    isActive = currentRoute.includes('/settings');
+                }
+                
+                // Agregar o remover clase active
+                if (isActive) {
+                    link.classList.add('active');
+                } else {
+                    link.classList.remove('active');
+                }
+            });
+        });
+    </script>
 </body>
 </html>

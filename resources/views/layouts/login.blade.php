@@ -2,7 +2,7 @@
 
 @section('content')
 <div class="flex justify-center items-center min-h-screen">
-    <div class="w-96 h-[780px] relative bg-transparent overflow-hidden">
+    <div class="w-96 h-[780px] relative bg-transparent overflow-hidden scrollbar-hide">
         
         {{-- Elementos decorativos de fondo --}}
         <div class="w-16 h-16 left-[232px] top-[97px] absolute opacity-40 bg-sky-200 rounded-full blob-float"></div>

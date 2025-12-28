@@ -1,17 +1,20 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="min-h-screen bg-orange-50 pb-32 relative overflow-hidden w-full flex justify-center" id="app-container">
+<div class="min-h-screen bg-orange-50 w-full flex justify-center relative overflow-hidden">
     
-    {{-- Blobs Decorativos de Fondo --}}
-    <div class="absolute -top-20 -right-20 w-52 h-52 bg-yellow-100 rounded-full opacity-40 blob-float"></div>
-    <div class="absolute top-1/3 -left-20 w-40 h-40 bg-emerald-100 rounded-full opacity-30 blob-float-2"></div>
-    <div class="absolute -bottom-20 right-1/4 w-60 h-60 bg-pink-100 rounded-full opacity-35 blob-float-3"></div>
-    <div class="absolute left-1/4 top-1/4 w-32 h-32 bg-blue-100 rounded-full opacity-25 blob-float-2"></div>
+    {{-- Contenedor centrado móvil --}}
+    <div class="w-96 min-h-screen relative overflow-y-scroll pb-32 scrollbar-hide">
+        
+        {{-- Círculos decorativos animados --}}
+        <div class="absolute w-48 h-48 bg-rose-200 rounded-full opacity-40 blur-3xl blob-float" style="top: 80px; left: 280px;"></div>
+        <div class="absolute w-40 h-40 bg-yellow-100 rounded-full opacity-30 blur-2xl blob-float-2" style="top: 200px; left: -40px;"></div>
+        <div class="absolute w-56 h-56 bg-sky-200 rounded-full opacity-35 blur-3xl blob-float-3" style="top: 400px; left: 300px;"></div>
+        <div class="absolute w-36 h-36 bg-emerald-100 rounded-full opacity-30 blur-2xl blob-float" style="top: 600px; left: -25px;"></div>
+        <div class="absolute w-44 h-44 bg-violet-200 rounded-full opacity-25 blur-2xl blob-float-2" style="top: 350px; left: 10px;"></div>
 
-    {{-- Contenedor de Contenido Dinámico --}}
-    <div id="content-wrapper" class="w-full transition-opacity duration-300 ease-in-out opacity-100">
-        <div id="home-content" class="max-w-md mx-auto px-5 pt-12 relative z-10">
+        {{-- Contenido principal --}}
+        <div class="relative z-10 px-5 pt-12">
         
         {{-- Encabezado --}}
         <div class="flex items-start justify-between mb-10">
@@ -96,11 +99,9 @@
             </div>
         </div>
         </div>
-    </div>
-    {{-- Fin de Contenedor de Contenido Dinámico --}}
 
-    {{-- Bottom Navigation --}}
-    <div class="fixed bottom-0 left-0 right-0 bg-white rounded-t-3xl shadow-[0px_25px_50px_0px_rgba(0,0,0,0.25)] max-w-md mx-auto z-20">
+        {{-- Bottom Navigation --}}
+        <div class="fixed bottom-0 left-1/2 -translate-x-1/2 w-96 bg-white rounded-t-3xl shadow-[0px_25px_50px_0px_rgba(0,0,0,0.25)] z-50">
         <div class="px-4 py-4 flex justify-around">
             
             {{-- Principal --}}
@@ -144,6 +145,8 @@
             </a>
 
         </div>
+        </div>
+
     </div>
 </div>
 @endsection

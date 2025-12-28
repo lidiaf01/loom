@@ -2,7 +2,7 @@
 
 @section('content')
 <div class="w-96 h-[780px] relative bg-orange-50 border-gray-200">
-  <div class="w-96 h-[780px] left-0 top-0 absolute bg-black/0 border-gray-200 overflow-hidden">
+  <div class="w-96 h-[780px] left-0 top-0 absolute bg-black/0 border-gray-200 overflow-hidden scrollbar-hide">
     <div class="w-96 h-[780px] left-0 top-0 absolute bg-black/0 border-gray-200">
       <div class="w-96 h-[780px] left-0 top-0 absolute bg-black/0 border-gray-200">
         <div class="w-16 h-16 left-[210px] top-[110px] absolute opacity-40 bg-cyan-200 rounded-full blob-float"></div>

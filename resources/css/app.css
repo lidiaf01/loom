@@ -77,3 +77,26 @@ h1, h2, h3, h4, .font-heading {
 .nav-link span {
     transition: color 300ms ease-in-out;
 }
+
+/* Ocultar scrollbar pero mantener scroll funcional */
+.scrollbar-hide::-webkit-scrollbar {
+    display: none;
+}
+
+.scrollbar-hide {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+}
+
+/* Animación del nav activo */
+.nav-link.active .nav-indicator {
+    @apply bg-yellow-100;
+}
+
+.nav-link.active svg {
+    @apply text-stone-600;
+}
+
+.nav-link.active span {
+    @apply text-stone-600;
+}

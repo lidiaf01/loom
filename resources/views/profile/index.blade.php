@@ -1,10 +1,20 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="min-h-screen bg-orange-50 w-full flex justify-center pb-32">
+<div class="min-h-screen bg-orange-50 w-full flex justify-center relative overflow-hidden">
     
     {{-- Contenedor centrado móvil --}}
-    <div class="w-full max-w-md">
+    <div class="w-96 min-h-screen relative overflow-y-scroll pb-32 scrollbar-hide">
+        
+        {{-- Círculos decorativos animados --}}
+        <div class="absolute w-52 h-52 bg-amber-200 rounded-full opacity-40 blur-3xl blob-float" style="top: 120px; left: 250px;"></div>
+        <div class="absolute w-44 h-44 bg-pink-200 rounded-full opacity-35 blur-2xl blob-float-2" style="top: 300px; left: -30px;"></div>
+        <div class="absolute w-48 h-48 bg-teal-200 rounded-full opacity-30 blur-3xl blob-float-3" style="top: 500px; left: 280px;"></div>
+        <div class="absolute w-40 h-40 bg-indigo-100 rounded-full opacity-25 blur-2xl blob-float" style="top: 700px; left: -15px;"></div>
+        <div class="absolute w-36 h-36 bg-lime-200 rounded-full opacity-30 blur-2xl blob-float-2" style="top: 280px; left: 320px;"></div>
+
+        {{-- Contenido principal --}}
+        <div class="relative z-10">
         
         {{-- Encabezado: Foto, Nombre, Bio --}}
         <div class="w-full pt-4 pb-2 px-4 text-center">
@@ -74,12 +84,10 @@
             @endif
 
         </div>
+        </div>
 
-    </div>
-
-    {{-- Bottom Navigation --}}
-    <div class="fixed bottom-0 left-0 right-0 bg-white rounded-t-3xl shadow-[0px_25px_50px_0px_rgba(0,0,0,0.25)] z-50">
-        <div class="max-w-md mx-auto">
+        {{-- Bottom Navigation --}}
+        <div class="fixed bottom-0 left-1/2 -translate-x-1/2 w-96 bg-white rounded-t-3xl shadow-[0px_25px_50px_0px_rgba(0,0,0,0.25)] z-50">
             <div class="px-4 py-4 flex justify-around">
                 
                 {{-- Principal --}}
@@ -124,7 +132,7 @@
 
             </div>
         </div>
-    </div>
 
+    </div>
 </div>
 @endsection
