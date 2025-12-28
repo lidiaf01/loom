@@ -19,7 +19,7 @@ class LoginController extends Controller
 
     if (Auth::attempt(['nombre' => $credentials['username'], 'password' => $credentials['password']])) {
         $request->session()->regenerate();
-        return redirect()->intended('/home');
+        return redirect()->intended('/home')->with('success', 'Sesión iniciada');
     }
     return back()->withErrors([
         'username' => 'El nombre de usuario o la clave no son correctos.',

@@ -3,6 +3,7 @@
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\RegistroController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\PublicacionController;
 use Illuminate\Support\Facades\Route;
 
 // Redirigir raíz a /inicio
@@ -37,4 +38,13 @@ Route::middleware('auth')->group(function () {
 
     // Ruta de perfil
     Route::get('/perfil', [ProfileController::class, 'show'])->name('profile');
+
+    // Publicaciones - flujo de creación
+    Route::get('/publicaciones/crear', [PublicacionController::class, 'create'])->name('publicaciones.crear');
+    Route::post('/publicaciones/continuar', [PublicacionController::class, 'continue'])->name('publicaciones.continuar');
+    Route::get('/publicaciones/opciones', [PublicacionController::class, 'opciones'])->name('publicaciones.opciones');
+    Route::post('/publicaciones', [PublicacionController::class, 'store'])->name('publicaciones.store');
+    Route::get('/publicaciones/{publicacion}', [PublicacionController::class, 'show'])->name('publicaciones.show');
+    Route::delete('/publicaciones/{publicacion}', [PublicacionController::class, 'destroy'])->name('publicaciones.destroy');
+    Route::post('/publicaciones/{publicacion}/guardar', [PublicacionController::class, 'guardar'])->name('publicaciones.guardar');
 });

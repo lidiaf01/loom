@@ -14,6 +14,9 @@
         @yield('content')
     </main>
 
+    {{-- Toast notification --}}
+    @component('components.toast') @endcomponent
+
     {{-- Script para activar nav según página --}}
     <script>
         document.addEventListener('DOMContentLoaded', function() {

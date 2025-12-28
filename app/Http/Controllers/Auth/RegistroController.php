@@ -76,7 +76,7 @@ class RegistroController extends Controller
             ]);
 
             Session::forget('registro_temp');
-            return redirect()->route('registro.exito');
+            return redirect()->route('registro.exito')->with('success', '¡Bienvenido!');
         } catch (\Exception $e) {
             return redirect()->route('registro.fallo');
         }

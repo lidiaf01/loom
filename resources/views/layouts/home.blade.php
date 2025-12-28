@@ -30,7 +30,7 @@
             <h2 class="text-stone-600/60 text-sm font-normal font-['Outfit'] mb-4 tracking-tight">Herramientas</h2>
             
             {{-- Card Grande - Crear --}}
-            <a href="#crear" class="block w-full bg-yellow-100 rounded-3xl p-6 mb-4 shadow-[0px_4px_6px_0px_rgba(0,0,0,0.10)] shadow-[0px_2px_4px_0px_rgba(0,0,0,0.10)] border border-amber-300 hover:shadow-yellow-300/40 hover:scale-105 hover:-translate-y-1 transition-all duration-300 cursor-pointer">
+            <a href="{{ route('publicaciones.crear') }}" class="block w-full bg-yellow-100 rounded-3xl p-6 mb-4 shadow-[0px_4px_6px_0px_rgba(0,0,0,0.10)] shadow-[0px_2px_4px_0px_rgba(0,0,0,0.10)] border border-amber-300 hover:shadow-yellow-300/40 hover:scale-105 hover:-translate-y-1 transition-all duration-300 cursor-pointer">
                 <div class="flex items-start gap-4">
                     <div class="w-10 h-10 bg-orange-50 rounded-xl flex items-center justify-center flex-shrink-0">
                         <svg class="w-5 h-5 text-stone-600" fill="currentColor" viewBox="0 0 24 24">

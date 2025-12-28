@@ -15,78 +15,62 @@
 
         {{-- Contenido principal --}}
         <div class="relative z-10">
-        
-        {{-- Encabezado: Foto, Nombre, Bio --}}
-        <div class="w-full pt-4 pb-2 px-4 text-center">
-            <div class="w-28 h-28 mx-auto mb-3 bg-zinc-300 rounded-full overflow-hidden border-4 border-white shadow-lg">
-                @if($user->foto_perfil)
-                    <img src="{{ asset('storage/' . $user->foto_perfil) }}" alt="{{ $user->nombre }}" class="w-full h-full object-cover">
-                @else
-                    <img src="{{ asset('images/default-profile.png') }}" alt="Foto de perfil" class="w-full h-full object-cover">
+            
+            {{-- Encabezado --}}
+            <div class="w-full pt-6 pb-4 px-4">
+                <h1 class="text-stone-700 text-3xl font-semibold font-['Outfit']">{{ $publicacion->titulo }}</h1>
+                @if(!empty($publicacion->subtitulo))
+                    <p class="text-stone-700/70 text-base font-normal font-['Outfit'] mt-2">{{ $publicacion->subtitulo }}</p>
+                @endif
+                @if(!empty($publicacion->categoria))
+                    @php $colors = $publicacion->getColorClasses(); @endphp
+                    <div class="inline-block px-4 py-2 {{ $colors['bg'] }} rounded-full border-2 {{ $colors['border'] }} text-stone-700 text-sm font-normal font-['Outfit'] mt-3">
+                        {{ $publicacion->categoria }}
+                    </div>
+                @endif
+                @if($publicacion->fecha_subida)
+                    <p class="text-stone-600/50 text-xs font-normal font-['Outfit'] mt-1">{{ $publicacion->fecha_subida instanceof \DateTime ? $publicacion->fecha_subida->format('d M Y') : $publicacion->fecha_subida }}</p>
                 @endif
             </div>
-            <h1 class="text-stone-700 text-3xl font-semibold font-['Outfit'] mb-1">{{ $user->nombre }}</h1>
-            <p class="text-stone-700/80 text-base font-normal font-['Outfit']">{{ $user->biografia ?? 'Biografia' }}</p>
-        </div>
 
-        {{-- Sección decorativa: Diario y Biblioteca --}}
-        <div class="w-full h-72 relative px-4 flex items-center justify-center overflow-hidden">
-            
-            {{-- Carpeta Diario izquierda --}}
-            <div class="absolute left-0 top-1/2 -translate-y-1/2 rotate-12">
-                <div class="w-40 h-52 bg-emerald-300 rounded-[15px] border-2 border-emerald-400 flex items-center justify-center shadow-md hover:shadow-emerald-400/30 transition-all duration-300 hover:-translate-y-2 cursor-pointer"
-                     style="transform: perspective(1000px) rotateX(5deg) rotateY(15deg) rotateZ(12deg); box-shadow: 0 8px 15px rgba(0,0,0,0.1);">
-                    <div class="flex flex-col items-center gap-2">
-                        <div class="w-20 h-12 bg-white/70 rounded-lg"></div>
-                        <span class="text-emerald-800 font-semibold font-['Outfit']">diario</span>
+            {{-- Contenido --}}
+            <div class="w-full px-4 py-4 mb-6">
+                <div class="w-full bg-white rounded-[20px] border-2 border-blue-200 p-6">
+                    <div class="text-stone-700 text-base font-normal font-['Outfit'] leading-relaxed prose prose-sm max-w-none break-words word-break">
+                        {!! $publicacion->contenido !!}
                     </div>
                 </div>
             </div>
 
-            {{-- Libro Biblioteca derecha --}}
-            <div class="absolute right-0 top-1/2 -translate-y-1/2 -rotate-6">
-                <div class="w-40 h-52 bg-yellow-200 rounded-[15px] border-2 border-amber-300 flex items-center justify-center shadow-md hover:shadow-yellow-400/30 transition-all duration-300 hover:-translate-y-2 cursor-pointer"
-                     style="transform: perspective(1000px) rotateX(8deg) rotateY(-20deg) rotateZ(-6deg); box-shadow: 0 8px 15px rgba(0,0,0,0.1);">
-                    <div class="flex flex-col items-center gap-2">
-                        <div class="w-32 h-2 bg-amber-400 rounded-full"></div>
-                        <span class="text-amber-800 font-semibold font-['Outfit'] text-center px-2">Biblioteca</span>
-                        <div class="w-32 h-2 bg-amber-400 rounded-full"></div>
-                    </div>
-                </div>
+            {{-- Botones de acción --}}
+            <div class="w-full px-4 mb-6 space-y-3">
+                
+                {{-- Botón Salir (Volver) --}}
+                <a href="{{ route('profile') }}" class="block w-full bg-stone-300 hover:bg-stone-400 rounded-[20px] border-2 border-stone-400 p-4 text-center transition-all duration-300 hover:shadow-stone-400/40 hover:scale-105 hover:-translate-y-1">
+                    <span class="text-stone-700 text-lg font-semibold font-['Outfit']">Salir</span>
+                </a>
+
+                {{-- Botón Guardar --}}
+                <form action="{{ route('publicaciones.guardar', $publicacion) }}" method="POST" class="w-full">
+                    @csrf
+                    <button type="submit" class="w-full bg-amber-300 hover:bg-amber-400 rounded-[20px] border-2 border-amber-400 p-4 text-center transition-all duration-300 hover:shadow-amber-400/40 hover:scale-105 hover:-translate-y-1">
+                        <span class="text-stone-700 text-lg font-semibold font-['Outfit']">Guardar</span>
+                    </button>
+                </form>
+
+                {{-- Botón Eliminar (solo para el propietario) --}}
+                @if(Auth::id() === $publicacion->usuario_id)
+                    <form action="{{ route('publicaciones.destroy', $publicacion) }}" method="POST" class="w-full" onsubmit="return confirm('¿Estás seguro de que deseas eliminar esta publicación?');">
+                        @csrf
+                        @method('DELETE')
+                        <button type="submit" class="w-full bg-red-300 hover:bg-red-400 rounded-[20px] border-2 border-red-400 p-4 text-center transition-all duration-300 hover:shadow-red-400/40 hover:scale-105 hover:-translate-y-1">
+                            <span class="text-stone-700 text-lg font-semibold font-['Outfit']">Eliminar</span>
+                        </button>
+                    </form>
+                @endif
+
             </div>
-        </div>
 
-        {{-- Sección de Publicaciones --}}
-        <div class="w-full px-4 mt-2">
-            
-            {{-- Header Rosa --}}
-            <div class="w-full bg-pink-300 rounded-[20px] border-2 border-pink-400 py-3 px-4 mb-4 text-center">
-                <h2 class="text-stone-700/80 text-xl font-normal font-['Outfit']">Revisa las publicaciones</h2>
-            </div>
-
-            {{-- Publicaciones o Mensaje Vacío --}}
-            @if($publicaciones->count() > 0)
-                <div class="space-y-3 pb-4">
-                    @foreach($publicaciones as $publicacion)
-                        @php $colors = $publicacion->getColorClasses(); @endphp
-                        <a href="{{ route('publicaciones.show', $publicacion) }}" class="block w-full {{ $colors['bg'] }} rounded-[20px] border-2 {{ $colors['border'] }} p-4 hover:shadow-stone-400/40 hover:scale-105 hover:-translate-y-1 transition-all duration-300">
-                            <div class="flex flex-col h-16 justify-center">
-                                <h3 class="text-stone-700/80 text-lg font-semibold font-['Outfit'] truncate">{{ $publicacion->titulo }}</h3>
-                                @if(!empty($publicacion->subtitulo))
-                                    <p class="text-stone-700/70 text-sm font-normal font-['Outfit'] mt-0.5 truncate">{{ $publicacion->subtitulo }}</p>
-                                @endif
-                            </div>
-                        </a>
-                    @endforeach
-                </div>
-            @else
-                <div class="w-full text-center pb-4">
-                    <p class="text-stone-600/50 text-base font-normal font-['Outfit']">Aún no tienes publicaciones</p>
-                    <p class="text-stone-600/40 text-sm font-normal font-['Outfit']">¡Comienza compartiendo tus hábitos!</p>
-                </div>
-            @endif
-
-        </div>
         </div>
 
         {{-- Bottom Navigation --}}

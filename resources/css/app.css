@@ -100,3 +100,41 @@ h1, h2, h3, h4, .font-heading {
 .nav-link.active span {
     @apply text-stone-600;
 }
+
+/* Toast animations */
+@keyframes toast-slide-in {
+    from {
+        transform: translate(-50%, 0);
+        opacity: 0;
+    }
+    to {
+        transform: translate(-50%, 0);
+        opacity: 1;
+    }
+}
+
+@keyframes toast-slide-out {
+    from {
+        transform: translate(-50%, 0);
+        opacity: 1;
+    }
+    to {
+        transform: translate(-50%, 20px);
+        opacity: 0;
+    }
+}
+
+.animate-toast-slide-in {
+    animation: toast-slide-in 0.4s ease-out forwards;
+}
+
+.animate-toast-slide-out {
+    animation: toast-slide-out 0.4s ease-out forwards;
+}
+
+/* Word break for long content */
+.word-break {
+    word-break: break-word;
+    overflow-wrap: break-word;
+    hyphens: auto;
+}
