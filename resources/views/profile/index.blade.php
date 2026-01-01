@@ -29,30 +29,30 @@
             <p class="text-stone-700/80 text-base font-normal font-['Outfit']">{{ $user->biografia ?? 'Biografia' }}</p>
         </div>
 
-        {{-- Sección decorativa: Diario y Biblioteca --}}
-        <div class="w-full h-72 relative px-4 flex items-center justify-center overflow-hidden">
-            
-            {{-- Carpeta Diario izquierda --}}
-            <div class="absolute left-0 top-1/2 -translate-y-1/2 rotate-12">
-                <div class="w-40 h-52 bg-emerald-300 rounded-[15px] border-2 border-emerald-400 flex items-center justify-center shadow-md hover:shadow-emerald-400/30 transition-all duration-300 hover:-translate-y-2 cursor-pointer"
-                     style="transform: perspective(1000px) rotateX(5deg) rotateY(15deg) rotateZ(12deg); box-shadow: 0 8px 15px rgba(0,0,0,0.1);">
-                    <div class="flex flex-col items-center gap-2">
-                        <div class="w-20 h-12 bg-white/70 rounded-lg"></div>
-                        <span class="text-emerald-800 font-semibold font-['Outfit']">diario</span>
+        {{-- Accesos rápidos tipo home --}}
+        <div class="w-full px-4 mt-4 mb-6">
+            <div class="grid grid-cols-2 gap-3">
+                {{-- Diario --}}
+                <a href="#diario" class="bg-emerald-100 rounded-3xl p-5 shadow-[0px_4px_6px_0px_rgba(0,0,0,0.10)] border border-emerald-300 hover:shadow-emerald-400/40 hover:scale-105 hover:-translate-y-1 transition-all duration-300 cursor-pointer">
+                    <div class="w-10 h-10 bg-orange-50 rounded-xl flex items-center justify-center mb-3">
+                        <svg class="w-5 h-5 text-stone-600" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 16H5V5h14v14zm-5.04-6.71l-2.75 3.54-1.3-1.54c-.3-.36-.77-.36-1.07 0-.3.36-.3.92 0 1.28l1.83 2.17c.3.36.77.36 1.07 0 .3-.36 2.21-2.88 2.21-2.88.3-.36.3-.92 0-1.28-.3-.36-.77-.36-1.07 0z"/>
+                        </svg>
                     </div>
-                </div>
-            </div>
+                    <h3 class="text-stone-700 text-sm font-semibold font-['Outfit']">Diario</h3>
+                    <p class="text-stone-700/60 text-xs font-normal font-['Outfit'] mt-1">Tus entradas personales</p>
+                </a>
 
-            {{-- Libro Biblioteca derecha --}}
-            <div class="absolute right-0 top-1/2 -translate-y-1/2 -rotate-6">
-                <div class="w-40 h-52 bg-yellow-200 rounded-[15px] border-2 border-amber-300 flex items-center justify-center shadow-md hover:shadow-yellow-400/30 transition-all duration-300 hover:-translate-y-2 cursor-pointer"
-                     style="transform: perspective(1000px) rotateX(8deg) rotateY(-20deg) rotateZ(-6deg); box-shadow: 0 8px 15px rgba(0,0,0,0.1);">
-                    <div class="flex flex-col items-center gap-2">
-                        <div class="w-32 h-2 bg-amber-400 rounded-full"></div>
-                        <span class="text-amber-800 font-semibold font-['Outfit'] text-center px-2">Biblioteca</span>
-                        <div class="w-32 h-2 bg-amber-400 rounded-full"></div>
+                {{-- Biblioteca --}}
+                <a href="#biblioteca" class="bg-yellow-200 rounded-3xl p-5 shadow-[0px_4px_6px_0px_rgba(0,0,0,0.10)] border border-amber-300 hover:shadow-amber-400/40 hover:scale-105 hover:-translate-y-1 transition-all duration-300 cursor-pointer">
+                    <div class="w-10 h-10 bg-orange-50 rounded-xl flex items-center justify-center mb-3">
+                        <svg class="w-5 h-5 text-stone-600" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 16H5V5h14v14zm-2-7h-4v4h-2v-4H7v-2h4V7h2v4h4v2z"/>
+                        </svg>
                     </div>
-                </div>
+                    <h3 class="text-stone-700 text-sm font-semibold font-['Outfit']">Biblioteca</h3>
+                    <p class="text-stone-700/60 text-xs font-normal font-['Outfit'] mt-1">Guardados y recursos</p>
+                </a>
             </div>
         </div>
 
