@@ -43,32 +43,39 @@
             </div>
 
             {{-- Botones de acción --}}
-            <div class="w-full px-4 mb-6 space-y-3">
-                
-                {{-- Botón Salir (Volver) --}}
-                <a href="{{ route('profile') }}" class="block w-full bg-stone-300 hover:bg-stone-400 rounded-[20px] border-2 border-stone-400 p-4 text-center transition-all duration-300 hover:shadow-stone-400/40 hover:scale-105 hover:-translate-y-1">
-                    <span class="text-stone-700 text-lg font-semibold font-['Outfit']">Salir</span>
-                </a>
+            <div class="w-full px-4 mb-6">
+                <div class="flex justify-end items-center gap-3">
+                    {{-- Botón Salir (Volver) --}}
+                    <a href="{{ route('profile') }}" class="h-11 w-11 inline-flex items-center justify-center bg-stone-200 hover:bg-stone-300 rounded-lg border border-stone-300 text-stone-700 transition-all duration-200" aria-label="Volver al perfil">
+                        <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                            <path d="M10 19l-7-7 7-7v4h8v6h-8v4z"/>
+                        </svg>
+                    </a>
 
-                {{-- Botón Guardar --}}
-                <form action="{{ route('publicaciones.guardar', $publicacion) }}" method="POST" class="w-full">
-                    @csrf
-                    <button type="submit" class="w-full bg-amber-300 hover:bg-amber-400 rounded-[20px] border-2 border-amber-400 p-4 text-center transition-all duration-300 hover:shadow-amber-400/40 hover:scale-105 hover:-translate-y-1">
-                        <span class="text-stone-700 text-lg font-semibold font-['Outfit']">Guardar</span>
-                    </button>
-                </form>
-
-                {{-- Botón Eliminar (solo para el propietario) --}}
-                @if(Auth::id() === $publicacion->usuario_id)
-                    <form action="{{ route('publicaciones.destroy', $publicacion) }}" method="POST" class="w-full" onsubmit="return confirm('¿Estás seguro de que deseas eliminar esta publicación?');">
+                    {{-- Botón Guardar --}}
+                    <form action="{{ route('publicaciones.guardar', $publicacion) }}" method="POST" class="inline-flex">
                         @csrf
-                        @method('DELETE')
-                        <button type="submit" class="w-full bg-red-300 hover:bg-red-400 rounded-[20px] border-2 border-red-400 p-4 text-center transition-all duration-300 hover:shadow-red-400/40 hover:scale-105 hover:-translate-y-1">
-                            <span class="text-stone-700 text-lg font-semibold font-['Outfit']">Eliminar</span>
+                        <button type="submit" class="h-11 w-11 inline-flex items-center justify-center bg-amber-200 hover:bg-amber-300 rounded-lg border border-amber-300 text-stone-700 transition-all duration-200" aria-label="Guardar publicación">
+                            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                                <path d="M5 4h14v16H5V4zm2 2v12h10V6H7zm2 2h6v2H9V8zm0 4h6v2H9v-2z"/>
+                            </svg>
                         </button>
                     </form>
-                @endif
 
+                    {{-- Botón Eliminar (solo para el propietario) --}}
+                    @if(Auth::id() === $publicacion->usuario_id)
+                        <form action="{{ route('publicaciones.destroy', $publicacion) }}" method="POST" class="inline-flex" onsubmit="return confirm('¿Estás seguro de que deseas eliminar esta publicación?');">
+                            @csrf
+                            @method('DELETE')
+                            <button type="submit" class="h-11 w-11 inline-flex items-center justify-center bg-red-200 hover:bg-red-300 rounded-lg border border-red-300 text-stone-700 transition-all duration-200" aria-label="Eliminar publicación">
+                                <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                                    <path d="M6 7h12v14H6V7zm2 2v10h2V9H8zm6 0v10h2V9h-2z"/>
+                                    <path d="M9 4V2h6v2h5v2H4V4h5z"/>
+                                </svg>
+                            </button>
+                        </form>
+                    @endif
+                </div>
             </div>
 
         </div>
