@@ -59,14 +59,18 @@
                 </a>
 
                 {{-- Últimas Lecturas --}}
-                <a href="#lecturas" class="bg-sky-200 rounded-3xl p-5 shadow-[0px_4px_6px_0px_rgba(0,0,0,0.10)] shadow-[0px_2px_4px_0px_rgba(0,0,0,0.10)] border border-blue-300 hover:shadow-sky-400/50 hover:scale-105 hover:-translate-y-1 transition-all duration-300 cursor-pointer">
+                @php
+                    $ultimaLecturaLink = $ultimaPublicacion ? route('publicaciones.show', $ultimaPublicacion) : route('profile');
+                    $ultimaLecturaTexto = $ultimaPublicacion ? $ultimaPublicacion->titulo : 'Aún no has abierto ninguna publicación';
+                @endphp
+                <a href="{{ $ultimaLecturaLink }}" class="bg-sky-200 rounded-3xl p-5 shadow-[0px_4px_6px_0px_rgba(0,0,0,0.10)] shadow-[0px_2px_4px_0px_rgba(0,0,0,0.10)] border border-blue-300 hover:shadow-sky-400/50 hover:scale-105 hover:-translate-y-1 transition-all duration-300 cursor-pointer">
                     <div class="w-10 h-10 bg-orange-50 rounded-xl flex items-center justify-center mb-3">
                         <svg class="w-5 h-5 text-stone-600" fill="currentColor" viewBox="0 0 24 24">
                             <path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-5 9.5c0 .83-.67 1.5-1.5 1.5S11 13.33 11 12.5s.67-1.5 1.5-1.5 1.5.67 1.5 1.5z"/>
                         </svg>
                     </div>
-                    <h3 class="text-stone-600 text-sm font-normal font-['Outfit']">Últimas lecturas</h3>
-                    <p class="text-stone-600/60 text-xs font-normal font-['Outfit'] mt-1">Revisa tus aprendizajes anteriores</p>
+                    <h3 class="text-stone-600 text-sm font-normal font-['Outfit']">Última lectura</h3>
+                    <p class="text-stone-600/60 text-xs font-normal font-['Outfit'] mt-1">{{ $ultimaLecturaTexto }}</p>
                 </a>
 
             </div>

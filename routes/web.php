@@ -4,6 +4,7 @@ use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\RegistroController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\PublicacionController;
+use App\Models\Publicacion;
 use Illuminate\Support\Facades\Route;
 
 // Redirigir raíz a /inicio
@@ -33,7 +34,16 @@ Route::middleware('guest')->group(function () {
 // Home - solo para autenticados
 Route::middleware('auth')->group(function () {
     Route::get('/home', function () {
-        return view('layouts.home');
+        $ultimaPublicacion = null;
+        $ultimaPublicacionId = session('ultima_publicacion_id');
+
+        if ($ultimaPublicacionId) {
+            $ultimaPublicacion = Publicacion::find($ultimaPublicacionId);
+        }
+
+        return view('layouts.home', [
+            'ultimaPublicacion' => $ultimaPublicacion,
+        ]);
     })->name('home');
 
     // Ruta de perfil

@@ -91,6 +91,8 @@ class PublicacionController extends Controller
 
     public function show(Publicacion $publicacion)
     {
+        Session::put('ultima_publicacion_id', $publicacion->getKey());
+
         return view('publicaciones.show', ['publicacion' => $publicacion]);
     }
 
