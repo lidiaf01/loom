@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Publicacion;
+use App\Models\Carpeta;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
@@ -72,6 +73,7 @@ class PublicacionController extends Controller
 
         $validated = $request->validate([
             'categoria' => ['required', 'in:' . implode(',', $this->categorias)],
+            'visibilidad' => ['required', 'in:publica,privada'],
         ]);
 
         $publicacion = new Publicacion([
@@ -81,6 +83,7 @@ class PublicacionController extends Controller
             'fecha_subida' => now(),
             'usuario_id' => Auth::id(),
             'categoria' => $validated['categoria'],
+            'visibilidad' => $validated['visibilidad'],
         ]);
         $publicacion->save();
 
@@ -91,6 +94,8 @@ class PublicacionController extends Controller
 
     public function show(Publicacion $publicacion)
     {
+        $this->authorize('view', $publicacion);
+
         return view('publicaciones.show', ['publicacion' => $publicacion]);
     }
 
@@ -104,8 +109,30 @@ class PublicacionController extends Controller
         return redirect()->route('profile')->with('success', 'Publicación eliminada correctamente.');
     }
 
-    public function guardar(Publicacion $publicacion)
+    public function guardar(Request $request, Publicacion $publicacion)
     {
-        return redirect()->back()->with('success', 'Publicación guardada (próximamente).');
+        $user = Auth::user();
+
+        $data = $request->validate([
+            'carpeta_id' => ['nullable', 'integer', 'exists:carpetas,id_Carpeta'],
+        ]);
+
+        $carpetaId = null;
+        if (!empty($data['carpeta_id'])) {
+            $carpeta = Carpeta::where('id_Carpeta', $data['carpeta_id'])
+                ->whereHas('biblioteca', function ($q) use ($user) {
+                    $q->where('usuario_id', $user->id);
+                })->firstOrFail();
+            $carpetaId = $carpeta->id_Carpeta;
+        }
+
+        $publicacion->guardadaPor()->syncWithoutDetaching([
+            $user->id => [
+                'carpeta_id' => $carpetaId,
+                'fecha_añadido' => now(),
+            ],
+        ]);
+
+        return redirect()->back()->with('success', 'Publicación guardada.');
     }
 }

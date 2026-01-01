@@ -14,7 +14,7 @@ class Publicacion extends Model
     const CREATED_AT = 'fecha_creacion';
     const UPDATED_AT = 'fecha_actualizacion';
 
-    protected $fillable = ['titulo', 'subtitulo', 'contenido', 'fecha_subida', 'contenido_visual', 'usuario_id', 'categoria'];
+    protected $fillable = ['titulo', 'subtitulo', 'contenido', 'fecha_subida', 'contenido_visual', 'usuario_id', 'categoria', 'visibilidad'];
 
     protected $casts = [
         'fecha_subida' => 'datetime',
@@ -26,8 +26,40 @@ class Publicacion extends Model
 
     // Relación con Carpeta
     public function carpetas() {
-        return $this->belongsToMany(Carpeta::class, 'carpeta_publicacion', 'id_publicacion', 'id_Carpeta')
-                    ->withPivot('fecha_añadido');
+        return $this->belongsToMany(Carpeta::class, 'carpeta_publicacion', 'publicacion_id', 'carpeta_id')
+                    ->withPivot('usuario_id', 'fecha_añadido')
+                    ->withTimestamps();
+    }
+
+    public function guardadaPor()
+    {
+        return $this->belongsToMany(Usuario::class, 'carpeta_publicacion', 'publicacion_id', 'usuario_id')
+            ->withPivot('carpeta_id', 'fecha_añadido')
+            ->withTimestamps();
+    }
+
+    public function scopeVisiblesPara($query, ?Usuario $viewer)
+    {
+        if (!$viewer) {
+            return $query->where('visibilidad', 'publica');
+        }
+
+        return $query->where(function ($q) use ($viewer) {
+            $q->where('visibilidad', 'publica')
+              ->orWhere(function ($qPrivadas) use ($viewer) {
+                  $qPrivadas->where('visibilidad', 'privada')
+                      ->where(function ($qAccess) use ($viewer) {
+                          $qAccess->where('usuario_id', $viewer->id)
+                              ->orWhereExists(function ($qFollow) use ($viewer) {
+                                  $qFollow->selectRaw(1)
+                                      ->from('seguidores')
+                                      ->whereColumn('seguidores.seguido_id', 'publicaciones.usuario_id')
+                                      ->where('seguidores.seguidor_id', $viewer->id)
+                                      ->where('seguidores.estado', 'accepted');
+                              });
+                      });
+              });
+        });
     }
 
     public function getColorClasses() {

@@ -86,7 +86,7 @@
                 </a>
 
                 {{-- Explorar --}}
-                <a href="#explorar" class="bg-red-300 rounded-3xl p-5 shadow-[0px_4px_6px_0px_rgba(0,0,0,0.10)] shadow-[0px_2px_4px_0px_rgba(0,0,0,0.10)] border border-red-400 hover:shadow-red-400/50 hover:scale-105 hover:-translate-y-1 transition-all duration-300 cursor-pointer">
+                <a href="{{ route('explorar') }}" class="bg-red-300 rounded-3xl p-5 shadow-[0px_4px_6px_0px_rgba(0,0,0,0.10)] shadow-[0px_2px_4px_0px_rgba(0,0,0,0.10)] border border-red-400 hover:shadow-red-400/50 hover:scale-105 hover:-translate-y-1 transition-all duration-300 cursor-pointer">
                     <div class="w-10 h-10 bg-orange-50 rounded-xl flex items-center justify-center mb-3">
                         <svg class="w-5 h-5 text-stone-600" fill="currentColor" viewBox="0 0 24 24">
                             <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm3.5-9c.83 0 1.5-.67 1.5-1.5S16.33 8 15.5 8 14 8.67 14 9.5s.67 1.5 1.5 1.5zm-7 0c.83 0 1.5-.67 1.5-1.5S9.33 8 8.5 8 7 8.67 7 9.5 7.67 11 8.5 11zm3.5 6.5c2.33 0 4.31-1.46 5.11-3.5H6.89c.8 2.04 2.78 3.5 5.11 3.5z"/>
@@ -115,7 +115,7 @@
             </a>
 
             {{-- Buscar --}}
-            <a href="#" data-route="search" class="nav-link flex flex-col items-center gap-2 transition-all duration-300">
+            <a href="{{ route('buscar') }}" data-route="search" class="nav-link flex flex-col items-center gap-2 transition-all duration-300">
                 <div class="w-12 h-12 rounded-2xl flex items-center justify-center nav-indicator transition-colors duration-300">
                     <svg class="w-5 h-5 text-stone-600/60" fill="currentColor" viewBox="0 0 24 24">
                         <path d="M15.5 1h-8C6.12 1 5 2.12 5 3.5v17C5 21.88 6.12 23 7.5 23h8c1.38 0 2.5-1.12 2.5-2.5v-17C18 2.12 16.88 1 15.5 1zm-4 21c-.83 0-1.5-.67-1.5-1.5s.67-1.5 1.5-1.5 1.5.67 1.5 1.5-.67 1.5-1.5 1.5zm4.5-4H7V4h9v14z"/>

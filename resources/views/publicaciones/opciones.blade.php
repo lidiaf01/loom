@@ -24,9 +24,17 @@
                             @endforeach
                         </select>
 
+                        <div>
+                            <label class="block text-stone-600 text-sm font-normal font-['Outfit'] mb-2">Visibilidad</label>
+                            <select name="visibilidad" required class="w-full bg-stone-200 rounded-[20px] px-4 py-3 text-stone-700 text-sm font-['Outfit'] shadow-inner focus:outline-none">
+                                <option value="publica">Pública</option>
+                                <option value="privada">Privada</option>
+                            </select>
+                        </div>
+
                         <div class="mt-2">
                             <label class="block text-stone-600 text-sm font-normal font-['Outfit'] mb-2">Guardar en carpeta</label>
-                            <input type="text" disabled placeholder="Próximamente" class="w-full bg-stone-200 rounded-[20px] px-4 py-3 text-stone-700 text-sm font-['Outfit'] shadow-inner" />
+                            <input type="text" disabled placeholder="Opcional (próximamente)" class="w-full bg-stone-200 rounded-[20px] px-4 py-3 text-stone-700 text-sm font-['Outfit'] shadow-inner" />
                         </div>
 
                         <div class="flex justify-end">

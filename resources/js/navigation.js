@@ -24,7 +24,11 @@ document.addEventListener('DOMContentLoaded', function() {
             let isActive = false;
             if (route === 'home' && (path === '/home' || path === '/' || path === '/inicio')) {
                 isActive = true;
-            } else if (route === 'profile' && path === '/perfil') {
+            } else if (route === 'profile' && (path === '/perfil' || path.startsWith('/usuarios/'))) {
+                isActive = true;
+            } else if (route === 'search' && path.startsWith('/buscar')) {
+                isActive = true;
+            } else if (route === 'settings' && path.startsWith('/ajustes')) {
                 isActive = true;
             }
             

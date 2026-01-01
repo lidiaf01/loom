@@ -30,14 +30,14 @@
                 // Determinar si este link es el activo
                 let isActive = false;
                 
-                if (dataRoute === 'home' && (currentRoute === '/home' || currentRoute.includes('/home'))) {
+                if (dataRoute === 'home' && (currentRoute === '/home' || currentRoute === '/inicio' || currentRoute === '/')) {
                     isActive = true;
-                } else if (dataRoute === 'profile' && currentRoute.includes('/profile')) {
+                } else if (dataRoute === 'profile' && (currentRoute === '/perfil' || currentRoute.startsWith('/usuarios/'))) {
                     isActive = true;
-                } else if (dataRoute === 'search') {
-                    isActive = currentRoute.includes('/search');
-                } else if (dataRoute === 'settings') {
-                    isActive = currentRoute.includes('/settings');
+                } else if (dataRoute === 'search' && currentRoute.startsWith('/buscar')) {
+                    isActive = true;
+                } else if (dataRoute === 'settings' && currentRoute.startsWith('/ajustes')) {
+                    isActive = true;
                 }
                 
                 // Agregar o remover clase active
