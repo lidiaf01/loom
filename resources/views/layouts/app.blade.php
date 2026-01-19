@@ -17,6 +17,9 @@
     {{-- Toast notification --}}
     @component('components.toast') @endcomponent
 
+    {{-- Modal personalizado --}}
+    @component('components.modal') @endcomponent
+
     {{-- Script para activar nav según página --}}
     <script>
         document.addEventListener('DOMContentLoaded', function() {

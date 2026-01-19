@@ -40,6 +40,26 @@
             </div>
 
             {{-- Botón Continuar --}}
+                        {{-- Mensajes de error y sesión --}}
+                        @if(session('success'))
+                            <div class="mb-4 w-80 left-[24px] absolute top-[170px]">
+                                <div class="bg-green-100 border border-green-300 text-green-800 px-4 py-2 rounded-lg text-sm">{{ session('success') }}</div>
+                            </div>
+                        @endif
+                        @if(session('error'))
+                            <div class="mb-4 w-80 left-[24px] absolute top-[170px]">
+                                <div class="bg-red-100 border border-red-300 text-red-800 px-4 py-2 rounded-lg text-sm">{{ session('error') }}</div>
+                            </div>
+                        @endif
+                        @if($errors->any())
+                            <div class="mb-4 w-80 left-[24px] absolute top-[170px]">
+                                <div class="bg-red-100 border border-red-300 text-red-800 px-4 py-2 rounded-lg text-sm">
+                                    @foreach($errors->all() as $error)
+                                        <div>{{ $error }}</div>
+                                    @endforeach
+                                </div>
+                            </div>
+                        @endif
             <button type="submit" class="w-80 h-14 left-[24px] top-[553px] absolute bg-gradient-to-r from-yellow-100 to-pink-300 rounded-2xl shadow-md flex items-center justify-center hover:opacity-90 transition-opacity">
                 <div class="w-4 h-4 mr-2 bg-stone-700 rounded-sm"></div>
                 <span class="text-stone-700 text-base font-semibold font-['Poppins']">Continuar</span>

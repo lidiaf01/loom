@@ -60,6 +60,25 @@ Route::middleware('auth')->group(function () {
 
     // Ruta de perfil
     Route::get('/perfil', [ProfileController::class, 'show'])->name('profile');
+        // Página de ajustes
+        Route::view('/ajustes', 'ajustes')->name('ajustes');
+        Route::post('/cuenta/eliminar', function() {
+            $user = Auth::user();
+            if ($user) {
+                // Eliminar usuario y cerrar sesión
+                $user->delete();
+                Auth::logout();
+                return redirect('/')->with('status', 'Cuenta eliminada correctamente');
+            }
+            return redirect('/ajustes')->with('error', 'No se pudo eliminar la cuenta');
+        })->name('cuenta.eliminar');
+        // Logout
+        Route::post('/logout', function() {
+            \Auth::logout();
+            request()->session()->invalidate();
+            request()->session()->regenerateToken();
+            return redirect('/inicio');
+        })->name('logout');
     Route::get('/usuarios/{usuario}', [ProfileController::class, 'showUsuario'])->name('usuarios.show');
     Route::get('/usuarios/{usuario}/seguidores', [ProfileController::class, 'seguidoresLista'])->name('usuarios.seguidores');
 
@@ -67,6 +86,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/publicaciones/crear', [PublicacionController::class, 'create'])->name('publicaciones.crear');
     Route::post('/publicaciones/continuar', [PublicacionController::class, 'continue'])->name('publicaciones.continuar');
     Route::get('/publicaciones/opciones', [PublicacionController::class, 'opciones'])->name('publicaciones.opciones');
+    Route::post('/publicaciones/cancelar', [PublicacionController::class, 'cancelar'])->name('publicaciones.cancelar');
     Route::post('/publicaciones', [PublicacionController::class, 'store'])->name('publicaciones.store');
     Route::get('/publicaciones/{publicacion}', [PublicacionController::class, 'show'])->name('publicaciones.show');
     Route::delete('/publicaciones/{publicacion}', [PublicacionController::class, 'destroy'])->name('publicaciones.destroy');

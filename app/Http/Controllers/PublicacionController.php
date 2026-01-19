@@ -99,6 +99,12 @@ class PublicacionController extends Controller
         return view('publicaciones.show', ['publicacion' => $publicacion]);
     }
 
+    public function cancelar()
+    {
+        Session::forget(['publicacion_titulo', 'publicacion_subtitulo', 'publicacion_contenido']);
+        return redirect()->route('profile');
+    }
+
     public function destroy(Publicacion $publicacion)
     {
         if (Auth::id() !== $publicacion->usuario_id) {

@@ -58,15 +58,15 @@
                     <p class="text-stone-600/60 text-xs font-normal font-['Outfit'] mt-1">Escribe tus pensamientos</p>
                 </a>
 
-                {{-- Últimas Lecturas --}}
+                {{-- Inspiración rápida --}}
                 <a href="#lecturas" class="bg-sky-200 rounded-3xl p-5 shadow-[0px_4px_6px_0px_rgba(0,0,0,0.10)] shadow-[0px_2px_4px_0px_rgba(0,0,0,0.10)] border border-blue-300 hover:shadow-sky-400/50 hover:scale-105 hover:-translate-y-1 transition-all duration-300 cursor-pointer">
                     <div class="w-10 h-10 bg-orange-50 rounded-xl flex items-center justify-center mb-3">
                         <svg class="w-5 h-5 text-stone-600" fill="currentColor" viewBox="0 0 24 24">
-                            <path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-5 9.5c0 .83-.67 1.5-1.5 1.5S11 13.33 11 12.5s.67-1.5 1.5-1.5 1.5.67 1.5 1.5z"/>
+                            <path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 16H5V5h14v14zm-5.04-6.71l-2.75 3.54-1.3-1.54c-.3-.36-.77-.36-1.07 0-.3.36-.3.92 0 1.28l1.83 2.17c.3.36.77.36 1.07 0 .3-.36 2.21-2.88 2.21-2.88.3-.36.3-.92 0-1.28-.3-.36-.77-.36-1.07 0z"/>
                         </svg>
                     </div>
-                    <h3 class="text-stone-600 text-sm font-normal font-['Outfit']">Últimas lecturas</h3>
-                    <p class="text-stone-600/60 text-xs font-normal font-['Outfit'] mt-1">Revisa tus aprendizajes anteriores</p>
+                    <h3 class="text-stone-600 text-sm font-normal font-['Outfit']">Inspiración rápida</h3>
+                    <p class="text-stone-600/60 text-xs font-normal font-['Outfit'] mt-1">Encuentra ideas y motivación para tu día</p>
                 </a>
 
             </div>
@@ -125,7 +125,7 @@
             </a>
 
             {{-- Ajustes --}}
-            <a href="#" data-route="settings" class="nav-link flex flex-col items-center gap-2 transition-all duration-300">
+            <a href="{{ route('ajustes') }}" data-route="settings" class="nav-link flex flex-col items-center gap-2 transition-all duration-300">
                 <div class="w-12 h-12 rounded-2xl flex items-center justify-center nav-indicator transition-colors duration-300">
                     <svg class="w-5 h-5 text-stone-600/60" fill="currentColor" viewBox="0 0 24 24">
                         <path d="M19.14 12.94c.04-.3.06-.61.06-.94 0-.32-.02-.64-.07-.94l2.03-1.58c.18-.14.23-.41.12-.64l-1.92-3.32c-.12-.22-.39-.3-.61-.22l-2.39.96c-.5-.38-1.03-.7-1.62-.94l-.36-2.54c-.04-.24-.24-.41-.48-.41h-3.84c-.24 0-.43.17-.47.41l-.36 2.54c-.59.24-1.13.57-1.62.94l-2.39-.96c-.23-.09-.49 0-.61.22L2.74 8.87c-.12.22-.07.49.12.64l2.03 1.58c-.05.3-.07.62-.07.94s.02.64.07.94l-2.03 1.58c-.18.14-.23.41-.12.64l1.92 3.32c.12.22.39.3.61.22l2.39-.96c.5.38 1.03.7 1.62.94l.36 2.54c.05.24.24.41.48.41h3.84c.24 0 .44-.17.47-.41l.36-2.54c.59-.24 1.13-.56 1.62-.94l2.39.96c.23.09.49 0 .61-.22l1.92-3.32c.12-.22.07-.49-.12-.64l-2.01-1.58zM12 15.6c-1.98 0-3.6-1.62-3.6-3.6s1.62-3.6 3.6-3.6 3.6 1.62 3.6 3.6-1.62 3.6-3.6 3.6z"/>
