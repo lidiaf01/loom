@@ -12,6 +12,11 @@ class Biblioteca extends Model
     // Si no definiste nombres de timestamps para este, Laravel usará created_at/updated_at
     // o puedes desactivarlos con public $timestamps = false;
 
+
+    protected $fillable = [
+        'usuario_id',
+    ];
+
     public function usuario() {
         return $this->belongsTo(Usuario::class, 'usuario_id');
     }

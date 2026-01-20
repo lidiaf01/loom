@@ -13,7 +13,21 @@ class Carpeta extends Model
     const CREATED_AT = 'fecha_creacion';
     const UPDATED_AT = 'fecha_modif';
 
-    protected $fillable = ['nombre', 'biblioteca_id'];
+    // Forzar timestamps personalizados
+    public static function boot()
+    {
+        parent::boot();
+        static::creating(function ($model) {
+            if (empty($model->fecha_creacion)) {
+                $model->fecha_creacion = now();
+            }
+        });
+        static::updating(function ($model) {
+            $model->fecha_modif = now();
+        });
+    }
+
+    protected $fillable = ['nombre', 'color', 'biblioteca_id'];
 
     public function biblioteca() {
         return $this->belongsTo(Biblioteca::class, 'biblioteca_id');

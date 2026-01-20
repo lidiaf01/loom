@@ -65,11 +65,6 @@
 
         {{-- Botones de Acción --}}
         <div class="space-y-4">
-            {{-- Inspiración rápida --}}
-            <a href="{{ route('inspiracion.rapida') }}" class="w-full h-14 bg-gradient-to-r from-emerald-100 via-yellow-100 to-pink-200 rounded-2xl shadow-[0px_10px_15px_0px_rgba(0,0,0,0.10)] shadow-[0px_4px_6px_0px_rgba(0,0,0,0.10)] flex items-center justify-center gap-2 hover:opacity-90 transition-opacity">
-                <svg class="w-5 h-5 text-stone-700" fill="currentColor" viewBox="0 0 24 24"><path d="M4 20l16-8L4 4v6l10 2-10 2v6z"/></svg>
-                <span class="text-stone-700 text-base font-semibold font-['Poppins']">Inspiración rápida</span>
-            </a>
 
             {{-- Botón Iniciar Sesión --}}
             <a href="{{ route('login') }}" class="w-full h-14 bg-gradient-to-r from-yellow-100 to-pink-300 rounded-2xl shadow-[0px_10px_15px_0px_rgba(0,0,0,0.10)] shadow-[0px_4px_6px_0px_rgba(0,0,0,0.10)] flex items-center justify-center hover:opacity-90 transition-opacity">

@@ -10,6 +10,12 @@ class Usuario extends Authenticatable
 {
     use HasFactory, Notifiable;
 
+    public function biblioteca()
+    {
+        return $this->hasOne(Biblioteca::class, 'usuario_id');
+    }
+    use HasFactory, Notifiable;
+
     protected $table = 'usuarios';
     protected $primaryKey = 'id';
 
@@ -21,8 +27,12 @@ class Usuario extends Authenticatable
     }   
 
     protected $fillable = [
-        'nombre', 'email', 'contrasenha', 'fecha_nac', 'biografia', 'foto_perfil', 'perfil_privado', 'fecha_registro'
+        'nombre', 'email', 'contrasenha', 'fecha_nac', 'biografia', 'foto_perfil', 'perfil_privado', 'fecha_registro', 'diario_privado'
     ];
+    public function diario()
+    {
+        return $this->hasMany(Diario::class, 'usuario_id');
+    }
 
     public function publicaciones() {
         return $this->hasMany(Publicacion::class, 'usuario_id');

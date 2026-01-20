@@ -43,32 +43,27 @@
             </div>
 
             {{-- Botones de acción --}}
-            <div class="w-full px-4 mb-6 space-y-3">
-                
-                {{-- Botón Salir (Volver) --}}
-                <a href="{{ route('profile') }}" class="block w-full bg-stone-300 hover:bg-stone-400 rounded-[20px] border-2 border-stone-400 p-4 text-center transition-all duration-300 hover:shadow-stone-400/40 hover:scale-105 hover:-translate-y-1">
-                    <span class="text-stone-700 text-lg font-semibold font-['Outfit']">Salir</span>
-                </a>
-
-                {{-- Botón Guardar --}}
-                <form action="{{ route('publicaciones.guardar', $publicacion) }}" method="POST" class="w-full">
-                    @csrf
-                    <button type="submit" class="w-full bg-amber-300 hover:bg-amber-400 rounded-[20px] border-2 border-amber-400 p-4 text-center transition-all duration-300 hover:shadow-amber-400/40 hover:scale-105 hover:-translate-y-1">
-                        <span class="text-stone-700 text-lg font-semibold font-['Outfit']">Guardar</span>
-                    </button>
-                </form>
-
-                {{-- Botón Eliminar (solo para el propietario) --}}
-                @if(Auth::id() === $publicacion->usuario_id)
-                    <form action="{{ route('publicaciones.destroy', $publicacion) }}" method="POST" class="w-full" data-confirm="¿Estás seguro de que deseas eliminar esta publicación?">
+            <div class="w-full px-4 mb-6">
+                <div class="flex flex-row gap-3">
+                    <a href="{{ route('profile') }}" class="flex-1 bg-stone-300 hover:bg-stone-400 rounded-2xl border-2 border-stone-400 p-3 text-center transition-all duration-300 hover:shadow-stone-400/40 hover:scale-105 hover:-translate-y-1 flex items-center justify-center">
+                        <span class="text-stone-700 text-base font-semibold font-['Outfit']">Salir</span>
+                    </a>
+                    <form action="{{ route('publicaciones.guardar', $publicacion) }}" method="POST" class="flex-1">
                         @csrf
-                        @method('DELETE')
-                        <button type="submit" class="w-full bg-red-300 hover:bg-red-400 rounded-[20px] border-2 border-red-400 p-4 text-center transition-all duration-300 hover:shadow-red-400/40 hover:scale-105 hover:-translate-y-1">
-                            <span class="text-stone-700 text-lg font-semibold font-['Outfit']">Eliminar</span>
+                        <button type="submit" class="w-full bg-amber-300 hover:bg-amber-400 rounded-2xl border-2 border-amber-400 p-3 text-center transition-all duration-300 hover:shadow-amber-400/40 hover:scale-105 hover:-translate-y-1 flex items-center justify-center">
+                            <span class="text-stone-700 text-base font-semibold font-['Outfit']">Guardar</span>
                         </button>
                     </form>
-                @endif
-
+                    @if(Auth::id() === $publicacion->usuario_id)
+                        <form action="{{ route('publicaciones.destroy', $publicacion) }}" method="POST" class="flex-1" data-confirm="¿Estás seguro de que deseas eliminar esta publicación?">
+                            @csrf
+                            @method('DELETE')
+                            <button type="submit" class="w-full bg-red-300 hover:bg-red-400 rounded-2xl border-2 border-red-400 p-3 text-center transition-all duration-300 hover:shadow-red-400/40 hover:scale-105 hover:-translate-y-1 flex items-center justify-center">
+                                <span class="text-stone-700 text-base font-semibold font-['Outfit']">Eliminar</span>
+                            </button>
+                        </form>
+                    @endif
+                </div>
             </div>
 
         </div>

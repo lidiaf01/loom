@@ -9,147 +9,212 @@
             {{-- Acordeón: Cuenta --}}
             <div class="mb-6">
                 <button type="button" class="w-full flex justify-between items-center py-4 border-b border-yellow-300 bg-yellow-50 focus:outline-none toggle-accordion">
-                    <span class="text-yellow-700 text-lg font-semibold font-['Outfit']">Cuenta</span>
-                    <span class="text-yellow-600 text-xl">&#9660;</span>
+                    <span class="text-pink-500 text-lg font-semibold font-['Outfit']">Cuenta</span>
+                    <span class="text-pink-400 text-xl">&#9660;</span>
                 </button>
                 <div class="accordion-content px-4 pb-4 space-y-3 hidden">
-                    <button type="button" onclick="showModal('changeAccount')" class="w-full text-left py-3 border-b border-yellow-200 bg-transparent text-yellow-700 font-medium transition">
-                        Cambiar cuenta
-                    </button>
-                    <button type="button" onclick="showModal('logout')" class="w-full text-left py-3 border-b border-yellow-200 bg-transparent text-yellow-700 font-medium transition">
-                        Cerrar sesión
-                    </button>
+                    <form method="POST" action="{{ route('ajustes.cambiarCuenta') }}" data-confirm="¿Seguro que quieres cambiar de cuenta? Se cerrará tu sesión actual.">
+                        @csrf
+                        <button type="submit" class="w-full text-left py-3 border-b border-yellow-200 bg-transparent text-pink-500 font-medium transition">Cambiar cuenta</button>
+                    </form>
+                    <form method="POST" action="{{ route('logout') }}" data-confirm="¿Seguro que quieres cerrar sesión?">
+                        @csrf
+                        <button type="submit" class="w-full text-left py-3 border-b border-yellow-200 bg-transparent text-pink-500 font-medium transition">Cerrar sesión</button>
+                    </form>
                 </div>
             </div>
 
             {{-- Acordeón: Seguridad --}}
             <div class="mb-6">
                 <button type="button" class="w-full flex justify-between items-center py-4 border-b border-amber-300 bg-amber-50 focus:outline-none toggle-accordion">
-                    <span class="text-amber-700 text-lg font-semibold font-['Outfit']">Seguridad</span>
-                    <span class="text-amber-600 text-xl">&#9660;</span>
+                    <span class="text-pink-500 text-lg font-semibold font-['Outfit']">Seguridad</span>
+                    <span class="text-pink-400 text-xl">&#9660;</span>
                 </button>
                 <div class="accordion-content px-4 pb-4 space-y-3 hidden">
-                    <button type="button" class="w-full text-left py-3 border-b border-amber-200 bg-transparent text-amber-700 font-medium transition">
+                    <button type="button" class="w-full text-left py-3 border-b border-amber-200 bg-transparent text-pink-500 font-medium transition" onclick="openPasswordModal()">
                         Cambiar contraseña
                     </button>
-                    <button type="button" onclick="showModal('delete')" class="w-full text-left py-3 border-b border-amber-200 bg-transparent text-amber-700 font-medium transition">
-                        Eliminar cuenta
-                    </button>
-
-                    <!-- Modal de confirmación -->
-                    <div id="confirmModal" class="fixed inset-0 bg-black bg-opacity-40 flex items-center justify-center z-50 hidden">
-                        <div class="bg-white rounded-2xl shadow-xl p-8 w-96 text-center animate-fade-in">
-                            <h2 id="modalTitle" class="text-xl font-bold mb-2 text-stone-700">¿Estás seguro?</h2>
-                            <p id="modalText" class="mb-6 text-stone-600">Esta acción no se puede deshacer.</p>
-                            <div class="flex justify-between gap-2">
-                                <button onclick="hideModal()" class="px-6 py-2 rounded-xl bg-stone-200 text-stone-700 font-semibold hover:bg-yellow-100 hover:text-yellow-700 transition">Cancelar</button>
-                                <form id="modalFormLogout" method="POST" action="{{ route('logout') }}" class="hidden">@csrf</form>
-                                <form id="modalFormDelete" method="POST" action="{{ route('cuenta.eliminar') }}" class="hidden">@csrf</form>
-                                <button id="modalConfirmBtn" class="px-6 py-2 rounded-xl bg-red-500 text-white font-semibold hover:bg-red-600 transition">Confirmar</button>
-                            </div>
-                        </div>
-                    </div>
-
-                    <script>
-                    window.showModal = function(type) {
-                        document.getElementById('confirmModal').classList.remove('hidden');
-                        if(type === 'logout') {
-                            document.getElementById('modalTitle').textContent = '¿Cerrar sesión?';
-                            document.getElementById('modalText').textContent = '¿Seguro que quieres cerrar sesión?';
-                            document.getElementById('modalConfirmBtn').onclick = function() {
-                                document.getElementById('modalFormLogout').submit();
-                            };
-                        } else if(type === 'delete') {
-                            document.getElementById('modalTitle').textContent = '¿Eliminar cuenta?';
-                            document.getElementById('modalText').textContent = '¿Seguro que quieres eliminar tu cuenta? Esta acción no se puede deshacer.';
-                            document.getElementById('modalConfirmBtn').onclick = function() {
-                                document.getElementById('modalFormDelete').submit();
-                            };
-                        } else if(type === 'changeAccount') {
-                            document.getElementById('modalTitle').textContent = '¿Cambiar de cuenta?';
-                            document.getElementById('modalText').textContent = 'Serás dirigido al inicio de sesión para cambiar de cuenta.';
-                            document.getElementById('modalConfirmBtn').onclick = function() {
-                                window.location.href = '{{ route('login') }}';
-                            };
-                        }
-                    }
-                    function hideModal() {
-                        document.getElementById('confirmModal').classList.add('hidden');
-                    }
-                    </script>
+                    <form method="POST" action="{{ route('ajustes.eliminarCuenta') }}" data-confirm="¿Seguro que quieres eliminar tu cuenta? Esta acción es irreversible y eliminará todos tus datos.">
+                        @csrf
+                        <button type="submit" class="w-full text-left py-3 border-b border-amber-200 bg-transparent text-pink-500 font-medium transition">Eliminar cuenta</button>
                     </form>
+
+                    <!-- ...existing code... -->
                 </div>
             </div>
 
             {{-- Acordeón: Personalización de perfil --}}
             <div class="mb-2">
                 <button type="button" class="w-full flex justify-between items-center py-3 border-b border-stone-300 focus:outline-none toggle-accordion">
-                    <span class="text-stone-700 text-lg font-semibold font-['Outfit']">Personalización de perfil</span>
-                    <span class="text-stone-600 text-xl">&#9660;</span>
+                    <span class="text-pink-500 text-lg font-semibold font-['Outfit']">Personalización de perfil</span>
+                    <span class="text-pink-400 text-xl">&#9660;</span>
                 </button>
                 <div class="accordion-content pl-2 pr-2 pb-2 hidden">
-                    <a href="#" class="block py-2 text-stone-700 hover:text-yellow-500 transition text-base">Personalizar perfil</a>
-                    <form method="POST" action="#" class="mt-2">
+                    <button type="button" class="block py-2 text-pink-500 hover:text-pink-400 transition text-base w-full text-left" onclick="openProfileModal()">Personalizar perfil</button>
+                    <form method="POST" action="{{ route('ajustes.cambiarVisibilidad') }}" class="mt-4">
                         @csrf
-                        <label class="block text-stone-600 text-sm mb-2">Visibilidad de la cuenta</label>
-                        <select name="visibilidad" class="w-full bg-stone-200 rounded-[20px] px-4 py-3 text-stone-700 text-base shadow-inner mb-2 border border-stone-400">
+                        <label class="block text-pink-400 text-sm mb-2">Visibilidad de la cuenta</label>
+                        <select name="visibilidad" class="w-full bg-stone-200 rounded-[20px] px-4 py-3 text-pink-500 text-base shadow-inner mb-2 border border-stone-400">
                             <option value="publica" {{ auth()->user()->visibilidad == 'publica' ? 'selected' : '' }}>Pública</option>
                             <option value="privada" {{ auth()->user()->visibilidad == 'privada' ? 'selected' : '' }}>Privada</option>
                         </select>
+                        <label class="block text-pink-400 text-sm mb-2 mt-4">Privacidad del diario</label>
+                        <div class="flex items-center gap-2 mb-2">
+                            <input type="checkbox" name="diario_privado" value="1" id="diario_privado" {{ auth()->user()->diario_privado ? 'checked' : '' }}>
+                            <label for="diario_privado" class="text-pink-500 text-sm">Diario privado</label>
+                        </div>
+                        <div class="text-xs text-gray-500 mb-2">Si está activado, solo tú puedes ver tu diario. Si está desactivado, otros podrán leerlo desde tu perfil.</div>
+                        <div class="flex justify-end">
+                            <button type="submit" class="px-5 py-3 bg-gradient-to-br from-yellow-100 to-pink-300 rounded-2xl border border-amber-300 shadow-md text-pink-600 text-sm font-['Outfit'] hover:scale-105 hover:-translate-y-1 transition-all duration-300">Actualizar privacidad</button>
+                        </div>
+                    </form>
+                </div>
+
+            <!-- Modal de personalización de perfil -->
+            <div id="profile-modal" class="fixed inset-0 bg-black/50 backdrop-blur-sm z-[100] hidden items-center justify-center px-4 opacity-0 transition-opacity duration-300">
+                <div class="bg-white rounded-3xl shadow-[0px_25px_50px_0px_rgba(0,0,0,0.35)] border-2 border-stone-200 p-6 max-w-sm w-full transform scale-95 opacity-0 transition-all duration-300" id="profile-modal-content">
+                    <form id="profile-form" method="POST" action="{{ route('ajustes.actualizarPerfil') }}" enctype="multipart/form-data" class="flex flex-col gap-4">
+                        @csrf
+                        <h3 class="text-stone-700 text-lg font-semibold font-['Outfit'] mb-2">Personalizar perfil</h3>
+                        <label class="block text-pink-400 text-sm mb-1">Nombre de usuario</label>
+                        <input type="text" name="nombre" value="{{ old('nombre', auth()->user()->nombre) }}" class="w-full bg-stone-200 rounded-[20px] px-4 py-3 text-pink-500 text-base shadow-inner border border-stone-400 mb-2">
+
+                        <label class="block text-pink-400 text-sm mb-1">Email</label>
+                        <input type="email" name="email" value="{{ old('email', auth()->user()->email) }}" class="w-full bg-stone-200 rounded-[20px] px-4 py-3 text-pink-500 text-base shadow-inner border border-stone-400 mb-2">
+
+                        <label class="block text-pink-400 text-sm mb-1">Foto de perfil</label>
+                        <input type="file" name="foto" accept="image/*" class="w-full bg-stone-200 rounded-[20px] px-4 py-2 text-pink-500 text-base shadow-inner border border-stone-400 mb-2">
+                        @if(auth()->user()->foto_perfil)
+                            <img src="{{ asset('storage/' . auth()->user()->foto_perfil) }}" alt="Foto actual" class="w-16 h-16 rounded-full object-cover mb-2">
+                        @endif
+
+                        <label class="block text-pink-400 text-sm mb-1">Biografía (texto o enlace)</label>
+                        <textarea name="biografia" rows="2" class="w-full bg-stone-200 rounded-[20px] px-4 py-3 text-pink-500 text-base shadow-inner border border-stone-400 mb-2">{{ old('biografia', auth()->user()->biografia) }}</textarea>
+
+                        <div class="flex gap-3 mt-2">
+                            <button type="button" class="flex-1 px-4 py-3 bg-stone-200 hover:bg-stone-300 rounded-2xl border border-stone-300 text-stone-700 text-sm font-semibold font-['Outfit'] transition-all duration-300 hover:scale-105" onclick="closeProfileModal()">Cancelar</button>
+                            <button type="submit" class="flex-1 px-4 py-3 bg-gradient-to-br from-yellow-100 to-pink-300 rounded-2xl border border-amber-300 shadow-md text-pink-600 text-sm font-['Outfit'] hover:scale-105 hover:-translate-y-1 transition-all duration-300">Guardar cambios</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            </div>
+
+            </div>
+
+
+            <!-- Modal de cambio de contraseña -->
+            <div id="password-modal" class="fixed inset-0 bg-black/50 backdrop-blur-sm z-[100] hidden items-center justify-center px-4 opacity-0 transition-opacity duration-300">
+                <div class="bg-white rounded-3xl shadow-[0px_25px_50px_0px_rgba(0,0,0,0.35)] border-2 border-stone-200 p-6 max-w-sm w-full transform scale-95 opacity-0 transition-all duration-300" id="password-modal-content">
+                    <form id="password-form" method="POST" action="{{ route('ajustes.cambiarContrasena') }}" class="flex flex-col gap-4">
+                        @csrf
+                        <h3 class="text-stone-700 text-lg font-semibold font-['Outfit'] mb-2">Cambiar contraseña</h3>
+                        <div id="password-step-actual">
+                            <label class="block text-stone-600 text-sm mb-2">Contraseña actual</label>
+                            <input type="password" name="actual" class="w-full bg-stone-200 rounded-[20px] px-4 py-3 text-stone-700 text-base shadow-inner border border-stone-400 mb-2" required autocomplete="current-password">
+                        </div>
+                        <div id="password-step-nueva" style="display:none;">
+                            <label class="block text-stone-600 text-sm mb-2">Nueva contraseña</label>
+                            <input type="password" name="nueva" class="w-full bg-stone-200 rounded-[20px] px-4 py-3 text-stone-700 text-base shadow-inner border border-stone-400 mb-2" autocomplete="new-password">
+                            <label class="block text-stone-600 text-sm mb-2">Confirmar nueva contraseña</label>
+                            <input type="password" name="nueva_confirmation" class="w-full bg-stone-200 rounded-[20px] px-4 py-3 text-stone-700 text-base shadow-inner border border-stone-400 mb-2" autocomplete="new-password">
+                        </div>
+                        <div class="flex gap-3 mt-2">
+                            <button type="button" class="flex-1 px-4 py-3 bg-stone-200 hover:bg-stone-300 rounded-2xl border border-stone-300 text-stone-700 text-sm font-semibold font-['Outfit'] transition-all duration-300 hover:scale-105" onclick="closePasswordModal()">Cancelar</button>
+                            <button type="submit" class="flex-1 px-4 py-3 bg-gradient-to-br from-emerald-200 to-green-200 hover:from-emerald-300 hover:to-green-400 rounded-2xl border border-emerald-300 text-stone-700 text-sm font-semibold font-['Outfit'] transition-all duration-300 hover:scale-105 shadow-md" id="password-next-btn">Siguiente</button>
+                        </div>
                     </form>
                 </div>
             </div>
 
-            </div>
-
-            <!-- Modal de confirmación global -->
-            <div id="confirmModal" class="fixed inset-0 bg-black bg-opacity-40 flex items-center justify-center z-50 hidden">
-                <div class="bg-white rounded-2xl shadow-xl p-8 w-96 text-center animate-fade-in">
-                    <h2 id="modalTitle" class="text-xl font-bold mb-2 text-stone-700">¿Estás seguro?</h2>
-                    <p id="modalText" class="mb-6 text-stone-600">Esta acción no se puede deshacer.</p>
-                    <div class="flex justify-between gap-2">
-                        <button onclick="hideModal()" class="px-6 py-2 rounded-xl bg-stone-200 text-stone-700 font-semibold hover:bg-yellow-100 hover:text-yellow-700 transition">Cancelar</button>
-                        <form id="modalFormLogout" method="POST" action="{{ route('logout') }}" class="hidden">@csrf</form>
-                        <form id="modalFormDelete" method="POST" action="{{ route('cuenta.eliminar') }}" class="hidden">@csrf</form>
-                        <button id="modalConfirmBtn" class="px-6 py-2 rounded-xl bg-red-500 text-white font-semibold hover:bg-red-600 transition">Confirmar</button>
-                    </div>
-                </div>
-            </div>
-
             <script>
+            // Acordeón
             document.addEventListener('DOMContentLoaded', function() {
                 document.querySelectorAll('.toggle-accordion').forEach(function(btn) {
                     btn.addEventListener('click', function() {
                         const content = btn.parentElement.querySelector('.accordion-content');
-                        content.classList.toggle('hidden');
+                        if (content) content.classList.toggle('hidden');
                     });
                 });
-                window.showModal = function(type) {
-                    document.getElementById('confirmModal').classList.remove('hidden');
-                    if(type === 'logout') {
-                        document.getElementById('modalTitle').textContent = '¿Cerrar sesión?';
-                        document.getElementById('modalText').textContent = '¿Seguro que quieres cerrar sesión?';
-                        document.getElementById('modalConfirmBtn').onclick = function() {
-                            document.getElementById('modalFormLogout').submit();
-                        };
-                    } else if(type === 'delete') {
-                        document.getElementById('modalTitle').textContent = '¿Eliminar cuenta?';
-                        document.getElementById('modalText').textContent = '¿Seguro que quieres eliminar tu cuenta? Esta acción no se puede deshacer.';
-                        document.getElementById('modalConfirmBtn').onclick = function() {
-                            document.getElementById('modalFormDelete').submit();
-                        };
-                    } else if(type === 'changeAccount') {
-                        document.getElementById('modalTitle').textContent = '¿Cambiar de cuenta?';
-                        document.getElementById('modalText').textContent = 'Serás dirigido al inicio de sesión para cambiar de cuenta.';
-                        document.getElementById('modalConfirmBtn').onclick = function() {
-                            window.location.href = '{{ route('login') }}';
-                        };
-                    }
+            });
+
+            // Modal de cambio de contraseña
+            function openPasswordModal() {
+                const modal = document.getElementById('password-modal');
+                const content = document.getElementById('password-modal-content');
+                document.getElementById('password-step-actual').style.display = '';
+                document.getElementById('password-step-nueva').style.display = 'none';
+                document.getElementById('password-next-btn').textContent = 'Siguiente';
+                modal.classList.remove('hidden');
+                modal.classList.add('flex');
+                setTimeout(() => {
+                    modal.classList.remove('opacity-0');
+                    modal.classList.add('opacity-100');
+                    content.classList.remove('scale-95', 'opacity-0');
+                    content.classList.add('scale-100', 'opacity-100');
+                }, 10);
+            }
+            function closePasswordModal() {
+                const modal = document.getElementById('password-modal');
+                const content = document.getElementById('password-modal-content');
+                modal.classList.remove('opacity-100');
+                modal.classList.add('opacity-0');
+                content.classList.remove('scale-100', 'opacity-100');
+                content.classList.add('scale-95', 'opacity-0');
+                setTimeout(() => {
+                    modal.classList.remove('flex');
+                    modal.classList.add('hidden');
+                }, 300);
+            }
+            // Lógica de pasos para cambio de contraseña
+            document.addEventListener('DOMContentLoaded', function() {
+                const form = document.getElementById('password-form');
+                if (form) {
+                    form.addEventListener('submit', function(e) {
+                        const stepActual = document.getElementById('password-step-actual');
+                        const stepNueva = document.getElementById('password-step-nueva');
+                        const nextBtn = document.getElementById('password-next-btn');
+                        if (stepActual.style.display !== 'none') {
+                            e.preventDefault();
+                            // Aquí deberías hacer una petición AJAX para validar la contraseña actual
+                            // Por ahora, simplemente pasamos al siguiente paso
+                            stepActual.style.display = 'none';
+                            stepNueva.style.display = '';
+                            nextBtn.textContent = 'Cambiar';
+                        }
+                    });
                 }
-                window.hideModal = function() {
-                    document.getElementById('confirmModal').classList.add('hidden');
+                // Modal de personalización de perfil
+                const profileBtn = document.querySelector('button[onclick="openProfileModal()"]');
+                if (profileBtn) {
+                    profileBtn.addEventListener('click', openProfileModal);
                 }
             });
+
+            function openProfileModal() {
+                const modal = document.getElementById('profile-modal');
+                const content = document.getElementById('profile-modal-content');
+                modal.classList.remove('hidden');
+                modal.classList.add('flex');
+                setTimeout(() => {
+                    modal.classList.remove('opacity-0');
+                    modal.classList.add('opacity-100');
+                    content.classList.remove('scale-95', 'opacity-0');
+                    content.classList.add('scale-100', 'opacity-100');
+                }, 10);
+            }
+            function closeProfileModal() {
+                const modal = document.getElementById('profile-modal');
+                const content = document.getElementById('profile-modal-content');
+                modal.classList.remove('opacity-100');
+                modal.classList.add('opacity-0');
+                content.classList.remove('scale-100', 'opacity-100');
+                content.classList.add('scale-95', 'opacity-0');
+                setTimeout(() => {
+                    modal.classList.remove('flex');
+                    modal.classList.add('hidden');
+                }, 300);
+            }
             </script>
         </div>
 

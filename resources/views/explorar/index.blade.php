@@ -16,9 +16,8 @@
                         @php $colors = $publicacion->getColorClasses(); @endphp
                         <a href="{{ route('publicaciones.show', $publicacion) }}" class="block w-full {{ $colors['bg'] }} rounded-3xl border-2 {{ $colors['border'] }} p-4 shadow-[0px_6px_12px_0px_rgba(0,0,0,0.10)] hover:shadow-lg hover:-translate-y-1 transition-all duration-300">
                             <div class="flex items-start gap-3">
-                                <div class="w-12 h-12 rounded-2xl bg-white/70 border border-white flex flex-col items-center justify-center text-stone-700 text-xs font-['Outfit']">
-                                    <span class="text-sm font-semibold">{{ $publicacion->guardada_por_count }}</span>
-                                    <span class="text-[10px]">guardados</span>
+                                <div class="w-12 h-12 rounded-2xl bg-white/70 border border-white flex items-center justify-center text-stone-700 text-lg font-bold font-['Outfit']">
+                                    {{ $publicacion->guardada_por_count }}
                                 </div>
                                 <div class="flex-1">
                                     <div class="flex items-center gap-2 mb-1 flex-wrap">

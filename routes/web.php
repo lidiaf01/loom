@@ -1,35 +1,35 @@
 <?php
-
+// Limpieza de imports y rutas
+use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\LoginController;
-use App\Http\Controllers\Auth\RegistroController;
-use App\Http\Controllers\ExploreController;
-use App\Http\Controllers\FollowController;
+use App\Models\Publicacion;
+use App\Http\Controllers\SearchController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\PublicacionController;
-use App\Http\Controllers\SearchController;
-use App\Models\Publicacion;
-use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\DiarioController;
+use App\Http\Controllers\BibliotecaController;
+use App\Http\Controllers\RegistroController;
+use App\Http\Controllers\ExploreController;
+use App\Http\Controllers\FollowController;
 
-// Redirigir raíz a /inicio
+
+// Menú de entrada (landing principal)
 Route::get('/', function () {
-    return redirect('/inicio');
-});
+    return view('welcome');
+})->name('landing');
 
 // Inspiración rápida: redirige a una publicación pública aleatoria
 Route::get('/inspiracion-rapida', function () {
     $publicacion = Publicacion::where('visibilidad', 'publica')
         ->inRandomOrder()
         ->first();
-
     if (!$publicacion) {
-        return redirect('/inicio')->with('status', 'No hay publicaciones públicas disponibles.');
+        return redirect('/')->with('status', 'No hay publicaciones públicas disponibles.');
     }
-
     if (!auth()->check()) {
         session(['url.intended' => route('publicaciones.show', $publicacion)]);
         return redirect()->route('login');
     }
-
     return redirect()->route('publicaciones.show', $publicacion);
 })->name('inspiracion.rapida');
 
@@ -52,11 +52,21 @@ Route::middleware('guest')->group(function () {
     Route::view('/fallo', 'auth.registro_fallo')->name('registro.fallo');
 });
 
+
+use App\Http\Controllers\AjustesController;
+
 // Home - solo para autenticados
 Route::middleware('auth')->group(function () {
     Route::get('/home', function () {
         return view('layouts.home');
     })->name('home');
+
+    // Ajustes
+    Route::post('/ajustes/cambiar-cuenta', [AjustesController::class, 'cambiarCuenta'])->name('ajustes.cambiarCuenta');
+    Route::post('/ajustes/cambiar-contrasena', [AjustesController::class, 'cambiarContrasena'])->name('ajustes.cambiarContrasena');
+    Route::post('/ajustes/eliminar-cuenta', [AjustesController::class, 'eliminarCuenta'])->name('ajustes.eliminarCuenta');
+    Route::post('/ajustes/actualizar-perfil', [AjustesController::class, 'actualizarPerfil'])->name('ajustes.actualizarPerfil');
+    Route::post('/ajustes/visibilidad', [AjustesController::class, 'cambiarVisibilidad'])->name('ajustes.cambiarVisibilidad');
 
     // Ruta de perfil
     Route::get('/perfil', [ProfileController::class, 'show'])->name('profile');
@@ -102,3 +112,21 @@ Route::middleware('auth')->group(function () {
     Route::get('/buscar', [SearchController::class, 'index'])->name('buscar');
     Route::get('/explorar', [ExploreController::class, 'index'])->name('explorar');
 });
+
+// Biblioteca - solo para autenticados
+Route::middleware(['auth'])->group(function () {
+    Route::get('/biblioteca', [BibliotecaController::class, 'index'])->name('biblioteca.index');
+    Route::post('/biblioteca/carpeta', [BibliotecaController::class, 'storeCarpeta'])->name('biblioteca.carpeta.store');
+    Route::put('/biblioteca/carpeta/{id}', [BibliotecaController::class, 'updateCarpeta'])->name('biblioteca.carpeta.update');
+    Route::delete('/biblioteca/carpeta/{id}', [BibliotecaController::class, 'destroyCarpeta'])->name('biblioteca.carpeta.destroy');
+    Route::get('/biblioteca/carpeta/{id}', [BibliotecaController::class, 'showCarpeta'])->name('biblioteca.carpeta.show');
+});
+
+// Diario
+Route::middleware(['auth'])->group(function () {
+    Route::get('/diario', [DiarioController::class, 'index'])->name('diario.index');
+    Route::post('/diario', [DiarioController::class, 'store'])->name('diario.store');
+    Route::delete('/diario/{id}', [DiarioController::class, 'destroy'])->name('diario.destroy');
+    Route::post('/ajustes/diario-privacidad', [DiarioController::class, 'setPrivacidad'])->name('diario.setPrivacidad');
+});
+Route::get('/usuario/{usuario_id}/diario', [DiarioController::class, 'showUser'])->name('diario.showUser');

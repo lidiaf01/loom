@@ -48,7 +48,7 @@
             <div class="grid grid-cols-2 gap-4 mb-4">
                 
                 {{-- Diario --}}
-                <a href="#diario" class="bg-emerald-100 rounded-3xl p-5 shadow-[0px_4px_6px_0px_rgba(0,0,0,0.10)] shadow-[0px_2px_4px_0px_rgba(0,0,0,0.10)] border border-emerald-300 hover:shadow-emerald-400/50 hover:scale-105 hover:-translate-y-1 transition-all duration-300 cursor-pointer">
+                <a href="{{ route('diario.index') }}" class="bg-emerald-100 rounded-3xl p-5 shadow-[0px_4px_6px_0px_rgba(0,0,0,0.10)] shadow-[0px_2px_4px_0px_rgba(0,0,0,0.10)] border border-emerald-300 hover:shadow-emerald-400/50 hover:scale-105 hover:-translate-y-1 transition-all duration-300 cursor-pointer">
                     <div class="w-10 h-10 bg-orange-50 rounded-xl flex items-center justify-center mb-3">
                         <svg class="w-5 h-5 text-stone-600" fill="currentColor" viewBox="0 0 24 24">
                             <path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 16H5V5h14v14zm-5.04-6.71l-2.75 3.54-1.3-1.54c-.3-.36-.77-.36-1.07 0-.3.36-.3.92 0 1.28l1.83 2.17c.3.36.77.36 1.07 0 .3-.36 2.21-2.88 2.21-2.88.3-.36.3-.92 0-1.28-.3-.36-.77-.36-1.07 0z"/>
@@ -59,14 +59,14 @@
                 </a>
 
                 {{-- Inspiración rápida --}}
-                <a href="#lecturas" class="bg-sky-200 rounded-3xl p-5 shadow-[0px_4px_6px_0px_rgba(0,0,0,0.10)] shadow-[0px_2px_4px_0px_rgba(0,0,0,0.10)] border border-blue-300 hover:shadow-sky-400/50 hover:scale-105 hover:-translate-y-1 transition-all duration-300 cursor-pointer">
+                <a href="{{ route('inspiracion.rapida') }}" class="bg-sky-200 rounded-3xl p-5 shadow-[0px_4px_6px_0px_rgba(0,0,0,0.10)] shadow-[0px_2px_4px_0px_rgba(0,0,0,0.10)] border border-blue-300 hover:shadow-sky-400/50 hover:scale-105 hover:-translate-y-1 transition-all duration-300 cursor-pointer">
                     <div class="w-10 h-10 bg-orange-50 rounded-xl flex items-center justify-center mb-3">
                         <svg class="w-5 h-5 text-stone-600" fill="currentColor" viewBox="0 0 24 24">
-                            <path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 16H5V5h14v14zm-5.04-6.71l-2.75 3.54-1.3-1.54c-.3-.36-.77-.36-1.07 0-.3.36-.3.92 0 1.28l1.83 2.17c.3.36.77.36 1.07 0 .3-.36 2.21-2.88 2.21-2.88.3-.36.3-.92 0-1.28-.3-.36-.77-.36-1.07 0z"/>
+                            <path d="M4 20l16-8L4 4v6l10 2-10 2v6z"/>
                         </svg>
                     </div>
                     <h3 class="text-stone-600 text-sm font-normal font-['Outfit']">Inspiración rápida</h3>
-                    <p class="text-stone-600/60 text-xs font-normal font-['Outfit'] mt-1">Encuentra ideas y motivación para tu día</p>
+                    <p class="text-stone-600/60 text-xs font-normal font-['Outfit'] mt-1">Descubre una publicación pública al azar</p>
                 </a>
 
             </div>
@@ -75,7 +75,7 @@
             <div class="grid grid-cols-2 gap-4">
                 
                 {{-- Biblioteca --}}
-                <a href="#biblioteca" class="bg-pink-300 rounded-3xl p-5 shadow-[0px_4px_6px_0px_rgba(0,0,0,0.10)] shadow-[0px_2px_4px_0px_rgba(0,0,0,0.10)] border border-pink-400 hover:shadow-pink-400/50 hover:scale-105 hover:-translate-y-1 transition-all duration-300 cursor-pointer">
+                <a href="{{ route('biblioteca.index') }}" class="bg-pink-300 rounded-3xl p-5 shadow-[0px_4px_6px_0px_rgba(0,0,0,0.10)] shadow-[0px_2px_4px_0px_rgba(0,0,0,0.10)] border border-pink-400 hover:shadow-pink-400/50 hover:scale-105 hover:-translate-y-1 transition-all duration-300 cursor-pointer">
                     <div class="w-10 h-10 bg-orange-50 rounded-xl flex items-center justify-center mb-3">
                         <svg class="w-5 h-5 text-stone-600" fill="currentColor" viewBox="0 0 24 24">
                             <path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 16H5V5h14v14zm-2-7h-4v4h-2v-4H7v-2h4V7h2v4h4v2z"/>
