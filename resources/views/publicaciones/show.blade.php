@@ -48,12 +48,9 @@
                     <a href="{{ route('profile') }}" class="flex-1 bg-stone-300 hover:bg-stone-400 rounded-2xl border-2 border-stone-400 p-3 text-center transition-all duration-300 hover:shadow-stone-400/40 hover:scale-105 hover:-translate-y-1 flex items-center justify-center">
                         <span class="text-stone-700 text-base font-semibold font-['Outfit']">Salir</span>
                     </a>
-                    <form action="{{ route('publicaciones.guardar', $publicacion) }}" method="POST" class="flex-1">
-                        @csrf
-                        <button type="submit" class="w-full bg-amber-300 hover:bg-amber-400 rounded-2xl border-2 border-amber-400 p-3 text-center transition-all duration-300 hover:shadow-amber-400/40 hover:scale-105 hover:-translate-y-1 flex items-center justify-center">
-                            <span class="text-stone-700 text-base font-semibold font-['Outfit']">Guardar</span>
-                        </button>
-                    </form>
+                    <button type="button" id="btn-abrir-guardar-modal" class="flex-1 w-full bg-amber-300 hover:bg-amber-400 rounded-2xl border-2 border-amber-400 p-3 text-center transition-all duration-300 hover:shadow-amber-400/40 hover:scale-105 hover:-translate-y-1 flex items-center justify-center">
+                        <span class="text-stone-700 text-base font-semibold font-['Outfit']">Guardar</span>
+                    </button>
                     @if(Auth::id() === $publicacion->usuario_id)
                         <form action="{{ route('publicaciones.destroy', $publicacion) }}" method="POST" class="flex-1" data-confirm="¿Estás seguro de que deseas eliminar esta publicación?">
                             @csrf
@@ -68,7 +65,80 @@
 
         </div>
 
+        @include('components.guardar-publicacion-modal')
         @include('layouts.navbar')
+@push('scripts')
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const modal = document.getElementById('guardar-publicacion-modal');
+        const btnAbrir = document.getElementById('btn-abrir-guardar-modal');
+        const btnCancelar = document.getElementById('guardar-cancelar');
+        const btnConfirmar = document.getElementById('guardar-confirmar');
+        const btnAbrirFormCarpeta = document.getElementById('btn-abrir-form-carpeta');
+        const formNuevaCarpeta = document.getElementById('form-nueva-carpeta');
+        const carpetasLista = document.getElementById('carpetas-lista');
+
+        btnAbrir.addEventListener('click', function() {
+            modal.classList.remove('hidden');
+            cargarCarpetas();
+        });
+        btnCancelar.addEventListener('click', function() {
+            modal.classList.add('hidden');
+            formNuevaCarpeta.classList.add('hidden');
+        });
+        btnAbrirFormCarpeta.addEventListener('click', function() {
+            formNuevaCarpeta.classList.toggle('hidden');
+        });
+        formNuevaCarpeta.addEventListener('submit', function(e) {
+            e.preventDefault();
+            const data = new FormData(formNuevaCarpeta);
+            fetch('/api/carpeta', {
+                method: 'POST',
+                headers: { 'X-CSRF-TOKEN': document.querySelector('meta[name=csrf-token]').content },
+                body: data
+            })
+            .then(r => r.json())
+            .then(res => {
+                if(res.success) {
+                    formNuevaCarpeta.reset();
+                    formNuevaCarpeta.classList.add('hidden');
+                    cargarCarpetas();
+                }
+            });
+        });
+        btnConfirmar.addEventListener('click', function() {
+            const carpetaId = document.querySelector('input[name=carpeta_guardar]:checked');
+            if (!carpetaId) return alert('Selecciona una carpeta');
+            fetch('/publicaciones/{{ $publicacion->id_publicacion }}/guardar', {
+                method: 'POST',
+                headers: { 'X-CSRF-TOKEN': document.querySelector('meta[name=csrf-token]').content, 'Content-Type': 'application/json' },
+                body: JSON.stringify({ carpeta_id: carpetaId.value })
+            })
+            .then(r => r.json())
+            .then(res => {
+                if(res.success) {
+                    modal.classList.add('hidden');
+                    alert('¡Guardado en tu biblioteca!');
+                }
+            });
+        });
+        function cargarCarpetas() {
+            fetch('/api/carpetas')
+                .then(r => r.json())
+                .then(res => {
+                    carpetasLista.innerHTML = '';
+                    if(res.length === 0) {
+                        carpetasLista.innerHTML = '<div class="text-stone-400 text-center">No tienes carpetas aún.</div>';
+                    } else {
+                        res.forEach(carpeta => {
+                            carpetasLista.innerHTML += `<label class='flex items-center gap-2 mb-2 cursor-pointer'><input type='radio' name='carpeta_guardar' value='${carpeta.id_Carpeta}' class='accent-pink-500'><span class='inline-block w-6 h-6 rounded-full border-2 border-pink-200' style='background:${carpeta.color}'></span><span>${carpeta.nombre}</span></label>`;
+                        });
+                    }
+                });
+        }
+    });
+</script>
+@endpush
 
     </div>
 </div>

@@ -1,6 +1,7 @@
 @extends('layouts.app')
 @section('content')
-<div class="w-96 min-h-screen mx-auto mt-4 px-2 sm:px-0 pb-32">
+<div class="min-h-screen bg-orange-50 w-full flex justify-center relative overflow-hidden">
+    <div class="w-96 min-h-screen relative overflow-y-scroll pb-32 scrollbar-hide px-4 pt-10">
     <h2 class="text-xl sm:text-2xl font-bold mb-4 text-emerald-700">Mi Diario</h2>
     <form method="POST" action="{{ route('diario.store') }}" class="mb-6 bg-emerald-50 p-3 sm:p-4 rounded-2xl shadow border border-emerald-100">
         @csrf

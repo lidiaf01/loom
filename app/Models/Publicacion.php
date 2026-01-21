@@ -27,15 +27,13 @@ class Publicacion extends Model
     // Relación con Carpeta
     public function carpetas() {
         return $this->belongsToMany(Carpeta::class, 'carpeta_publicacion', 'publicacion_id', 'carpeta_id')
-                    ->withPivot('usuario_id', 'fecha_añadido')
-                    ->withTimestamps();
+                    ->withPivot('usuario_id', 'fecha_añadido');
     }
 
     public function guardadaPor()
     {
         return $this->belongsToMany(Usuario::class, 'carpeta_publicacion', 'publicacion_id', 'usuario_id')
-            ->withPivot('carpeta_id', 'fecha_añadido')
-            ->withTimestamps();
+            ->withPivot('carpeta_id', 'fecha_añadido');
     }
 
     public function scopeVisiblesPara($query, ?Usuario $viewer)

@@ -35,7 +35,6 @@ class Carpeta extends Model
 
     public function publicaciones() {
         return $this->belongsToMany(Publicacion::class, 'carpeta_publicacion', 'carpeta_id', 'publicacion_id')
-                    ->withPivot('usuario_id', 'fecha_añadido')
-                    ->withTimestamps();
+                ->withPivot('usuario_id', 'fecha_añadido');
     }
 }

@@ -23,31 +23,34 @@
             <div class="space-y-4">
                 <div class="bg-white rounded-3xl p-4 shadow-[0px_4px_6px_0px_rgba(0,0,0,0.10)] border border-stone-200">
                     <label class="block text-stone-600 text-sm font-normal font-['Outfit'] mb-2">Categoría</label>
-                    <form id="formPaso2" method="POST" action="{{ route('publicaciones.store') }}" class="space-y-4">
-                        @csrf
-                        <select name="categoria" required class="w-full bg-stone-200 rounded-[20px] px-4 py-3 text-stone-700 text-sm font-['Outfit'] shadow-inner focus:outline-none">
-                            @foreach($categorias as $cat)
-                                <option value="{{ $cat }}">{{ $cat }}</option>
-                            @endforeach
-                        </select>
-
-                        <div>
-                            <label class="block text-stone-600 text-sm font-normal font-['Outfit'] mb-2">Visibilidad</label>
-                            <select name="visibilidad" required class="w-full bg-stone-200 rounded-[20px] px-4 py-3 text-stone-700 text-sm font-['Outfit'] shadow-inner focus:outline-none">
-                                <option value="publica">Pública</option>
-                                <option value="privada">Privada</option>
+                        <form id="formPaso2" method="POST" action="{{ route('publicaciones.store') }}" class="space-y-4">
+                            @csrf
+                            <select name="categoria" required class="w-full bg-stone-200 rounded-[20px] px-4 py-3 text-stone-700 text-sm font-['Outfit'] shadow-inner focus:outline-none">
+                                @foreach($categorias as $cat)
+                                    <option value="{{ $cat }}">{{ $cat }}</option>
+                                @endforeach
                             </select>
-                        </div>
 
-                        <div class="mt-2">
-                            <label class="block text-stone-600 text-sm font-normal font-['Outfit'] mb-2">Guardar en carpeta</label>
-                            <input type="text" disabled placeholder="Opcional (próximamente)" class="w-full bg-stone-200 rounded-[20px] px-4 py-3 text-stone-700 text-sm font-['Outfit'] shadow-inner" />
-                        </div>
+                            <div>
+                                <label class="block text-stone-600 text-sm font-normal font-['Outfit'] mb-2">Visibilidad</label>
+                                <select name="visibilidad" required class="w-full bg-stone-200 rounded-[20px] px-4 py-3 text-stone-700 text-sm font-['Outfit'] shadow-inner focus:outline-none">
+                                    <option value="publica">Pública</option>
+                                    <option value="privada">Privada</option>
+                                </select>
+                            </div>
 
-                        <div class="flex justify-end">
-                            <button type="submit" class="px-5 py-3 bg-gradient-to-br from-yellow-100 to-pink-300 rounded-2xl border border-amber-300 shadow-md text-stone-700 text-sm font-['Outfit'] hover:scale-105 hover:-translate-y-1 transition-all duration-300">Publicar</button>
-                        </div>
-                    </form>
+                            <div class="flex flex-col gap-3 mt-6">
+                                <button type="submit" class="w-full h-14 bg-gradient-to-r from-yellow-100 to-pink-300 rounded-2xl shadow-md flex items-center justify-center hover:opacity-90 transition-opacity">
+                                    <span class="text-stone-700 text-base font-semibold font-['Poppins']">Publicar</span>
+                                </button>
+                                <form action="{{ route('publicaciones.guardar', ['publicacion' => 0]) }}" method="POST">
+                                    @csrf
+                                    <button type="submit" class="w-full h-14 bg-amber-200 hover:bg-amber-300 rounded-2xl shadow flex items-center justify-center transition-all">
+                                        <span class="text-stone-700 text-base font-semibold font-['Poppins']">Guardar en Biblioteca</span>
+                                    </button>
+                                </form>
+                            </div>
+                        </form>
                 </div>
 
                 <div class="bg-white rounded-3xl p-4 shadow-[0px_4px_6px_0px_rgba(0,0,0,0.10)] border border-stone-200">
