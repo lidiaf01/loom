@@ -3,11 +3,16 @@
 @section('content')
 <div class="min-h-screen bg-orange-50 w-full flex justify-center relative overflow-hidden">
     <div class="w-96 min-h-screen relative overflow-y-scroll pb-32 scrollbar-hide">
+        {{-- Círculos decorativos --}}
+        <div class="absolute w-96 h-96 bg-violet-200 rounded-full opacity-60 blur-2xl blob-float" style="top: 100px; left: 260px;"></div>
+        <div class="absolute w-72 h-72 bg-yellow-200 rounded-full opacity-58 blur-2xl blob-float-2" style="top: 280px; left: -30px;"></div>
+        <div class="absolute w-80 h-80 bg-pink-200 rounded-full opacity-55 blur-2xl blob-float-3" style="top: 480px; left: 280px;"></div>
+        <div class="absolute w-64 h-64 bg-cyan-100 rounded-full opacity-60 blur-2xl blob-float" style="top: 680px; left: -15px;"></div>
 
         <div class="relative z-10 px-5 pt-12">
             <div class="flex items-start justify-between mb-6">
                 <div>
-                    <h1 class="text-stone-600 text-xl font-normal font-['Outfit']">Nueva publicación</h1>
+                    <h1 class="text-stone-700 text-2xl font-bold font-['Outfit']">Nueva publicación</h1>
                     <p class="text-stone-600/70 text-sm font-normal font-['Outfit'] mt-1">Comparte tu contenido</p>
                 </div>
                 <form action="{{ route('publicaciones.cancelar') }}" method="POST" class="flex-shrink-0" data-confirm="¿Deseas cancelar la creación de la publicación?">
@@ -40,9 +45,10 @@
                 </div>
 
                 <div class="flex justify-end">
-                    <button type="submit" class="w-12 h-12 bg-yellow-100 rounded-2xl border border-amber-300 shadow-md flex items-center justify-center hover:scale-105 hover:-translate-y-1 transition-all duration-300">
-                        <svg class="w-6 h-6 text-stone-600" fill="currentColor" viewBox="0 0 24 24">
-                            <path d="M7 10l5 5 5-5z"/>
+                    <button type="submit" class="w-14 h-14 bg-yellow-200 rounded-2xl border border-amber-300 shadow-md flex items-center justify-center hover:scale-105 hover:-translate-y-1 transition-all duration-300 group">
+                        <svg class="w-7 h-7 text-amber-500 group-hover:text-amber-600 transition" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                            <circle cx="12" cy="12" r="10" stroke="currentColor"/>
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M8 12h8m-4-4v8" />
                         </svg>
                     </button>
                 </div>

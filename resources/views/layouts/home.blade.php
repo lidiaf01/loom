@@ -5,13 +5,12 @@
     
     {{-- Contenedor centrado móvil --}}
     <div class="w-96 min-h-screen relative overflow-y-scroll pb-32 scrollbar-hide">
-        
-        {{-- Círculos decorativos animados --}}
-        <div class="absolute w-48 h-48 bg-rose-200 rounded-full opacity-40 blur-3xl blob-float" style="top: 80px; left: 280px;"></div>
-        <div class="absolute w-40 h-40 bg-yellow-100 rounded-full opacity-30 blur-2xl blob-float-2" style="top: 200px; left: -40px;"></div>
-        <div class="absolute w-56 h-56 bg-sky-200 rounded-full opacity-35 blur-3xl blob-float-3" style="top: 400px; left: 300px;"></div>
-        <div class="absolute w-36 h-36 bg-emerald-100 rounded-full opacity-30 blur-2xl blob-float" style="top: 600px; left: -25px;"></div>
-        <div class="absolute w-44 h-44 bg-violet-200 rounded-full opacity-25 blur-2xl blob-float-2" style="top: 350px; left: 10px;"></div>
+        {{-- Círculos decorativos --}}
+        <div class="absolute w-80 h-80 bg-rose-200 rounded-full opacity-60 blur-2xl blob-float" style="top: 80px; left: 280px;"></div>
+        <div class="absolute w-64 h-64 bg-yellow-200 rounded-full opacity-58 blur-2xl blob-float-2" style="top: 200px; left: -40px;"></div>
+        <div class="absolute w-[14rem] h-[14rem] bg-sky-200 rounded-full opacity-55 blur-2xl blob-float-3" style="top: 400px; left: 300px;"></div>
+        <div class="absolute w-[14rem] h-[14rem] bg-emerald-100 rounded-full opacity-60 blur-2xl blob-float" style="top: 600px; left: -25px;"></div>
+        <div class="absolute w-72 h-72 bg-violet-200 rounded-full opacity-58 blur-2xl blob-float-2" style="top: 350px; left: 10px;"></div>
 
         {{-- Contenido principal --}}
         <div class="relative z-10 px-5 pt-12">
@@ -30,7 +29,7 @@
             <h2 class="text-stone-600/60 text-sm font-normal font-['Outfit'] mb-4 tracking-tight">Herramientas</h2>
             
             {{-- Card Grande - Crear --}}
-            <a href="{{ route('publicaciones.crear') }}" class="block w-full bg-yellow-100 rounded-3xl p-6 mb-4 shadow-[0px_4px_6px_0px_rgba(0,0,0,0.10)] shadow-[0px_2px_4px_0px_rgba(0,0,0,0.10)] border border-amber-300 hover:shadow-yellow-300/40 hover:scale-105 hover:-translate-y-1 transition-all duration-300 cursor-pointer">
+            <a href="{{ route('publicaciones.crear') }}" class="block w-full bg-yellow-200 rounded-3xl p-6 mb-4 shadow-[0px_4px_6px_0px_rgba(0,0,0,0.10)] shadow-[0px_2px_4px_0px_rgba(0,0,0,0.10)] border border-amber-300 hover:shadow-yellow-300/40 hover:scale-105 hover:-translate-y-1 transition-all duration-300 cursor-pointer">
                 <div class="flex items-start gap-4">
                     <div class="w-10 h-10 bg-orange-50 rounded-xl flex items-center justify-center flex-shrink-0">
                         <svg class="w-5 h-5 text-stone-600" fill="currentColor" viewBox="0 0 24 24">
@@ -50,8 +49,12 @@
                 {{-- Diario --}}
                 <a href="{{ route('diario.index') }}" class="bg-emerald-100 rounded-3xl p-5 shadow-[0px_4px_6px_0px_rgba(0,0,0,0.10)] shadow-[0px_2px_4px_0px_rgba(0,0,0,0.10)] border border-emerald-300 hover:shadow-emerald-400/50 hover:scale-105 hover:-translate-y-1 transition-all duration-300 cursor-pointer">
                     <div class="w-10 h-10 bg-orange-50 rounded-xl flex items-center justify-center mb-3">
-                        <svg class="w-5 h-5 text-stone-600" fill="currentColor" viewBox="0 0 24 24">
-                            <path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 16H5V5h14v14zm-5.04-6.71l-2.75 3.54-1.3-1.54c-.3-.36-.77-.36-1.07 0-.3.36-.3.92 0 1.28l1.83 2.17c.3.36.77.36 1.07 0 .3-.36 2.21-2.88 2.21-2.88.3-.36.3-.92 0-1.28-.3-.36-.77-.36-1.07 0z"/>
+                        <!-- Icono moderno de diario/cuaderno -->
+                        <svg class="w-6 h-6 text-stone-600" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
+                            <rect x="4" y="4" width="16" height="16" rx="3" stroke="currentColor" fill="none"/>
+                            <line x1="8" y1="8" x2="16" y2="8" stroke="currentColor" stroke-linecap="round"/>
+                            <line x1="8" y1="12" x2="16" y2="12" stroke="currentColor" stroke-linecap="round"/>
+                            <line x1="8" y1="16" x2="13" y2="16" stroke="currentColor" stroke-linecap="round"/>
                         </svg>
                     </div>
                     <h3 class="text-stone-600 text-sm font-normal font-['Outfit']">Diario</h3>
@@ -77,8 +80,11 @@
                 {{-- Biblioteca --}}
                 <a href="{{ route('biblioteca.index') }}" class="bg-pink-300 rounded-3xl p-5 shadow-[0px_4px_6px_0px_rgba(0,0,0,0.10)] shadow-[0px_2px_4px_0px_rgba(0,0,0,0.10)] border border-pink-400 hover:shadow-pink-400/50 hover:scale-105 hover:-translate-y-1 transition-all duration-300 cursor-pointer">
                     <div class="w-10 h-10 bg-orange-50 rounded-xl flex items-center justify-center mb-3">
-                        <svg class="w-5 h-5 text-stone-600" fill="currentColor" viewBox="0 0 24 24">
-                            <path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 16H5V5h14v14zm-2-7h-4v4h-2v-4H7v-2h4V7h2v4h4v2z"/>
+                        <!-- Icono moderno de biblioteca/estantería -->
+                        <svg class="w-6 h-6 text-stone-600" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
+                            <rect x="5" y="4" width="3" height="16" rx="1" stroke="currentColor" fill="none"/>
+                            <rect x="10.5" y="4" width="3" height="16" rx="1" stroke="currentColor" fill="none"/>
+                            <rect x="16" y="4" width="3" height="16" rx="1" stroke="currentColor" fill="none"/>
                         </svg>
                     </div>
                     <h3 class="text-stone-600 text-sm font-normal font-['Outfit']">Biblioteca</h3>
@@ -106,7 +112,7 @@
             
             {{-- Principal --}}
             <a href="{{ route('home') }}" data-route="home" class="nav-link flex flex-col items-center gap-2 transition-all duration-300">
-                <div class="w-12 h-12 bg-yellow-100 rounded-2xl flex items-center justify-center nav-indicator transition-colors duration-300">
+                <div class="w-12 h-12 bg-yellow-200 rounded-2xl flex items-center justify-center nav-indicator transition-colors duration-300">
                     <svg class="w-5 h-5 text-stone-600" fill="currentColor" viewBox="0 0 24 24">
                         <path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/>
                     </svg>

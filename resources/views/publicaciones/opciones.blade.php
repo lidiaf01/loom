@@ -3,14 +3,19 @@
 @section('content')
 <div class="min-h-screen bg-orange-50 w-full flex justify-center relative overflow-hidden">
     <div class="w-96 min-h-screen relative overflow-y-scroll pb-32 scrollbar-hide">
+        {{-- Círculos decorativos --}}
+        <div class="absolute w-80 h-80 bg-yellow-200 rounded-full opacity-60 blur-2xl blob-float" style="top: 100px; left: 260px;"></div>
+        <div class="absolute w-72 h-72 bg-pink-200 rounded-full opacity-58 blur-2xl blob-float-2" style="top: 280px; left: -30px;"></div>
+        <div class="absolute w-96 h-96 bg-amber-200 rounded-full opacity-55 blur-2xl blob-float-3" style="top: 480px; left: 280px;"></div>
+        <div class="absolute w-64 h-64 bg-rose-100 rounded-full opacity-60 blur-2xl blob-float" style="top: 680px; left: -20px;"></div>
 
         <div class="relative z-10 px-5 pt-12">
-            <div class="flex items-start justify-between mb-6">
+            <div class="flex w-full items-center justify-between">
                 <div>
                     <h1 class="text-stone-600 text-xl font-normal font-['Outfit']">Opciones de publicación</h1>
                     <p class="text-stone-600/70 text-sm font-normal font-['Outfit'] mt-1">Selecciona categoría y publica</p>
                 </div>
-                <form action="{{ route('publicaciones.cancelar') }}" method="POST" class="flex-shrink-0" data-confirm="¿Deseas cancelar la creación de la publicación?">
+                <form action="{{ route('publicaciones.cancelar') }}" method="POST" class="flex-shrink-0 ml-4" data-confirm="¿Deseas cancelar la creación de la publicación?">
                     @csrf
                     <button type="submit" class="w-12 h-12 bg-red-100 hover:bg-red-200 rounded-full shadow-md flex items-center justify-center transition-all duration-300 hover:scale-105 border border-red-300">
                         <svg class="w-5 h-5 text-red-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -21,11 +26,11 @@
             </div>
 
             <div class="space-y-4">
-                <div class="bg-white rounded-3xl p-4 shadow-[0px_4px_6px_0px_rgba(0,0,0,0.10)] border border-stone-200">
+                <div class="bg-white rounded-3xl p-4 shadow-[0px_4px_6px_0px_rgba(0,0,0,0.10)] border border-stone-200 mt-6">
                     <label class="block text-stone-600 text-sm font-normal font-['Outfit'] mb-2">Categoría</label>
                         <form id="formPaso2" method="POST" action="{{ route('publicaciones.store') }}" class="space-y-4">
                             @csrf
-                            <select name="categoria" required class="w-full bg-stone-200 rounded-[20px] px-4 py-3 text-stone-700 text-sm font-['Outfit'] shadow-inner focus:outline-none">
+                            <select name="categoria" required class="w-full bg-stone-200 rounded-[20px] px-2 py-3 text-stone-700 text-sm font-['Outfit'] shadow-inner focus:outline-none" style="padding-right:22px;">
                                 @foreach($categorias as $cat)
                                     <option value="{{ $cat }}">{{ $cat }}</option>
                                 @endforeach
@@ -33,29 +38,130 @@
 
                             <div>
                                 <label class="block text-stone-600 text-sm font-normal font-['Outfit'] mb-2">Visibilidad</label>
-                                <select name="visibilidad" required class="w-full bg-stone-200 rounded-[20px] px-4 py-3 text-stone-700 text-sm font-['Outfit'] shadow-inner focus:outline-none">
+                                <select name="visibilidad" required class="w-full bg-stone-200 rounded-[20px] px-2 py-3 text-stone-700 text-sm font-['Outfit'] shadow-inner focus:outline-none" style="padding-right:22px;">
                                     <option value="publica">Pública</option>
                                     <option value="privada">Privada</option>
                                 </select>
                             </div>
 
                             <div class="flex flex-col gap-3 mt-6">
-                                <button type="submit" class="w-full h-14 bg-gradient-to-r from-yellow-100 to-pink-300 rounded-2xl shadow-md flex items-center justify-center hover:opacity-90 transition-opacity">
+                                <button type="button" id="btnAbrirGuardarModal" class="w-full h-14 bg-amber-200 hover:bg-amber-300 rounded-2xl shadow flex items-center justify-center gap-2 transition-all">
+                                    <svg class="w-5 h-5 text-amber-600" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" /></svg>
+                                    <span class="text-stone-700 text-base font-semibold font-['Poppins']">Guardar en Biblioteca</span>
+                                </button>
+                                <button type="submit" class="w-full h-14 bg-gradient-to-r from-yellow-100 to-pink-300 rounded-2xl shadow-md flex items-center justify-center hover:opacity-90 transition-opacity mt-2">
                                     <span class="text-stone-700 text-base font-semibold font-['Poppins']">Publicar</span>
                                 </button>
-                                <form action="{{ route('publicaciones.guardar', ['publicacion' => 0]) }}" method="POST">
-                                    @csrf
-                                    <button type="submit" class="w-full h-14 bg-amber-200 hover:bg-amber-300 rounded-2xl shadow flex items-center justify-center transition-all">
-                                        <span class="text-stone-700 text-base font-semibold font-['Poppins']">Guardar en Biblioteca</span>
-                                    </button>
-                                </form>
+                                </div>
+
+                                <!-- Espacio extra entre formulario y vista previa -->
+                                <div class="mb-6"></div>
+                                                <div class="bg-white rounded-3xl p-4 shadow-[0px_4px_6px_0px_rgba(0,0,0,0.10)] border border-stone-200 mt-6">
+                                <div id="guardar-publicacion-modal" class="fixed inset-0 z-50 flex items-center justify-center bg-black/30 hidden">
+                                    <div class="bg-white rounded-2xl shadow-lg p-6 w-full max-w-sm">
+                                        <h2 class="text-stone-700 text-lg font-bold font-['Outfit'] mb-4">Guardar en carpeta</h2>
+                                        @if($carpetas->count())
+                                            <div class="flex flex-col gap-3 mb-4">
+                                                @foreach($carpetas as $carpeta)
+                                                    <label class="flex items-center gap-2 cursor-pointer">
+                                                        <input type="radio" name="carpeta_id" value="{{ $carpeta->id_Carpeta }}" class="peer hidden">
+                                                        <span class="inline-block w-7 h-7 rounded-full border-2 border-pink-200 peer-checked:border-pink-500" style="background: {{ $carpeta->color }}"></span>
+                                                        <span class="font-semibold text-stone-700">{{ $carpeta->nombre }}</span>
+                                                    </label>
+                                                @endforeach
+                                            </div>
+                                            <div class="mb-2 text-stone-500 text-sm font-['Outfit']">Se guardará en:</div>
+                                            <div id="previewCarpeta" class="mb-4 hidden"></div>
+                                        @else
+                                            <div class="text-pink-400 text-center mb-4">No tienes carpetas creadas.<br>Crea una carpeta en tu biblioteca para guardar publicaciones.</div>
+                                        @endif
+                                        <button type="button" id="guardar-cancelar" class="w-full mt-2 h-10 bg-stone-100 hover:bg-stone-200 text-stone-600 rounded-xl font-semibold flex items-center justify-center gap-2 transition">
+                                            <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" /></svg>
+                                            Cancelar
+                                        </button>
+                                    </div>
+                                </div>
+                                <input type="hidden" id="carpetaSeleccionada" name="carpeta_id" value="">
+
+                                <!-- Preview visual de la carpeta seleccionada -->
+                                <div id="seGuardaraEn" class="mb-0 text-stone-500 text-sm font-['Outfit']" style="display:none;">Se guardará en:</div>
+                                <div id="carpetaPreviewSeleccionada" class="mt-0"></div>
+                            </div>
+                        </form>
+                            @push('scripts')
+                            <script>
+                            document.addEventListener('DOMContentLoaded', function() {
+                                const btnAbrirGuardarModal = document.getElementById('btnAbrirGuardarModal');
+                                const modal = document.getElementById('guardar-publicacion-modal');
+                                const btnCancelar = document.getElementById('guardar-cancelar');
+                                const radios = document.querySelectorAll('#guardar-publicacion-modal input[type=radio][name=carpeta_id]');
+                                const preview = document.getElementById('previewCarpeta');
+                                const inputCarpetaSeleccionada = document.getElementById('carpetaSeleccionada');
+                                const carpetaPreviewSeleccionada = document.getElementById('carpetaPreviewSeleccionada');
+                                const seGuardaraEn = document.getElementById('seGuardaraEn');
+                                btnAbrirGuardarModal.addEventListener('click', function() {
+                                    modal.classList.remove('hidden');
+                                });
+                                btnCancelar.addEventListener('click', function() {
+                                    modal.classList.add('hidden');
+                                });
+                                radios.forEach(radio => {
+                                    radio.addEventListener('change', function() {
+                                        // Preview en el modal
+                                        preview.innerHTML = `<div class='flex items-center gap-2 mt-2'><span class='inline-block w-6 h-6 rounded-full border-2 border-pink-200' style='background:${this.nextElementSibling.style.background}'></span><span class='font-semibold text-stone-700'>${this.nextElementSibling.nextElementSibling.textContent}</span></div>`;
+                                        preview.classList.remove('hidden');
+                                        inputCarpetaSeleccionada.value = this.value;
+                                        modal.classList.add('hidden');
+
+                                        // Preview visual debajo del botón
+                                        carpetaPreviewSeleccionada.innerHTML = `<div class='flex items-center gap-2 p-2 bg-stone-100 rounded-xl border border-pink-200 mt-2'><span class='inline-block w-7 h-7 rounded-full border-2 border-pink-200' style='background:${this.nextElementSibling.style.background}'></span><span class='font-semibold text-stone-700'>${this.nextElementSibling.nextElementSibling.textContent}</span></div>`;
+                                        seGuardaraEn.style.display = '';
+                                    });
+                                });
+                                // Si ya hay una carpeta seleccionada al recargar, mostrar el preview
+                                if(inputCarpetaSeleccionada.value) {
+                                    const selectedRadio = Array.from(radios).find(r => r.value === inputCarpetaSeleccionada.value);
+                                    if(selectedRadio) {
+                                        carpetaPreviewSeleccionada.innerHTML = `<div class='flex items-center gap-2 p-2 bg-stone-100 rounded-xl border border-pink-200 mt-2'><span class='inline-block w-7 h-7 rounded-full border-2 border-pink-200' style='background:${selectedRadio.nextElementSibling.style.background}'></span><span class='font-semibold text-stone-700'>${selectedRadio.nextElementSibling.nextElementSibling.textContent}</span></div>`;
+                                        seGuardaraEn.style.display = '';
+                                    }
+                                } else {
+                                    carpetaPreviewSeleccionada.innerHTML = '';
+                                    seGuardaraEn.style.display = 'none';
+                                }
+                            });
+                            </script>
+                            @endpush
+                            @push('scripts')
+                            <script>
+                            document.addEventListener('DOMContentLoaded', function() {
+                                const btnAbrirGuardarModal = document.getElementById('btnAbrirGuardarModal');
+                                const modal = document.getElementById('guardar-publicacion-modal');
+                                const btnCancelar = document.getElementById('guardar-cancelar');
+                                btnAbrirGuardarModal.addEventListener('click', function() {
+                                    modal.classList.remove('hidden');
+                                });
+                                btnCancelar.addEventListener('click', function() {
+                                    modal.classList.add('hidden');
+                                });
+                                const radios = document.querySelectorAll('#formGuardarEnCarpeta input[type=radio][name=carpeta_id]');
+                                const preview = document.getElementById('previewCarpeta');
+                                radios.forEach(radio => {
+                                    radio.addEventListener('change', function() {
+                                        preview.innerHTML = `<div class='flex items-center gap-2 mt-2'><span class='inline-block w-6 h-6 rounded-full border-2 border-pink-200' style='background:${this.nextElementSibling.style.background}'></span><span class='font-semibold text-stone-700'>${this.nextElementSibling.nextElementSibling.textContent}</span></div>`;
+                                        preview.classList.remove('hidden');
+                                    });
+                                });
+                            });
+                            </script>
+                            @endpush
                             </div>
                         </form>
                 </div>
 
-                <div class="bg-white rounded-3xl p-4 shadow-[0px_4px_6px_0px_rgba(0,0,0,0.10)] border border-stone-200">
+                <div class="bg-white rounded-3xl p-4 shadow-[0px_4px_6px_0px_rgba(0,0,0,0.10)] border border-stone-200 mt-6">
                     <h3 class="text-stone-600 text-sm font-normal font-['Outfit'] mb-2">Vista previa</h3>
-                    <div class="bg-stone-100 rounded-2xl p-4 min-h-auto border-2 border-stone-200">
+                    <div class="bg-stone-100 rounded-2xl p-4 min-h-auto border-2 border-stone-200 mt-6">
                         <h4 class="text-stone-700 text-base font-['Outfit'] break-words">{{ $titulo }}</h4>
                         @if($subtitulo)
                             <p class="text-stone-600/80 text-sm font-['Outfit'] mt-1 break-words">{{ $subtitulo }}</p>

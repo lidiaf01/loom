@@ -11,24 +11,23 @@
     @endphp
     {{-- Contenedor centrado móvil --}}
     <div class="w-96 min-h-screen relative overflow-y-scroll pb-32 scrollbar-hide">
-        
-        {{-- Círculos decorativos animados --}}
-        <div class="absolute w-52 h-52 bg-amber-200 rounded-full opacity-40 blur-3xl blob-float" style="top: 120px; left: 250px;"></div>
-        <div class="absolute w-44 h-44 bg-pink-200 rounded-full opacity-35 blur-2xl blob-float-2" style="top: 300px; left: -30px;"></div>
-        <div class="absolute w-48 h-48 bg-teal-200 rounded-full opacity-30 blur-3xl blob-float-3" style="top: 500px; left: 280px;"></div>
-        <div class="absolute w-40 h-40 bg-indigo-100 rounded-full opacity-25 blur-2xl blob-float" style="top: 700px; left: -15px;"></div>
-        <div class="absolute w-36 h-36 bg-lime-200 rounded-full opacity-30 blur-2xl blob-float-2" style="top: 280px; left: 320px;"></div>
+        {{-- Círculos decorativos --}}
+        <div class="absolute w-96 h-96 bg-amber-200 rounded-full opacity-60 blur-2xl blob-float" style="top: 120px; left: 250px;"></div>
+        <div class="absolute w-72 h-72 bg-pink-200 rounded-full opacity-58 blur-2xl blob-float-2" style="top: 300px; left: -30px;"></div>
+        <div class="absolute w-80 h-80 bg-teal-200 rounded-full opacity-55 blur-2xl blob-float-3" style="top: 500px; left: 280px;"></div>
+        <div class="absolute w-64 h-64 bg-indigo-100 rounded-full opacity-60 blur-2xl blob-float" style="top: 700px; left: -15px;"></div>
+        <div class="absolute w-[14rem] h-[14rem] bg-lime-200 rounded-full opacity-58 blur-2xl blob-float-2" style="top: 280px; left: 320px;"></div>
 
         {{-- Contenido principal --}}
         <div class="relative z-10">
         
         {{-- Encabezado: Foto, Nombre, Bio --}}
         <div class="w-full pt-4 pb-5 px-4 text-center">
-            <div class="w-28 h-28 mx-auto mb-3 bg-zinc-300 rounded-full overflow-hidden border-4 border-white shadow-lg">
+            <div class="w-32 h-32 mx-auto mb-3 bg-zinc-300 rounded-full overflow-hidden border-4 border-white shadow-lg">
                 @if($user->foto_perfil)
                     <img src="{{ asset('storage/' . $user->foto_perfil) }}" alt="{{ $user->nombre }}" class="w-full h-full object-cover">
                 @else
-                    <img src="{{ asset('images/default-profile.png') }}" alt="Foto de perfil" class="w-full h-full object-cover">
+                    <img src="{{ asset('images/default-profile.svg') }}" alt="Foto de perfil" class="w-full h-full object-cover bg-white">
                 @endif
             </div>
             <h1 class="text-stone-700 text-3xl font-semibold font-['Outfit'] mb-1">{{ $user->nombre }}</h1>
@@ -39,7 +38,7 @@
                     <span class="text-lg font-semibold">{{ $seguidores }}</span>
                     <span class="text-stone-600/70">Seguidores</span>
                 </a>
-                <a href="{{ route('usuarios.seguidores', $user) }}" class="flex flex-col items-center hover:-translate-y-0.5 transition-all">
+                <a href="{{ route('usuarios.seguidos', $user) }}" class="flex flex-col items-center hover:-translate-y-0.5 transition-all">
                     <span class="text-lg font-semibold">{{ $seguidos }}</span>
                     <span class="text-stone-600/70">Seguidos</span>
                 </a>
@@ -59,7 +58,7 @@
                     @else
                         <form method="POST" action="{{ route('usuarios.seguir', $user) }}">
                             @csrf
-                            <button type="submit" class="px-4 py-2 rounded-full bg-yellow-100 border-2 border-amber-300 text-stone-700 text-sm font-semibold font-['Outfit'] hover:-translate-y-0.5 hover:shadow transition-all">
+                            <button type="submit" class="px-4 py-2 rounded-full bg-yellow-200 border-2 border-amber-300 text-stone-700 text-sm font-semibold font-['Outfit'] hover:-translate-y-0.5 hover:shadow transition-all">
                                 {{ $user->perfil_privado ? 'Solicitar seguir' : 'Seguir' }}
                             </button>
                         </form>
@@ -105,15 +104,26 @@
             <div class="grid grid-cols-2 gap-4">
                 <a href="{{ route('diario.showUser', $user->id) }}" class="bg-emerald-100 rounded-3xl p-5 shadow-[0px_4px_6px_0px_rgba(0,0,0,0.10)] border border-emerald-300 hover:shadow-emerald-400/50 hover:scale-105 hover:-translate-y-1 transition-all duration-300 cursor-pointer">
                     <div class="w-10 h-10 bg-orange-50 rounded-xl flex items-center justify-center mb-3">
-                        <svg class="w-5 h-5 text-stone-600" fill="currentColor" viewBox="0 0 24 24"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 16H5V5h14v14zm-5.04-6.71l-2.75 3.54-1.3-1.54c-.3-.36-.77-.36-1.07 0-.3.36-.3.92 0 1.28l1.83 2.17c.3.36.77.36 1.07 0 .3-.36 2.21-2.88 2.21-2.88.3-.36.3-.92 0-1.28-.3-.36-.77-.36-1.07 0z"/></svg>
+                        <!-- Icono moderno de diario/cuaderno -->
+                        <svg class="w-6 h-6 text-stone-600" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
+                            <rect x="4" y="4" width="16" height="16" rx="3" stroke="currentColor" fill="none"/>
+                            <line x1="8" y1="8" x2="16" y2="8" stroke="currentColor" stroke-linecap="round"/>
+                            <line x1="8" y1="12" x2="16" y2="12" stroke="currentColor" stroke-linecap="round"/>
+                            <line x1="8" y1="16" x2="13" y2="16" stroke="currentColor" stroke-linecap="round"/>
+                        </svg>
                     </div>
                     <h3 class="text-stone-600 text-sm font-normal font-['Outfit']">Diario</h3>
                     <p class="text-stone-600/60 text-xs font-normal font-['Outfit'] mt-1">Escribe tus pensamientos</p>
                 </a>
 
-                <a href="{{ route('biblioteca.index') }}" class="bg-pink-300 rounded-3xl p-5 shadow-[0px_4px_6px_0px_rgba(0,0,0,0.10)] border border-pink-400 hover:shadow-pink-400/50 hover:scale-105 hover:-translate-y-1 transition-all duration-300 cursor-pointer">
+                <a href="{{ route('biblioteca.usuario', ['usuario' => $user->id]) }}" class="bg-pink-300 rounded-3xl p-5 shadow-[0px_4px_6px_0px_rgba(0,0,0,0.10)] border border-pink-400 hover:shadow-pink-400/50 hover:scale-105 hover:-translate-y-1 transition-all duration-300 cursor-pointer">
                     <div class="w-10 h-10 bg-orange-50 rounded-xl flex items-center justify-center mb-3">
-                        <svg class="w-5 h-5 text-stone-600" fill="currentColor" viewBox="0 0 24 24"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 16H5V5h14v14zm-2-7h-4v4h-2v-4H7v-2h4V7h2v4h4v2z"/></svg>
+                        <!-- Icono moderno de biblioteca/estantería -->
+                        <svg class="w-6 h-6 text-stone-600" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
+                            <rect x="5" y="4" width="3" height="16" rx="1" stroke="currentColor" fill="none"/>
+                            <rect x="10.5" y="4" width="3" height="16" rx="1" stroke="currentColor" fill="none"/>
+                            <rect x="16" y="4" width="3" height="16" rx="1" stroke="currentColor" fill="none"/>
+                        </svg>
                     </div>
                     <h3 class="text-stone-600 text-sm font-normal font-['Outfit']">Biblioteca</h3>
                     <p class="text-stone-600/60 text-xs font-normal font-['Outfit'] mt-1">Contenido guardado</p>
@@ -137,20 +147,29 @@
                     </p>
                 </div>
             @elseif($publicaciones->count() > 0)
-                <div class="space-y-3 pb-4">
+                <div class="space-y-4 pb-4">
                     @foreach($publicaciones as $publicacion)
                         @php $colors = $publicacion->getColorClasses(); @endphp
-                        <a href="{{ route('publicaciones.show', $publicacion) }}" class="block w-full {{ $colors['bg'] }} rounded-[20px] border-2 {{ $colors['border'] }} p-4 hover:shadow-stone-400/40 hover:scale-105 hover:-translate-y-1 transition-all duration-300">
-                            <div class="flex flex-col h-16 justify-center">
-                                <div class="flex items-center gap-2">
-                                    <h3 class="text-stone-700/80 text-lg font-semibold font-['Outfit'] truncate">{{ $publicacion->titulo }}</h3>
+                        <a href="{{ route('publicaciones.show', $publicacion) }}" class="block w-full {{ $colors['bg'] }} rounded-3xl border-2 {{ $colors['border'] }} p-4 shadow-[0px_6px_12px_0px_rgba(0,0,0,0.10)] hover:shadow-lg hover:-translate-y-1 transition-all duration-300">
+                            <div class="flex-1">
+                                <div class="flex items-center gap-2 mb-1 flex-wrap">
+                                    @if($publicacion->categoria)
+                                        <span class="text-[10px] px-2 py-1 rounded-full bg-white/70 border border-white text-stone-700 font-['Outfit']">{{ $publicacion->categoria }}</span>
+                                    @endif
                                     @if($publicacion->visibilidad === 'privada')
-                                        <span class="text-xs px-2 py-1 rounded-full bg-stone-200 border border-stone-300 text-stone-700 font-['Outfit']">Privada</span>
+                                        <span class="text-2xs px-2 py-1 rounded-full bg-stone-200 border border-stone-300 text-stone-700 font-['Outfit']">Privada</span>
                                     @endif
                                 </div>
-                                @if(!empty($publicacion->subtitulo))
-                                    <p class="text-stone-700/70 text-sm font-normal font-['Outfit'] mt-0.5 truncate">{{ $publicacion->subtitulo }}</p>
+                                <h3 class="text-stone-800 text-lg font-semibold font-['Outfit'] leading-tight">{{ $publicacion->titulo }}</h3>
+                                @if($publicacion->subtitulo)
+                                    <p class="text-stone-700/80 text-sm font-['Outfit'] mt-1">{{ $publicacion->subtitulo }}</p>
                                 @endif
+                                <p class="text-stone-700/80 text-xs font-['Outfit'] mt-1">
+                                    {{ $publicacion->usuario->nombre }}
+                                    @if($publicacion->fecha_subida)
+                                        · {{ optional($publicacion->fecha_subida)->format('d M Y') }}
+                                    @endif
+                                </p>
                             </div>
                         </a>
                     @endforeach

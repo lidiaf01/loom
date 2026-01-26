@@ -30,13 +30,33 @@ class FollowController extends Controller
     public function aceptar(Usuario $seguidor): RedirectResponse
     {
         $usuario = Auth::user();
-
-        $pendiente = $usuario->solicitudesRecibidas()->where('seguidor_id', $seguidor->id)->first();
-        if ($pendiente) {
-            $usuario->seguidores()->updateExistingPivot($seguidor->id, ['estado' => 'accepted']);
+        \Log::info('[ACEPTAR] Intentando aceptar solicitud', [
+            'auth_id' => $usuario->id,
+            'seguidor_id' => $seguidor->id,
+        ]);
+        $pivot = \DB::table('seguidores')
+            ->where('seguidor_id', $seguidor->id)
+            ->where('seguido_id', $usuario->id)
+            ->where('estado', 'pending')
+            ->first();
+        \Log::info('[ACEPTAR] Resultado consulta pivot', [
+            'pivot' => $pivot
+        ]);
+        if ($pivot) {
+            \DB::table('seguidores')
+                ->where('seguidor_id', $seguidor->id)
+                ->where('seguido_id', $usuario->id)
+                ->update(['estado' => 'accepted']);
+            \Log::info('[ACEPTAR] Solicitud aceptada', [
+                'seguidor_id' => $seguidor->id,
+                'seguido_id' => $usuario->id
+            ]);
             return back()->with('success', 'Solicitud aceptada.');
         }
-
+        \Log::warning('[ACEPTAR] No hay solicitud pendiente', [
+            'seguidor_id' => $seguidor->id,
+            'seguido_id' => $usuario->id
+        ]);
         return back()->with('error', 'No hay solicitud pendiente.');
     }
 

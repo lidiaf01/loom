@@ -2,6 +2,12 @@
 @section('content')
 <div class="min-h-screen bg-orange-50 w-full flex justify-center relative overflow-hidden">
     <div class="w-full max-w-md min-h-screen relative overflow-y-scroll pb-32 scrollbar-hide px-4 pt-16">
+    {{-- Círculos decorativos --}}
+    <div class="absolute w-80 h-80 bg-pink-200 rounded-full opacity-60 blur-2xl blob-float" style="top: 120px; left: 70%;"></div>
+    <div class="absolute w-72 h-72 bg-rose-200 rounded-full opacity-58 blur-2xl blob-float-2" style="top: 300px; left: 5%;"></div>
+    <div class="absolute w-96 h-96 bg-fuchsia-200 rounded-full opacity-55 blur-2xl blob-float-3" style="top: 500px; left: 75%;"></div>
+    <div class="absolute w-64 h-64 bg-purple-100 rounded-full opacity-60 blur-2xl blob-float" style="top: 700px; left: 10%;"></div>
+
     @php
         $pastelColors = ['#FFD6E0', '#B5EAD7', '#C7CEEA', '#FFF5BA', '#FFDAC1', '#E2F0CB', '#B5D8FA', '#FFB7B2'];
         $color = $pastelColors[$carpeta->id_Carpeta % count($pastelColors)];
@@ -11,7 +17,7 @@
             <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" /></svg>
             Volver
         </a>
-        <h2 class="text-2xl font-bold text-pink-700 text-center mt-10">{{ $carpeta->nombre }}</h2>
+        <h2 class="text-stone-700 text-2xl font-bold font-['Outfit'] text-center mt-10">{{ $carpeta->nombre }}</h2>
         <button id="btn-ajustes-carpeta" class="absolute right-0 top-0 p-2 rounded-full hover:bg-pink-100 transition ml-2" title="Ajustes">
             <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-pink-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11.25 2.25c.414 0 .75.336.75.75v1.086a7.5 7.5 0 013.09 1.282l.77-.77a.75.75 0 111.06 1.06l-.77.77A7.5 7.5 0 0120.164 9h1.086a.75.75 0 010 1.5h-1.086a7.5 7.5 0 01-1.282 3.09l.77.77a.75.75 0 11-1.06 1.06l-.77-.77A7.5 7.5 0 0112 20.164v1.086a.75.75 0 01-1.5 0v-1.086a7.5 7.5 0 01-3.09-1.282l-.77.77a.75.75 0 11-1.06-1.06l.77-.77A7.5 7.5 0 013.836 12H2.75a.75.75 0 010-1.5h1.086a7.5 7.5 0 011.282-3.09l-.77-.77a.75.75 0 111.06-1.06l.77.77A7.5 7.5 0 0112 3.836V2.75c0-.414.336-.75.75-.75zM12 8.25a3.75 3.75 0 100 7.5 3.75 3.75 0 000-7.5z" />
@@ -46,9 +52,10 @@
     @if($publicaciones->count())
         <div class="grid gap-5">
             @foreach($publicaciones as $publicacion)
-                <a href="{{ route('publicaciones.show', $publicacion) }}" class="block bg-white border-2 border-pink-100 rounded-2xl p-5 shadow-md hover:bg-pink-50 transition-all duration-200 hover:scale-[1.02]">
-                    <div class="font-semibold text-lg text-pink-900 mb-1">{{ $publicacion->titulo }}</div>
-                    <div class="text-xs text-pink-400 mb-1">{{ $publicacion->categoria }}</div>
+                @php $colors = $publicacion->getColorClasses(); @endphp
+                <a href="{{ route('publicaciones.show', $publicacion) }}" class="block rounded-2xl p-5 shadow-md hover:scale-[1.02] transition-all duration-200 {{ $colors['bg'] }} border-2 {{ $colors['border'] }}">
+                    <div class="font-semibold text-lg text-stone-800 mb-1">{{ $publicacion->titulo }}</div>
+                    <div class="text-xs font-semibold mb-1">{{ $publicacion->categoria }}</div>
                     <div class="text-stone-500 text-xs">{{ $publicacion->fecha_subida ? ($publicacion->fecha_subida instanceof \DateTime ? $publicacion->fecha_subida->format('d M Y') : $publicacion->fecha_subida) : '' }}</div>
                 </a>
             @endforeach

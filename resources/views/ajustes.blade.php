@@ -3,12 +3,19 @@
 @section('content')
 <div class="min-h-screen bg-orange-50 w-full flex justify-center relative overflow-hidden">
     <div class="w-96 min-h-screen relative overflow-y-scroll pb-32 scrollbar-hide">
+        {{-- Círculos decorativos --}}
+        <div class="absolute w-96 h-96 bg-amber-200 rounded-full opacity-60 blur-2xl blob-float" style="top: 120px; left: 250px;"></div>
+        <div class="absolute w-72 h-72 bg-pink-200 rounded-full opacity-58 blur-2xl blob-float-2" style="top: 300px; left: -30px;"></div>
+        <div class="absolute w-80 h-80 bg-teal-200 rounded-full opacity-55 blur-2xl blob-float-3" style="top: 500px; left: 280px;"></div>
+        <div class="absolute w-64 h-64 bg-indigo-100 rounded-full opacity-60 blur-2xl blob-float" style="top: 700px; left: -15px;"></div>
+        <div class="absolute w-[14rem] h-[14rem] bg-lime-200 rounded-full opacity-58 blur-2xl blob-float-2" style="top: 280px; left: 320px;"></div>
+
         <div class="relative z-10 px-5 pt-12 space-y-4">
             <h1 class="text-stone-700 text-2xl font-bold font-['Outfit'] mb-6">Ajustes</h1>
 
             {{-- Acordeón: Cuenta --}}
             <div class="mb-6">
-                <button type="button" class="w-full flex justify-between items-center py-4 border-b border-yellow-300 bg-yellow-50 focus:outline-none toggle-accordion">
+                <button type="button" class="w-full flex justify-between items-center py-4 border-b border-yellow-300 focus:outline-none toggle-accordion">
                     <span class="text-pink-500 text-lg font-semibold font-['Outfit']">Cuenta</span>
                     <span class="text-pink-400 text-xl">&#9660;</span>
                 </button>
@@ -26,7 +33,7 @@
 
             {{-- Acordeón: Seguridad --}}
             <div class="mb-6">
-                <button type="button" class="w-full flex justify-between items-center py-4 border-b border-amber-300 bg-amber-50 focus:outline-none toggle-accordion">
+                <button type="button" class="w-full flex justify-between items-center py-4 border-b border-amber-300 focus:outline-none toggle-accordion">
                     <span class="text-pink-500 text-lg font-semibold font-['Outfit']">Seguridad</span>
                     <span class="text-pink-400 text-xl">&#9660;</span>
                 </button>
@@ -85,7 +92,9 @@
                         <label class="block text-pink-400 text-sm mb-1">Foto de perfil</label>
                         <input type="file" name="foto" accept="image/*" class="w-full bg-stone-200 rounded-[20px] px-4 py-2 text-pink-500 text-base shadow-inner border border-stone-400 mb-2">
                         @if(auth()->user()->foto_perfil)
-                            <img src="{{ asset('storage/' . auth()->user()->foto_perfil) }}" alt="Foto actual" class="w-16 h-16 rounded-full object-cover mb-2">
+                            <img src="{{ asset('storage/' . auth()->user()->foto_perfil) }}" alt="Foto actual" class="w-64 h-64 rounded-full object-cover mb-2">
+                        @else
+                            <img src="{{ asset('images/default-profile.svg') }}" alt="Foto predeterminada" class="w-64 h-64 rounded-full object-cover mb-2 bg-white">
                         @endif
 
                         <label class="block text-pink-400 text-sm mb-1">Biografía (texto o enlace)</label>
@@ -241,7 +250,7 @@
                 </a>
                 {{-- Ajustes --}}
                 <a href="{{ route('ajustes') }}" data-route="settings" class="nav-link flex flex-col items-center gap-1 transition-all duration-300 active">
-                    <div class="w-12 h-12 bg-yellow-100 rounded-2xl flex items-center justify-center nav-indicator transition-colors duration-300">
+                    <div class="w-12 h-12 bg-yellow-200 rounded-2xl flex items-center justify-center nav-indicator transition-colors duration-300">
                         <svg class="w-5 h-5 text-stone-600" fill="currentColor" viewBox="0 0 24 24">
                             <path d="M19.14 12.94c.04-.3.06-.61.06-.94 0-.32-.02-.64-.07-.94l2.03-1.58c.18-.14.23-.41.12-.64l-1.92-3.32c-.12-.22-.39-.3-.61-.22l-2.39.96c-.5-.38-1.03-.7-1.62-.94l-.36-2.54c-.04-.24-.24-.41-.48-.41h-3.84c-.24 0-.43.17-.47.41l-.36 2.54c-.59.24-1.13.57-1.62.94l-2.39-.96c-.23-.09-.49 0-.61.22L2.74 8.87c-.12.22-.07.49.12.64l2.03 1.58c-.05.3-.07.62-.07.94s.02.64.07.94l-2.03 1.58c-.18.14-.23.41-.12.64l1.92 3.32c.12.22.39.3.61.22l2.39-.96c.5.38 1.03.7 1.62.94l.36 2.54c.05.24.24.41.48.41h3.84c.24 0 .44-.17 .47-.41l.36-2.54c.59-.24 1.13-.56 1.62-.94l2.39 .96c.23 .09 .49 0 .61-.22l1.92-3.32c.12-.22 .07-.49-.12-.64l-2.01-1.58zM12 15.6c-1.98 0-3.6-1.62-3.6-3.6s1.62-3.6 3.6-3.6 3.6 1.62 3.6 3.6-1.62 3.6-3.6 3.6z"/>
                         </svg>

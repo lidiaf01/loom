@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\{Auth, Hash, Session};
 
 class LoginController extends Controller
 {
-    public function showLoginForm() { return view('layouts.login'); }
+    public function showLoginForm() { return view('auth.login'); }
 
     public function login(Request $request) {
     $credentials = $request->validate([

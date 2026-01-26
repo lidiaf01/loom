@@ -1,0 +1,100 @@
+[
+  {
+    "usuario_email": "maria@example.com",
+    "titulo": "Smoothie verde para el desayuno",
+    "contenido": "¿Quieres empezar el día con energía? Prueba este <b>smoothie verde</b>:<ul><li>1 taza de espinaca fresca</li><li>1 plátano maduro</li><li>1 manzana verde</li><li>1 vaso de leche vegetal</li><li>1 cucharadita de semillas de chía</li></ul>Mezcla todos los ingredientes y bate hasta obtener una textura suave. Este batido es <b>rico en fibra, vitaminas y antioxidantes</b>, ideal para un desayuno rápido y saludable. Puedes añadir hielo si lo prefieres más refrescante. ¡Disfruta y cuida tu salud desde la primera comida del día!",
+    "categoria": "Cocina & Nutrición",
+    "fecha": "2026-01-26"
+  },
+  {
+    "usuario_email": "carlos@test.com",
+    "titulo": "Crea tu propio diario de gratitud",
+    "contenido": "<b>Llevar un diario de gratitud</b> es una práctica sencilla que puede transformar tu bienestar emocional. Solo necesitas:<ol><li>Un cuaderno bonito</li><li>Dedicar 5 minutos al día</li><li>Anotar 3 cosas por las que te sientes agradecido</li></ol>Hazlo cada noche antes de dormir y verás cómo tu perspectiva cambia, enfocándote en lo positivo. Decora tu diario con <b>dibujos, frases inspiradoras o fotos</b>. Esta rutina te ayudará a reducir el estrés y a valorar más los pequeños detalles de la vida.",
+    "categoria": "Desarrollo Personal",
+    "fecha": "2026-01-26"
+  },
+  {
+    "usuario_email": "ana.garcia@web.es",
+    "titulo": "5 ejercicios para hacer en casa sin material",
+    "contenido": "<b>Mantenerse activo</b> es posible sin salir de casa ni comprar equipamiento. Prueba esta rutina:<ul><li>Sentadillas</li><li>Flexiones</li><li>Zancadas</li><li>Plancha</li><li>Saltos de tijera</li></ul>Haz cada ejercicio durante <b>30 segundos</b> y descansa 15 segundos entre ellos. Repite el circuito 3 veces. Esta rutina mejora tu fuerza, resistencia y salud cardiovascular. <i>Recuerda calentar antes y estirar al finalizar para evitar lesiones.</i>",
+    "categoria": "Ejercicio & Movimiento",
+    "fecha": "2026-01-26"
+  },
+  {
+    "usuario_email": "admin@loom.com",
+    "titulo": "Cómo organizar un viaje económico por Europa",
+    "contenido": "Viajar por Europa no tiene por qué ser caro. Planifica con antelación, busca vuelos en días de semana y utiliza comparadores de precios. Hospédate en hostales o utiliza plataformas de intercambio de casas. Aprovecha los free tours para conocer las ciudades y compra alimentos en supermercados locales. Lleva una lista de imprescindibles y usa apps para moverte en transporte público. Así podrás disfrutar de una experiencia inolvidable sin gastar de más.",
+    "categoria": "Viajes & Aventuras",
+    "fecha": "2026-01-26"
+  },
+  {
+    "usuario_email": "maria@example.com",
+    "titulo": "Meditación guiada para principiantes",
+    "contenido": "La <b>meditación</b> es una herramienta poderosa para reducir el estrés y mejorar la concentración. Sigue estos pasos:<ol><li>Busca un lugar tranquilo</li><li>Siéntate cómodamente y cierra los ojos</li><li>Concéntrate en tu respiración</li><li>Deja pasar los pensamientos sin juzgarlos</li></ol>Puedes usar <b>audios de meditación guiada</b> para empezar. Practica 10 minutos al día y notarás los beneficios en tu estado de ánimo y tu salud mental.",
+    "categoria": "Meditación & Mindfulness",
+    "fecha": "2026-01-26"
+  },
+  {
+    "usuario_email": "carlos@test.com",
+    "titulo": "Manualidades con materiales reciclados",
+    "contenido": "<b>Reutilizar materiales</b> es una forma creativa y ecológica de decorar tu hogar. Junta:<ul><li>Botellas de plástico</li><li>Cartón</li><li>Latas</li></ul>Puedes hacer <b>macetas, organizadores o adornos</b>. Por ejemplo, corta una botella por la mitad, decórala con pintura y úsala como maceta para plantas pequeñas. Busca inspiración en internet y comparte tus creaciones. Así ayudas al planeta y desarrollas tu creatividad.",
+    "categoria": "Hobbies & Creatividad",
+    "fecha": "2026-01-26"
+  },
+  {
+    "usuario_email": "ana.garcia@web.es",
+    "titulo": "Cómo mejorar la comunicación en familia",
+    "contenido": "La <b>comunicación</b> es clave para una familia unida. Organiza reuniones familiares semanales donde todos puedan expresar sus ideas y sentimientos. Practica la <b>escucha activa</b>, evita interrupciones y valida las emociones de los demás. Utiliza juegos o dinámicas para fomentar la confianza. Resolver los conflictos con respeto y empatía fortalecerá los lazos familiares y creará un ambiente armonioso en casa.",
+    "categoria": "Relaciones & Familia",
+    "fecha": "2026-01-26"
+  },
+  {
+    "usuario_email": "admin@loom.com",
+    "titulo": "Ahorra tiempo y dinero con estos trucos de productividad",
+    "contenido": "La <b>organización</b> es fundamental para aprovechar mejor tu tiempo y tus recursos. <ul><li>Usa una agenda o app para planificar tus tareas diarias</li><li>Prioriza lo importante y delega lo que puedas</li><li>Haz compras semanales con lista para evitar gastos innecesarios</li><li>Automatiza pagos y revisa tus suscripciones</li></ul>Estos hábitos te ayudarán a ser más productivo y a mejorar tus finanzas personales.",
+    "categoria": "Finanzas & Productividad",
+    "fecha": "2026-01-26"
+  },
+  {
+    "usuario_email": "maria@example.com",
+    "titulo": "Descubre el arte urbano de tu ciudad",
+    "contenido": "El <b>arte urbano</b> es una forma de expresión que llena de color las ciudades. Investiga sobre los murales y grafitis más famosos de tu zona. <ul><li>Organiza rutas a pie o en bici para descubrirlos</li><li>Toma fotos para compartir en redes sociales</li><li>Respeta siempre las obras y apoya a los artistas locales</li></ul>El arte en la calle es cultura viva y accesible para todos.",
+    "categoria": "Arte & Cultura",
+    "fecha": "2026-01-26"
+  },
+  {
+    "usuario_email": "carlos@test.com",
+    "titulo": "Cómo mantenerte activo en vacaciones",
+    "contenido": "Durante las vacaciones es fácil caer en el sedentarismo. Aprovecha para caminar, nadar o practicar deportes al aire libre. Haz excursiones, paseos en bicicleta o yoga en la playa. Mantenerte activo te ayudará a relajarte, mejorar tu salud y disfrutar más de tu tiempo libre. Invita a familiares o amigos para hacerlo más divertido.",
+    "categoria": "Salud & Bienestar",
+    "fecha": "2026-01-26"
+  },
+  {
+    "usuario_email": "luis.torres@mail.com",
+    "titulo": "Ruta ciclista por la sierra",
+    "contenido": "Comparte tu experiencia recorriendo la sierra en bicicleta. Consejos sobre rutas, equipamiento y seguridad para principiantes.",
+    "categoria": "Deporte & Aventura",
+    "fecha": "2026-01-25"
+  },
+  {
+    "usuario_email": "elena.martinez@mail.com",
+    "titulo": "Reseña: El guardián entre el centeno",
+    "contenido": "Una reflexión personal sobre el clásico de J.D. Salinger y su impacto en la literatura juvenil.",
+    "categoria": "Libros & Reseñas",
+    "fecha": "2026-01-24"
+  },
+  {
+    "usuario_email": "javier.fernandez@mail.com",
+    "titulo": "Receta fácil: tortilla de patatas",
+    "contenido": "Paso a paso para preparar una tortilla de patatas jugosa y sabrosa, ideal para cualquier ocasión.",
+    "categoria": "Cocina & Nutrición",
+    "fecha": "2026-01-23"
+  },
+  {
+    "usuario_email": "sara.gomez@mail.com",
+    "titulo": "Cómo dibujar gatos kawaii",
+    "contenido": "Tutorial básico para dibujar gatos estilo kawaii, perfecto para principiantes y amantes del arte tierno.",
+    "categoria": "Arte & Creatividad",
+    "fecha": "2026-01-22"
+  }
+]

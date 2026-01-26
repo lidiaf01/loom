@@ -6,9 +6,23 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 
+
 class Usuario extends Authenticatable
 {
     use HasFactory, Notifiable;
+
+    // Relación directa a carpetas del usuario (a través de su biblioteca)
+    public function carpetas()
+    {
+        return $this->hasManyThrough(
+            \App\Models\Carpeta::class,
+            \App\Models\Biblioteca::class,
+            'usuario_id', // Foreign key en Biblioteca
+            'biblioteca_id', // Foreign key en Carpeta
+            'id', // Local key en Usuario
+            'id' // Local key en Biblioteca
+        );
+    }
 
     public function biblioteca()
     {

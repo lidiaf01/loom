@@ -1,15 +1,15 @@
-@extends("layouts.app")
+@extends("layouts.login")
 @section("content")
 <div class="h-[780px] bg-white rounded-lg outline outline-2 outline-offset-[-2px] outline-gray-300 inline-flex flex-col justify-start items-start overflow-hidden">
   <div class="w-96 h-[780px] relative bg-orange-50 border-gray-200">
     <div class="w-96 h-[780px] left-0 top-0 absolute bg-black/0 border-gray-200 overflow-hidden">
       <div class="w-96 h-[780px] left-0 top-0 absolute bg-black/0 border-gray-200">
         <div class="w-96 h-[780px] left-0 top-0 absolute bg-black/0 border-gray-200">
-          <div class="w-16 h-16 left-[232px] top-[97px] absolute opacity-40 bg-sky-200 rounded-full"></div>
-          <div class="w-28 h-28 left-[-25px] top-[17px] absolute opacity-40 bg-pink-300 rounded-full"></div>
-          <div class="w-28 h-28 left-[295px] top-[579px] absolute opacity-40 bg-emerald-100 rounded-full"></div>
-          <div class="w-56 h-56 left-[-12px] top-[624px] absolute opacity-40 bg-yellow-100 rounded-full"></div>
-          <div class="w-16 h-16 left-[-12px] top-[481px] absolute opacity-40 bg-purple-400 rounded-full"></div>
+          <div class="w-64 h-64 left-[232px] top-[97px] absolute opacity-60 bg-sky-200 rounded-full"></div>
+          <div class="w-56 h-56 left-[-25px] top-[17px] absolute opacity-60 bg-pink-300 rounded-full"></div>
+          <div class="w-56 h-56 left-[295px] top-[579px] absolute opacity-60 bg-emerald-100 rounded-full"></div>
+          <div class="w-56 h-56 left-[-12px] top-[624px] absolute opacity-60 bg-yellow-200 rounded-full"></div>
+          <div class="w-64 h-64 left-[-12px] top-[481px] absolute opacity-60 bg-purple-400 rounded-full"></div>
           <a
             href="{{ route('login') }}"
             class="w-80 h-14 left-[24px] top-[553px] absolute bg-gradient-to-r from-yellow-100 to-pink-300 rounded-2xl shadow-[0px_10px_15px_0px_rgba(0,0,0,0.10)] shadow-[0px_4px_6px_0px_rgba(0,0,0,0.10)] border-gray-200 flex items-center justify-center hover:opacity-90 transition"

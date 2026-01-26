@@ -91,6 +91,7 @@ Route::middleware('auth')->group(function () {
         })->name('logout');
     Route::get('/usuarios/{usuario}', [ProfileController::class, 'showUsuario'])->name('usuarios.show');
     Route::get('/usuarios/{usuario}/seguidores', [ProfileController::class, 'seguidoresLista'])->name('usuarios.seguidores');
+    Route::get('/usuarios/{usuario}/seguidos', [ProfileController::class, 'seguidosLista'])->name('usuarios.seguidos');
 
     // Publicaciones - flujo de creación
     Route::get('/publicaciones/crear', [PublicacionController::class, 'create'])->name('publicaciones.crear');
@@ -105,7 +106,7 @@ Route::middleware('auth')->group(function () {
     // Seguidores / solicitudes
     Route::post('/usuarios/{usuario}/seguir', [FollowController::class, 'solicitar'])->name('usuarios.seguir');
     Route::delete('/usuarios/{usuario}/seguir', [FollowController::class, 'dejar'])->name('usuarios.dejar');
-    Route::post('/usuarios/{usuario}/aceptar', [FollowController::class, 'aceptar'])->name('usuarios.aceptar');
+    Route::post('/usuarios/{seguidor}/aceptar', [FollowController::class, 'aceptar'])->name('usuarios.aceptar');
     Route::post('/usuarios/{usuario}/rechazar', [FollowController::class, 'rechazar'])->name('usuarios.rechazar');
 
     // Búsqueda y explorar
@@ -116,6 +117,7 @@ Route::middleware('auth')->group(function () {
 // Biblioteca - solo para autenticados
 Route::middleware(['auth'])->group(function () {
     Route::get('/biblioteca', [BibliotecaController::class, 'index'])->name('biblioteca.index');
+    Route::get('/usuarios/{usuario}/biblioteca', [BibliotecaController::class, 'showUsuario'])->name('biblioteca.usuario');
     Route::post('/biblioteca/carpeta', [BibliotecaController::class, 'storeCarpeta'])->name('biblioteca.carpeta.store');
     Route::put('/biblioteca/carpeta/{id}', [BibliotecaController::class, 'updateCarpeta'])->name('biblioteca.carpeta.update');
     Route::delete('/biblioteca/carpeta/{id}', [BibliotecaController::class, 'destroyCarpeta'])->name('biblioteca.carpeta.destroy');
@@ -128,5 +130,6 @@ Route::middleware(['auth'])->group(function () {
     Route::post('/diario', [DiarioController::class, 'store'])->name('diario.store');
     Route::delete('/diario/{id}', [DiarioController::class, 'destroy'])->name('diario.destroy');
     Route::post('/ajustes/diario-privacidad', [DiarioController::class, 'setPrivacidad'])->name('diario.setPrivacidad');
+    Route::get('/diario/lectura/{id}', [DiarioController::class, 'lectura'])->name('diario.lectura');
 });
 Route::get('/usuario/{usuario_id}/diario', [DiarioController::class, 'showUser'])->name('diario.showUser');

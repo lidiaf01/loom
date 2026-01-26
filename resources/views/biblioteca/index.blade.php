@@ -1,42 +1,49 @@
 @extends('layouts.app')
 @section('content')
-<div class="h-screen w-screen bg-orange-50 flex flex-col justify-center items-center relative overflow-hidden">
-    <div class="w-full max-w-md flex flex-col flex-1 justify-center items-center px-4 pt-10 pb-32">
-        <h2 class="text-2xl font-bold text-pink-700 text-center mb-6">Mi Biblioteca</h2>
+<div class="min-h-screen w-full bg-orange-50 flex flex-col items-center relative overflow-hidden">
+    {{-- Círculos decorativos --}}
+    <div class="absolute w-96 h-96 bg-pink-200 rounded-full opacity-60 blur-2xl blob-float" style="top: 100px; left: 70%;"></div>
+    <div class="absolute w-72 h-72 bg-rose-200 rounded-full opacity-58 blur-2xl blob-float-2" style="top: 300px; left: 10%;"></div>
+    <div class="absolute w-80 h-80 bg-fuchsia-200 rounded-full opacity-55 blur-2xl blob-float-3" style="top: 500px; left: 75%;"></div>
+    <div class="absolute w-64 h-64 bg-purple-100 rounded-full opacity-60 blur-2xl blob-float" style="top: 700px; left: 5%;"></div>
+
+    <div class="w-full max-w-md flex flex-col flex-1 items-center px-2 pt-6 pb-32 sm:px-4 sm:pt-10 relative z-10">
+        <h2 class="text-stone-700 text-2xl font-bold font-['Outfit'] text-center mb-4 sm:mb-6">
+            @if(isset($owner))
+                Biblioteca de {{ $owner->nombre }}
+            @else
+                Mi Biblioteca
+            @endif
+        </h2>
     @if($carpetas->count())
-        <div class="flex flex-col items-center justify-center w-full flex-1">
-            <div class="flex flex-col items-center w-full gap-6 max-w-md">
-                @foreach($carpetas as $carpeta)
-                    <a href="{{ route('biblioteca.carpeta.show', $carpeta->id_Carpeta) }}" class="w-full">
-                        <div class="relative flex items-center justify-center w-full" style="height:110px;">
-                            <svg width="100%" height="110" viewBox="0 0 350 110" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <!-- Sombra -->
-                                <ellipse cx="175" cy="104" rx="120" ry="8" fill="#000" opacity="0.08" />
-                                <!-- Tapa -->
-                                <rect x="40" y="16" width="110" height="22" rx="10" fill="#ececec"/>
-                                <rect x="40" y="16" width="110" height="22" rx="10" fill="{{ $carpeta->color }}" opacity="0.7"/>
-                                <!-- Cuerpo principal -->
-                                <path d="M20 38 Q20 20 90 20 H260 Q330 20 330 38 V92 Q330 104 260 104 H90 Q20 104 20 92 Z" fill="{{ $carpeta->color }}"/>
-                                <!-- Nombre -->
-                                <foreignObject x="60" y="70" width="230" height="30">
-                                    <div xmlns="http://www.w3.org/1999/xhtml" style="width:230px;height:30px;display:flex;align-items:center;justify-content:center;overflow:hidden;">
-                                        <span style="font-size:17px;font-family:Outfit,Arial,sans-serif;color:#444;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:210px;display:block;">{{ $carpeta->nombre }}</span>
-                                    </div>
-                                </foreignObject>
-                            </svg>
-                        </div>
-                    </a>
-                @endforeach
-            </div>
+        <div class="grid grid-cols-2 gap-4 sm:gap-6 w-full max-w-md">
+            @foreach($carpetas as $carpeta)
+                <a href="{{ route('biblioteca.carpeta.show', $carpeta->id_Carpeta) }}" class="block">
+                    <div class="relative flex flex-col items-center justify-center w-full h-[90px] sm:h-[110px] group transition-transform hover:scale-105 cursor-pointer rounded-2xl shadow-md border border-pink-100" style="background: {{ $carpeta->color }};">
+                        <span class="text-sm sm:text-base font-semibold text-stone-700 text-center px-2 truncate w-full" title="{{ $carpeta->nombre }}">{{ $carpeta->nombre }}</span>
+                    </div>
+                </a>
+            @endforeach
         </div>
+        @if(!isset($owner) || (isset($owner) && auth()->id() === $owner->id))
+        <div class="w-full flex justify-center mt-8 mb-10">
+            <button id="btnNuevaCarpeta" type="button" class="bg-[#FFD6E0] hover:bg-[#F8A5C2] text-pink-700 rounded-full w-12 h-12 sm:w-14 sm:h-14 flex items-center justify-center text-2xl sm:text-3xl shadow-lg focus:outline-none transition z-50">+
+            </button>
         </div>
+        @endif
     @else
-        <div class="text-pink-400 text-center">No tienes carpetas aún.</div>
+        @if(isset($owner) && auth()->id() !== $owner->id)
+            <div class="text-pink-400 text-center">Esta biblioteca aún no tiene carpetas públicas.</div>
+        @else
+            <div class="text-pink-400 text-center">No tienes carpetas aún.</div>
+            <div class="w-full flex justify-center mt-4 mb-6">
+                <button id="btnNuevaCarpeta" type="button" class="bg-pink-400 hover:bg-pink-500 text-white rounded-full w-12 h-12 sm:w-14 sm:h-14 flex items-center justify-center text-2xl sm:text-3xl shadow-lg focus:outline-none transition z-50">+
+                </button>
+            </div>
+        @endif
     @endif
-    <div class="w-full flex justify-center">
-        <button id="btnNuevaCarpeta" type="button" class="bg-pink-300 hover:bg-pink-400 text-white rounded-full w-16 h-16 flex items-center justify-center text-4xl shadow focus:outline-none transition fixed bottom-24 left-1/2 -translate-x-1/2 z-30">+</button>
-    </div>
     <!-- Modal para crear carpeta -->
+    @if(!isset($owner) || (isset($owner) && auth()->id() === $owner->id))
     <div id="modalCarpeta" class="absolute left-1/2 top-1/2 z-[100] hidden -translate-x-1/2 -translate-y-1/2 px-4 pb-32">
         <div class="bg-white rounded-3xl shadow-[0px_25px_50px_0px_rgba(0,0,0,0.15)] border-2 border-stone-200 p-6 max-w-sm w-full flex flex-col">
             <div class="flex justify-between items-center mb-2">
@@ -62,7 +69,9 @@
                 <button type="submit" class="bg-pink-400 hover:bg-pink-500 text-white rounded-lg py-2 mt-2">Crear carpeta</button>
             </form>
         </div>
+        </div>
     </div>
+    @endif
 </div>
 @include('layouts.navbar')
 @endsection

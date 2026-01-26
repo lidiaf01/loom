@@ -8,6 +8,18 @@ use Illuminate\Http\Request;
 
 class ProfileController extends Controller
 {
+    public function seguidosLista(Usuario $usuario)
+    {
+        $viewer = auth()->user();
+        $this->authorize('view', $usuario);
+
+        $seguidos = $usuario->seguidos()->wherePivot('estado', 'accepted')->get();
+
+        return view('followers.seguidos', [
+            'user' => $usuario,
+            'seguidos' => $seguidos,
+        ]);
+    }
     /**
      * Mostrar el perfil del usuario autenticado
      */
@@ -97,8 +109,11 @@ class ProfileController extends Controller
         $seguidores = $usuario->seguidores()->wherePivot('estado', 'accepted')->get();
         $solicitudes = collect();
 
-        if ($viewer->id === $usuario->id && $usuario->perfil_privado) {
-            $solicitudes = $usuario->solicitudesRecibidas()->get();
+        if ($viewer->id === $usuario->id) {
+            // Forzar que cada solicitud sea un modelo Usuario
+            $solicitudes = $usuario->solicitudesRecibidas()->get()->map(function($s) {
+                return \App\Models\Usuario::find($s->id);
+            })->filter();
         }
 
         return view('followers.index', [

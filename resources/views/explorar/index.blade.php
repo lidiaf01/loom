@@ -3,8 +3,11 @@
 @section('content')
 <div class="min-h-screen bg-orange-50 w-full flex justify-center relative overflow-hidden">
     <div class="w-96 min-h-screen relative overflow-y-scroll pb-24 scrollbar-hide">
-        <div class="absolute w-48 h-48 bg-sky-200 rounded-full opacity-30 blur-3xl blob-float" style="top: 120px; left: 260px;"></div>
-        <div class="absolute w-44 h-44 bg-amber-200 rounded-full opacity-25 blur-2xl blob-float-2" style="top: 320px; left: -30px;"></div>
+        {{-- Círculos decorativos --}}
+        <div class="absolute w-80 h-80 bg-sky-200 rounded-full opacity-60 blur-2xl blob-float" style="top: 120px; left: 260px;"></div>
+        <div class="absolute w-72 h-72 bg-amber-200 rounded-full opacity-58 blur-2xl blob-float-2" style="top: 320px; left: -30px;"></div>
+        <div class="absolute w-96 h-96 bg-rose-200 rounded-full opacity-55 blur-2xl blob-float-3" style="top: 520px; left: 280px;"></div>
+        <div class="absolute w-64 h-64 bg-violet-100 rounded-full opacity-60 blur-2xl blob-float" style="top: 720px; left: -20px;"></div>
 
         <div class="relative z-10 px-5 pt-10">
             <h1 class="text-stone-700 text-2xl font-semibold font-['Outfit'] mb-1">Explorar</h1>
@@ -16,9 +19,7 @@
                         @php $colors = $publicacion->getColorClasses(); @endphp
                         <a href="{{ route('publicaciones.show', $publicacion) }}" class="block w-full {{ $colors['bg'] }} rounded-3xl border-2 {{ $colors['border'] }} p-4 shadow-[0px_6px_12px_0px_rgba(0,0,0,0.10)] hover:shadow-lg hover:-translate-y-1 transition-all duration-300">
                             <div class="flex items-start gap-3">
-                                <div class="w-12 h-12 rounded-2xl bg-white/70 border border-white flex items-center justify-center text-stone-700 text-lg font-bold font-['Outfit']">
-                                    {{ $publicacion->guardada_por_count }}
-                                </div>
+                                <!-- Avatar de guardados eliminado -->
                                 <div class="flex-1">
                                     <div class="flex items-center gap-2 mb-1 flex-wrap">
                                         @if($publicacion->categoria)
@@ -71,7 +72,7 @@
             <span class="text-stone-600/60 text-xs font-normal font-['Outfit']">Ajustes</span>
         </a>
         <a href="{{ route('profile') }}" data-route="profile" class="nav-link flex flex-col items-center gap-1 transition-all duration-300">
-            <div class="w-12 h-12 bg-yellow-100 rounded-2xl flex items-center justify-center nav-indicator transition-colors duration-300">
+            <div class="w-12 h-12 bg-yellow-200 rounded-2xl flex items-center justify-center nav-indicator transition-colors duration-300">
                 <svg class="w-5 h-5 text-stone-600" fill="currentColor" viewBox="0 0 24 24"><path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/></svg>
             </div>
             <span class="text-stone-600 text-xs font-normal font-['Outfit']">Perfil</span>

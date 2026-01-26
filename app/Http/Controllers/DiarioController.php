@@ -54,7 +54,7 @@ class DiarioController extends Controller
         $user = Auth::user();
         $owner = \App\Models\Usuario::findOrFail($usuario_id);
         if ($owner->diario_privado && (!$user || $user->id !== $owner->id)) {
-            abort(403, 'Diario privado');
+            return redirect()->route('usuarios.show', ['usuario' => $owner->id])->with('error', 'Diario privado');
         }
         $page = $request->input('page', 1);
         $perPage = 10;
@@ -76,5 +76,15 @@ class DiarioController extends Controller
         $user->diario_privado = $request->has('diario_privado');
         $user->save();
         return back()->with('success', 'Privacidad actualizada');
+    }
+
+    // Lectura completa de una entrada de diario
+    public function lectura($id)
+    {
+        $user = Auth::user();
+        $entrada = Diario::where('id_entrada', $id)
+            ->where('usuario_id', $user->id)
+            ->firstOrFail();
+        return view('diario.lectura', compact('entrada'));
     }
 }

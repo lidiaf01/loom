@@ -10,7 +10,7 @@ use Illuminate\Support\Facades\Auth;
 
 class BibliotecaController extends Controller
 {
-    // Mostrar biblioteca del usuario autenticado
+    // Muestra la biblioteca del usuario autenticado
     public function index()
     {
         $user = Auth::user();
@@ -22,7 +22,23 @@ class BibliotecaController extends Controller
         return view('biblioteca.index', compact('biblioteca', 'carpetas'));
     }
 
-    // Crear carpeta
+    // Muestra la biblioteca de otro usuario
+    public function showUsuario($usuario_id)
+    {
+        $owner = \App\Models\Usuario::findOrFail($usuario_id);
+        $biblioteca = $owner->biblioteca;
+        if (!$biblioteca) {
+            $biblioteca = Biblioteca::create(['usuario_id' => $owner->id]);
+        }
+        $carpetas = $biblioteca->carpetas()->orderBy('fecha_creacion', 'asc')->get();
+        return view('biblioteca.index', [
+            'biblioteca' => $biblioteca,
+            'carpetas' => $carpetas,
+            'owner' => $owner
+        ]);
+    }
+
+    // Crea una nueva carpeta
     public function storeCarpeta(Request $request)
     {
         $request->validate([
@@ -43,7 +59,7 @@ class BibliotecaController extends Controller
         return redirect()->route('biblioteca.index')->with('success', 'Carpeta creada');
     }
 
-    // Renombrar/cambiar color carpeta
+    // Renombra o cambia el color de una carpeta
     public function updateCarpeta(Request $request, $id)
     {
         $request->validate([
@@ -58,7 +74,7 @@ class BibliotecaController extends Controller
         return back()->with('success', 'Carpeta actualizada');
     }
 
-    // Eliminar carpeta
+    // Elimina una carpeta
     public function destroyCarpeta($id)
     {
         $carpeta = Carpeta::findOrFail($id);
@@ -67,12 +83,25 @@ class BibliotecaController extends Controller
         return back()->with('success', 'Carpeta eliminada');
     }
 
-    // Ver publicaciones de una carpeta
+    // Muestra las publicaciones de una carpeta
     public function showCarpeta($id)
     {
         $carpeta = Carpeta::findOrFail($id);
         $this->authorize('view', $carpeta);
         $publicaciones = $carpeta->publicaciones()->orderBy('fecha_creacion', 'desc')->get();
         return view('biblioteca.carpeta', compact('carpeta', 'publicaciones'));
+    }
+
+    // API: Lista las carpetas del usuario autenticado (para el modal de guardar publicación)
+    public function apiCarpetas()
+    {
+        \Log::channel('single')->debug('[API CARPETAS] Endpoint ejecutado');
+        $user = auth()->user();
+        \Log::channel('single')->debug('[API CARPETAS] Usuario detectado', ['user' => $user]);
+        if (!$user) {
+            return response()->json(['error' => 'No autenticado'], 401);
+        }
+        $carpetas = $user->carpetas()->select('id_Carpeta', 'nombre', 'color')->get();
+        return response()->json($carpetas);
     }
 }

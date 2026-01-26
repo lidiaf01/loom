@@ -53,11 +53,15 @@ class PublicacionController extends Controller
             return redirect()->route('publicaciones.crear');
         }
 
+        $user = Auth::user();
+        $biblioteca = $user->biblioteca;
+        $carpetas = $biblioteca ? $biblioteca->carpetas()->orderBy('fecha_creacion', 'asc')->get() : collect();
         return view('publicaciones.opciones', [
             'titulo' => $titulo,
             'subtitulo' => $subtitulo,
             'contenido' => $contenido,
             'categorias' => $this->categorias,
+            'carpetas' => $carpetas,
         ]);
     }
 
@@ -67,13 +71,18 @@ class PublicacionController extends Controller
         $subtitulo = Session::get('publicacion_subtitulo');
         $contenido = Session::get('publicacion_contenido');
 
+        $usuarioId = Auth::id();
         if (!$titulo || !$contenido) {
             return redirect()->route('publicaciones.crear');
+        }
+        if (!$usuarioId) {
+            return redirect()->route('login')->with('error', 'Debes iniciar sesión para publicar.');
         }
 
         $validated = $request->validate([
             'categoria' => ['required', 'in:' . implode(',', $this->categorias)],
             'visibilidad' => ['required', 'in:publica,privada'],
+            'carpeta_id' => ['nullable', 'integer', 'exists:carpetas,id_Carpeta'],
         ]);
 
         $publicacion = new Publicacion([
@@ -81,11 +90,28 @@ class PublicacionController extends Controller
             'subtitulo' => $subtitulo,
             'contenido' => $contenido,
             'fecha_subida' => now(),
-            'usuario_id' => Auth::id(),
+            'usuario_id' => $usuarioId,
             'categoria' => $validated['categoria'],
             'visibilidad' => $validated['visibilidad'],
         ]);
         $publicacion->save();
+
+        // Si se seleccionó carpeta, guardar la publicación en la carpeta
+        if (!empty($validated['carpeta_id'])) {
+            $carpeta = Carpeta::where('id_Carpeta', $validated['carpeta_id'])
+                ->whereHas('biblioteca', function ($q) use ($usuarioId) {
+                    $q->where('usuario_id', $usuarioId);
+                })->first();
+            if ($carpeta) {
+                $carpeta->publicaciones()->attach(
+                    $publicacion->id_publicacion,
+                    [
+                        'usuario_id' => $usuarioId,
+                        'fecha_añadido' => now()
+                    ]
+                );
+            }
+        }
 
         Session::forget(['publicacion_titulo', 'publicacion_subtitulo', 'publicacion_contenido']);
 

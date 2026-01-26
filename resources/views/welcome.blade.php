@@ -3,14 +3,12 @@
 @section('content')
 <div class="min-h-screen bg-orange-50 flex justify-center items-center">
     <div class="w-96 h-[780px] relative overflow-hidden scrollbar-hide">
-        
-        {{-- Círculos Decorativos de Fondo (5 círculos dentro del contenedor) --}}
-        <div class="w-16 h-16 left-[210px] top-[110px] absolute opacity-40 bg-cyan-200 rounded-full blob-float"></div>
-        <div class="w-28 h-28 left-[-35px] top-[10px] absolute opacity-40 bg-orange-200 rounded-full blob-float-3"></div>
-        <div class="w-28 h-28 left-[275px] top-[560px] absolute opacity-40 bg-emerald-200 rounded-full blob-float"></div>
-        <div class="w-56 h-56 left-[-20px] top-[640px] absolute opacity-40 bg-lime-100 rounded-full blob-float-2"></div>
-        <div class="w-16 h-16 left-[-20px] top-[470px] absolute opacity-40 bg-fuchsia-300 rounded-full blob-float-2"></div>
-    
+        {{-- Círculos decorativos difuminados --}}
+        <div class="absolute w-64 h-64 left-[210px] top-[110px] opacity-60 bg-cyan-200 rounded-full blur-2xl"></div>
+        <div class="absolute w-56 h-56 left-[-35px] top-[10px] opacity-58 bg-orange-200 rounded-full blur-2xl"></div>
+        <div class="absolute w-56 h-56 left-[275px] top-[560px] opacity-60 bg-emerald-200 rounded-full blur-2xl"></div>
+        <div class="absolute w-56 h-56 left-[-20px] top-[640px] opacity-55 bg-lime-100 rounded-full blur-2xl"></div>
+        <div class="absolute w-64 h-64 left-[-20px] top-[470px] opacity-58 bg-fuchsia-300 rounded-full blur-2xl"></div>
         <div class="relative z-10 px-6 py-8">
         
         {{-- Encabezado --}}
