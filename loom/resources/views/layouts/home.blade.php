@@ -1,0 +1,158 @@
+@extends('layouts.app')
+
+@section('content')
+<div class="min-h-screen bg-orange-50 w-full flex justify-center relative overflow-hidden">
+    
+    {{-- Contenedor centrado móvil --}}
+    <div class="w-96 min-h-screen relative overflow-y-scroll pb-32 scrollbar-hide">
+        {{-- Círculos decorativos --}}
+        <div class="absolute w-80 h-80 bg-rose-200 rounded-full opacity-60 blur-2xl blob-float" style="top: 80px; left: 280px;"></div>
+        <div class="absolute w-64 h-64 bg-yellow-200 rounded-full opacity-58 blur-2xl blob-float-2" style="top: 200px; left: -40px;"></div>
+        <div class="absolute w-[14rem] h-[14rem] bg-sky-200 rounded-full opacity-55 blur-2xl blob-float-3" style="top: 400px; left: 300px;"></div>
+        <div class="absolute w-[14rem] h-[14rem] bg-emerald-100 rounded-full opacity-60 blur-2xl blob-float" style="top: 600px; left: -25px;"></div>
+        <div class="absolute w-72 h-72 bg-violet-200 rounded-full opacity-58 blur-2xl blob-float-2" style="top: 350px; left: 10px;"></div>
+
+        {{-- Contenido principal --}}
+        <div class="relative z-10 px-5 pt-12">
+        
+        {{-- Encabezado --}}
+        <div class="flex items-start justify-between mb-10">
+            <div>
+                <h1 class="text-stone-600 text-2xl font-normal font-['Outfit']">Hola, {{ auth()->user()->nombre }}</h1>
+                <p class="text-stone-600/70 text-sm font-normal font-['Outfit'] mt-1">Tu espacio de crecimiento</p>
+            </div>
+            <div class="w-12 h-12 bg-gradient-to-br from-pink-300 to-purple-200 rounded-full shadow-md flex-shrink-0"></div>
+        </div>
+
+        {{-- Sección Herramientas --}}
+        <div>
+            <h2 class="text-stone-600/60 text-sm font-normal font-['Outfit'] mb-4 tracking-tight">Herramientas</h2>
+            
+            {{-- Card Grande - Crear --}}
+            <a href="{{ route('publicaciones.crear') }}" class="block w-full bg-yellow-200 rounded-3xl p-6 mb-4 shadow-[0px_4px_6px_0px_rgba(0,0,0,0.10)] shadow-[0px_2px_4px_0px_rgba(0,0,0,0.10)] border border-amber-300 hover:shadow-yellow-300/40 hover:scale-105 hover:-translate-y-1 transition-all duration-300 cursor-pointer">
+                <div class="flex items-start gap-4">
+                    <div class="w-10 h-10 bg-orange-50 rounded-xl flex items-center justify-center flex-shrink-0">
+                        <svg class="w-5 h-5 text-stone-600" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"/>
+                        </svg>
+                    </div>
+                    <div>
+                        <h3 class="text-stone-600 text-sm font-normal font-['Outfit']">Crear</h3>
+                        <p class="text-stone-600/60 text-xs font-normal font-['Outfit']">Comparte tus hábitos</p>
+                    </div>
+                </div>
+            </a>
+
+            {{-- Grid 2 columnas --}}
+            <div class="grid grid-cols-2 gap-4 mb-4">
+                
+                {{-- Diario --}}
+                <a href="{{ route('diario.index') }}" class="bg-emerald-100 rounded-3xl p-5 shadow-[0px_4px_6px_0px_rgba(0,0,0,0.10)] shadow-[0px_2px_4px_0px_rgba(0,0,0,0.10)] border border-emerald-300 hover:shadow-emerald-400/50 hover:scale-105 hover:-translate-y-1 transition-all duration-300 cursor-pointer">
+                    <div class="w-10 h-10 bg-orange-50 rounded-xl flex items-center justify-center mb-3">
+                        <!-- Icono moderno de diario/cuaderno -->
+                        <svg class="w-6 h-6 text-stone-600" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
+                            <rect x="4" y="4" width="16" height="16" rx="3" stroke="currentColor" fill="none"/>
+                            <line x1="8" y1="8" x2="16" y2="8" stroke="currentColor" stroke-linecap="round"/>
+                            <line x1="8" y1="12" x2="16" y2="12" stroke="currentColor" stroke-linecap="round"/>
+                            <line x1="8" y1="16" x2="13" y2="16" stroke="currentColor" stroke-linecap="round"/>
+                        </svg>
+                    </div>
+                    <h3 class="text-stone-600 text-sm font-normal font-['Outfit']">Diario</h3>
+                    <p class="text-stone-600/60 text-xs font-normal font-['Outfit'] mt-1">Escribe tus pensamientos</p>
+                </a>
+
+                {{-- Inspiración rápida --}}
+                <a href="{{ route('inspiracion.rapida') }}" class="bg-sky-200 rounded-3xl p-5 shadow-[0px_4px_6px_0px_rgba(0,0,0,0.10)] shadow-[0px_2px_4px_0px_rgba(0,0,0,0.10)] border border-blue-300 hover:shadow-sky-400/50 hover:scale-105 hover:-translate-y-1 transition-all duration-300 cursor-pointer">
+                    <div class="w-10 h-10 bg-orange-50 rounded-xl flex items-center justify-center mb-3">
+                        <svg class="w-5 h-5 text-stone-600" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M4 20l16-8L4 4v6l10 2-10 2v6z"/>
+                        </svg>
+                    </div>
+                    <h3 class="text-stone-600 text-sm font-normal font-['Outfit']">Inspiración rápida</h3>
+                    <p class="text-stone-600/60 text-xs font-normal font-['Outfit'] mt-1">Descubre una publicación pública al azar</p>
+                </a>
+
+            </div>
+
+            {{-- Grid 2 columnas - Fila 2 --}}
+            <div class="grid grid-cols-2 gap-4">
+                
+                {{-- Biblioteca --}}
+                <a href="{{ route('biblioteca.index') }}" class="bg-pink-300 rounded-3xl p-5 shadow-[0px_4px_6px_0px_rgba(0,0,0,0.10)] shadow-[0px_2px_4px_0px_rgba(0,0,0,0.10)] border border-pink-400 hover:shadow-pink-400/50 hover:scale-105 hover:-translate-y-1 transition-all duration-300 cursor-pointer">
+                    <div class="w-10 h-10 bg-orange-50 rounded-xl flex items-center justify-center mb-3">
+                        <!-- Icono moderno de biblioteca/estantería -->
+                        <svg class="w-6 h-6 text-stone-600" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
+                            <rect x="5" y="4" width="3" height="16" rx="1" stroke="currentColor" fill="none"/>
+                            <rect x="10.5" y="4" width="3" height="16" rx="1" stroke="currentColor" fill="none"/>
+                            <rect x="16" y="4" width="3" height="16" rx="1" stroke="currentColor" fill="none"/>
+                        </svg>
+                    </div>
+                    <h3 class="text-stone-600 text-sm font-normal font-['Outfit']">Biblioteca</h3>
+                    <p class="text-stone-600/60 text-xs font-normal font-['Outfit'] mt-1">Contenido Guardado</p>
+                </a>
+
+                {{-- Explorar --}}
+                <a href="{{ route('explorar') }}" class="bg-red-300 rounded-3xl p-5 shadow-[0px_4px_6px_0px_rgba(0,0,0,0.10)] shadow-[0px_2px_4px_0px_rgba(0,0,0,0.10)] border border-red-400 hover:shadow-red-400/50 hover:scale-105 hover:-translate-y-1 transition-all duration-300 cursor-pointer">
+                    <div class="w-10 h-10 bg-orange-50 rounded-xl flex items-center justify-center mb-3">
+                        <svg class="w-5 h-5 text-stone-600" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm3.5-9c.83 0 1.5-.67 1.5-1.5S16.33 8 15.5 8 14 8.67 14 9.5s.67 1.5 1.5 1.5zm-7 0c.83 0 1.5-.67 1.5-1.5S9.33 8 8.5 8 7 8.67 7 9.5 7.67 11 8.5 11zm3.5 6.5c2.33 0 4.31-1.46 5.11-3.5H6.89c.8 2.04 2.78 3.5 5.11 3.5z"/>
+                        </svg>
+                    </div>
+                    <h3 class="text-stone-600 text-sm font-normal font-['Outfit']">Explorar</h3>
+                    <p class="text-stone-600/60 text-xs font-normal font-['Outfit'] mt-1">Por si no sabes por donde empezar</p>
+                </a>
+
+            </div>
+        </div>
+        </div>
+
+        {{-- Bottom Navigation --}}
+        <div class="fixed bottom-0 left-1/2 -translate-x-1/2 w-96 bg-white rounded-t-3xl shadow-[0px_25px_50px_0px_rgba(0,0,0,0.25)] z-50">
+        <div class="px-4 py-4 flex justify-around">
+            
+            {{-- Principal --}}
+            <a href="{{ route('home') }}" data-route="home" class="nav-link flex flex-col items-center gap-2 transition-all duration-300">
+                <div class="w-12 h-12 bg-yellow-200 rounded-2xl flex items-center justify-center nav-indicator transition-colors duration-300">
+                    <svg class="w-5 h-5 text-stone-600" fill="currentColor" viewBox="0 0 24 24">
+                        <path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/>
+                    </svg>
+                </div>
+                <span class="text-stone-600 text-xs font-normal font-['Outfit']">Principal</span>
+            </a>
+
+            {{-- Buscar --}}
+            <a href="{{ route('buscar') }}" data-route="search" class="nav-link flex flex-col items-center gap-2 transition-all duration-300">
+                <div class="w-12 h-12 rounded-2xl flex items-center justify-center nav-indicator transition-colors duration-300">
+                    <svg class="w-5 h-5 text-stone-600/60" fill="currentColor" viewBox="0 0 24 24">
+                        <path d="M15.5 1h-8C6.12 1 5 2.12 5 3.5v17C5 21.88 6.12 23 7.5 23h8c1.38 0 2.5-1.12 2.5-2.5v-17C18 2.12 16.88 1 15.5 1zm-4 21c-.83 0-1.5-.67-1.5-1.5s.67-1.5 1.5-1.5 1.5.67 1.5 1.5-.67 1.5-1.5 1.5zm4.5-4H7V4h9v14z"/>
+                    </svg>
+                </div>
+                <span class="text-stone-600/60 text-xs font-normal font-['Outfit']">Buscar</span>
+            </a>
+
+            {{-- Ajustes --}}
+            <a href="{{ route('ajustes') }}" data-route="settings" class="nav-link flex flex-col items-center gap-2 transition-all duration-300">
+                <div class="w-12 h-12 rounded-2xl flex items-center justify-center nav-indicator transition-colors duration-300">
+                    <svg class="w-5 h-5 text-stone-600/60" fill="currentColor" viewBox="0 0 24 24">
+                        <path d="M19.14 12.94c.04-.3.06-.61.06-.94 0-.32-.02-.64-.07-.94l2.03-1.58c.18-.14.23-.41.12-.64l-1.92-3.32c-.12-.22-.39-.3-.61-.22l-2.39.96c-.5-.38-1.03-.7-1.62-.94l-.36-2.54c-.04-.24-.24-.41-.48-.41h-3.84c-.24 0-.43.17-.47.41l-.36 2.54c-.59.24-1.13.57-1.62.94l-2.39-.96c-.23-.09-.49 0-.61.22L2.74 8.87c-.12.22-.07.49.12.64l2.03 1.58c-.05.3-.07.62-.07.94s.02.64.07.94l-2.03 1.58c-.18.14-.23.41-.12.64l1.92 3.32c.12.22.39.3.61.22l2.39-.96c.5.38 1.03.7 1.62.94l.36 2.54c.05.24.24.41.48.41h3.84c.24 0 .44-.17.47-.41l.36-2.54c.59-.24 1.13-.56 1.62-.94l2.39.96c.23.09.49 0 .61-.22l1.92-3.32c.12-.22.07-.49-.12-.64l-2.01-1.58zM12 15.6c-1.98 0-3.6-1.62-3.6-3.6s1.62-3.6 3.6-3.6 3.6 1.62 3.6 3.6-1.62 3.6-3.6 3.6z"/>
+                    </svg>
+                </div>
+                <span class="text-stone-600/60 text-xs font-normal font-['Outfit']">Ajustes</span>
+            </a>
+
+            {{-- Perfil --}}
+            <a href="{{ route('profile') }}" data-route="profile" class="nav-link flex flex-col items-center gap-2 transition-all duration-300">
+                <div class="w-12 h-12 rounded-2xl flex items-center justify-center nav-indicator transition-colors duration-300">
+                    <svg class="w-5 h-5 text-stone-600/60" fill="currentColor" viewBox="0 0 24 24">
+                        <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/>
+                    </svg>
+                </div>
+                <span class="text-stone-600/60 text-xs font-normal font-['Outfit']">Perfil</span>
+            </a>
+
+        </div>
+        </div>
+
+    </div>
+</div>
+@endsection

@@ -1,0 +1,66 @@
+[
+  {
+    "nombre": "admin",
+    "email": "admin@loom.com",
+    "contrasenha": "admin",
+    "fecha_nac": "1990-01-01",
+    "biografia": "Administrador del sistema Loom.",
+    "foto_perfil": "profiles/admin.png"
+  },
+  {
+    "nombre": "Maria Lopez",
+    "email": "maria@example.com",
+    "contrasenha": "password123",
+    "fecha_nac": "1995-05-15",
+    "biografia": "Entusiasta del diseño y la tecnología.",
+    "foto_perfil": null
+  },
+  {
+    "nombre": "Carlos Ruiz",
+    "email": "carlos@test.com",
+    "contrasenha": "secret2025",
+    "fecha_nac": "1988-11-20",
+    "biografia": "Desarrollador backend aprendiendo Laravel.",
+    "foto_perfil": null
+  },
+  {
+    "nombre": "Ana Garcia",
+    "email": "ana.garcia@web.es",
+    "contrasenha": "ana_pass_88",
+    "fecha_nac": "2000-02-28",
+    "biografia": "Amante de la fotografía y los viajes.",
+    "foto_perfil": null
+  },
+  {
+    "nombre": "Luis Torres",
+    "email": "luis.torres@mail.com",
+    "contrasenha": "luis2026",
+    "fecha_nac": "1992-07-10",
+    "biografia": "Fanático del ciclismo y la música indie.",
+    "foto_perfil": null
+  },
+  {
+    "nombre": "Elena Martínez",
+    "email": "elena.martinez@mail.com",
+    "contrasenha": "elena2026",
+    "fecha_nac": "1998-03-22",
+    "biografia": "Apasionada por la lectura y el cine clásico.",
+    "foto_perfil": null
+  },
+  {
+    "nombre": "Javier Fernández",
+    "email": "javier.fernandez@mail.com",
+    "contrasenha": "javier2026",
+    "fecha_nac": "1985-12-05",
+    "biografia": "Cocinero amateur y viajero frecuente.",
+    "foto_perfil": null
+  },
+  {
+    "nombre": "Sara Gómez",
+    "email": "sara.gomez@mail.com",
+    "contrasenha": "sara2026",
+    "fecha_nac": "2002-09-17",
+    "biografia": "Estudiante de arte y amante de los gatos.",
+    "foto_perfil": null
+  }
+]

@@ -1,0 +1,169 @@
+@import "tailwindcss";
+
+/* Mejoras UX/UI cards publicaciones perfil */
+.truncate-title-card {
+    display: block;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 100%;
+}
+.truncate-subtitle-card {
+    display: block;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 100%;
+}
+.text-2xs {
+    font-size: 10px;
+    line-height: 1rem;
+}
+.animate-float-left {
+    animation: floatLeft 2.5s cubic-bezier(0.4,0,0.2,1) infinite alternate;
+}
+
+/* Truncar títulos largos de publicaciones en show.blade.php */
+.truncate-title {
+    display: block;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 100%;
+}
+
+/* Tipografías globales */
+:root {
+    --font-body: 'Poppins', system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, 'Helvetica Neue', Arial, 'Noto Sans', sans-serif;
+    --font-heading: 'Outfit', var(--font-body);
+}
+
+html, body {
+    font-family: var(--font-body);
+}
+
+h1, h2, h3, h4, .font-heading {
+    font-family: var(--font-heading);
+}
+
+/* Animaciones suaves para círculos decorativos */
+@keyframes drift {
+    0%   { transform: translate3d(0, 0, 0); }
+    50%  { transform: translate3d(10px, -8px, 0); }
+    100% { transform: translate3d(0, 0, 0); }
+}
+
+@keyframes drift2 {
+    0%   { transform: translate3d(0, 0, 0) rotate(0deg); }
+    50%  { transform: translate3d(-8px, 10px, 0) rotate(3deg); }
+    100% { transform: translate3d(0, 0, 0) rotate(0deg); }
+}
+
+@keyframes drift3 {
+    0%   { transform: translate3d(0, 0, 0); }
+    50%  { transform: translate3d(6px, 6px, 0); }
+    100% { transform: translate3d(0, 0, 0); }
+}
+
+.blob-float { animation: drift 18s ease-in-out infinite; will-change: transform; }
+.blob-float-2 { animation: drift2 22s ease-in-out infinite; will-change: transform; }
+.blob-float-3 { animation: drift3 26s ease-in-out infinite; will-change: transform; }
+
+/* Animaciones de entrada desde los bordes */
+@keyframes slideInFromLeft {
+    from { transform: translateX(-100%); }
+    to { transform: translateX(0); }
+}
+
+@keyframes slideInFromRight {
+    from { transform: translateX(100%); }
+    to { transform: translateX(0); }
+}
+
+@keyframes floatLeft {
+    0%, 100% { transform: translateX(0); }
+    50% { transform: translateX(-10px); }
+}
+
+@keyframes floatRight {
+    0%, 100% { transform: translateX(0); }
+    50% { transform: translateX(10px); }
+}
+
+.animate-float-left { animation: floatLeft 3s ease-in-out infinite; }
+.animate-float-right { animation: floatRight 3s ease-in-out infinite; }
+
+/* Transiciones de navegación */
+#content-wrapper {
+    transition: opacity 300ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.nav-indicator {
+    transition: background-color 300ms ease-in-out;
+}
+
+.nav-link svg {
+    transition: color 300ms ease-in-out;
+}
+
+.nav-link span {
+    transition: color 300ms ease-in-out;
+}
+
+/* Ocultar scrollbar pero mantener scroll funcional */
+.scrollbar-hide::-webkit-scrollbar {
+    display: none;
+}
+
+.scrollbar-hide {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+}
+
+/* Animación del nav activo */
+.nav-link.active .nav-indicator {
+}
+
+.nav-link.active svg {
+}
+
+.nav-link.active span {
+}
+
+/* Animaciones de toast */
+@keyframes toast-slide-in {
+    from {
+        transform: translate(-50%, 0);
+        opacity: 0;
+    }
+    to {
+        transform: translate(-50%, 0);
+        opacity: 1;
+    }
+}
+
+@keyframes toast-slide-out {
+    from {
+        transform: translate(-50%, 0);
+        opacity: 1;
+    }
+    to {
+        transform: translate(-50%, 20px);
+        opacity: 0;
+    }
+}
+
+.animate-toast-slide-in {
+    animation: toast-slide-in 0.4s ease-out forwards;
+}
+
+.animate-toast-slide-out {
+    animation: toast-slide-out 0.4s ease-out forwards;
+}
+
+/* Corte de palabra para contenido largo */
+.word-break {
+    word-break: break-word;
+    overflow-wrap: break-word;
+    hyphens: auto;
+}
